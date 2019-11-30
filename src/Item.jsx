@@ -7,7 +7,7 @@ export function ProductImage(props)
         <img src={props.src} alt="" />
       </div>
       <div className="sale-tag">
-        <p>{props.saleText}</p>
+        <p>{props.saleText}%</p>
       </div>
       </div>
 )
@@ -21,8 +21,8 @@ export  function ProductInfo(props)
 <p class="item-category">{props.type}</p>
 <p class="item-name">{props.name}</p>
 <div class="item-price">
-  <p>{props.finalPrice}</p>
-  <p id="break-through">{props.price}</p>
+  <p>{props.finalPrice}đ</p>
+  <p id="break-through">{props.price}đ</p>
 </div>
 </div>
 )
