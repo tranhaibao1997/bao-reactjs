@@ -20,7 +20,9 @@ return(
             {
          props.data.map(elm=>
             {
-                return <ProductItem  {...elm}></ProductItem>
+                return <ProductItem  
+                addItemName={props.addItemNamex}
+                {...elm}></ProductItem>
             })
             }
           </div>

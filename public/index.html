@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="./assets/style.css">
         <link rel="stylesheet" href="./assets/responsive.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
     </head>
 </head>
 
@@ -46,7 +47,7 @@
             $ = c.getContext("2d");
         var w = c.width = window.innerWidth,
             h = c.height = window.innerHeight;
-        setTimeout(Snowy, 1000);
+        setTimeout(Snowy, 500);
 
         function Snowy() {
             var snow, arr = [];
@@ -105,6 +106,21 @@
             c.width = w = window.innerWidth;
             c.height = h = window.innerHeight;
         }, false);
+
+        setTimeout(close, 3000)
+
+
+        function close() {
+            const loader = document.querySelectorAll(".loader");
+            console.log(loader)
+            const snow = document.querySelectorAll("#canv");
+            for (let i = 0; i < loader.length; i++) {
+                loader[i].classList.add("loader-close");
+            }
+
+
+        }
+
 
 
     });

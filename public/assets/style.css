@@ -32,8 +32,10 @@ body {
     font-weight: normal;
     font-style: normal;
     font-size: 14px;
-    background-image: url(BG.jpg);
-    background-attachment: fixed;
+}
+
+.product-action a:hover {
+    cursor: pointer;
 }
 
 .img,
@@ -73,6 +75,7 @@ a:focus,
 a:hover {
     color: #10111e;
     text-decoration: none;
+    cursor: pointer;
 }
 
 a,
@@ -230,6 +233,30 @@ label {
 
 .separator {
     border-top: 1px solid #f2f2f2
+}
+
+.loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    /* float: left; */
+    transition: 0.5s;
+    background-image: url(BG.jpg);
+    background-repeat: no-repeat;
+    z-index: 10000;
+    background-size: cover;
+}
+
+#canv {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    z-index: 10000;
+}
+
+.loader-close {
+    width: 0%;
 }
 
 
@@ -717,7 +744,7 @@ label {
     right: 0;
     top: 100%;
     transition: all 0.3s ease 0s;
-    width: 350px;
+    width: 450px;
     z-index: 9;
     box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.3);
     visibility: hidden;
@@ -731,6 +758,7 @@ label {
 
 .header-right ul li .minicart .cart-img {
     float: left;
+    width: 150px;
 }
 
 .header-right ul li .minicart .cart-content {
@@ -741,6 +769,7 @@ label {
 
 .cart-content h3 {
     color: #ddd;
+    font-family: 'Quicksand', sans-serif;
 }
 
 ul.minicart .cart-content a {
@@ -755,7 +784,7 @@ ul.minicart .cart-content a:hover {
 }
 
 ul.minicart .cart-img img {
-    width: 85px;
+    max-width: 100%;
 }
 
 ul.minicart .cart-price span {
@@ -766,6 +795,7 @@ ul.minicart .cart-price span {
 ul.minicart .cart-price .new {
     font-size: 14px;
     color: #747691;
+    margin-right: 30px;
 }
 
 ul.minicart .cart-price span {
@@ -775,11 +805,12 @@ ul.minicart .cart-price span {
 }
 
 .header-right ul li .minicart>li {
-    display: block;
+    display: flex;
     margin-bottom: 22px;
     margin-left: 0;
     overflow: hidden;
     padding: 0;
+    justify-content: center;
 }
 
 .header-right ul li .minicart>li:last-child {
@@ -1613,6 +1644,7 @@ img.secondary-img {
 .product-content h4 {
     font-size: 20px;
     margin-bottom: 15px;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .product-content h4 a:hover {
@@ -5018,6 +5050,10 @@ ul.cat li a:hover {
     font-size: 14px;
 }
 
+.product-action a:hover {
+    cursor: pointer;
+}
+
 #contacts-form textarea::placeholder {
     color: #a7a7c1;
     font-size: 14px;
@@ -5155,12 +5191,6 @@ ul.cat li a:hover {
         -webkit-transform: scale(1, 1);
         opacity: 0;
     }
-}
-
-#canv {
-    position: fixed;
-    width: 100%;
-    height: 100%;
 }
 
 
