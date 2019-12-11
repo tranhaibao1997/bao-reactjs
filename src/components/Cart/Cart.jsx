@@ -2,11 +2,8 @@ import React from 'react'
 
 function Cart(props)
 {
-
-    
-    
-    
-    return (
+ 
+return (
         <ul className="minicart">
             {
                 props.products.map(elm => {
@@ -19,7 +16,7 @@ return (
             </div>
             <div className="cart-content">
                 <h3>
-                    <a href="#">{elm.name}</a>
+<a href="#">{elm.name} X <span>{elm.quantity}</span></a>
                 </h3>
                 <div className="cart-price">
                     <span className="new">${elm.price}</span>

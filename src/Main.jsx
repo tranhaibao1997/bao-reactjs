@@ -13,19 +13,39 @@ function Main() {
 
     //add Product to cart
     const [addProducts, setAddedProducts] = useState([])
+    // const [total,caculateTotal]=useState(0);
     const addCart = (value) => {
-        if (addProducts.find(elm => elm.name === value.name)) {
-            console.log("a");
+       
+        if(addProducts.length===0)
+        {
+            value.quantity=1;
+            setAddedProducts([...addProducts,value])
         }
-        else {
-            setAddedProducts([...addProducts, value])
+        else
+        {
+            let i=addProducts.findIndex( a => a.name === value.name)
+           if(i !== -1)
+           {
+            [...addProducts][i].quantity++;
+            console.log(addProducts[i].quantity)
+            
+          
+           }
+           else
+           {
+            value.quantity=1;
+            setAddedProducts([...addProducts,value])
+           }
         }
+        
+      
     }
     //add Product to cart
 
 
     //caculate Total Price
-    const totalPrice = addProducts.reduce((total, n) => total + n.price, 0)
+   var total=addProducts.reduce((acc,curr) => acc+(curr.price*curr.quantity),0);
+
     //caculate Total Price
 
 
@@ -44,7 +64,7 @@ function Main() {
     return (
         <>
             <Header productCount={addProducts.length}>
-                <Cart products={addProducts} totalPrice={totalPrice} ></Cart>
+                <Cart products={addProducts}  totalPrice={total}  ></Cart>
             </Header>
 <Loader>
 
