@@ -28,6 +28,7 @@ function Main() {
            {
             [...addProducts][i].quantity++;
             console.log(addProducts[i].quantity)
+          
             
           
            }
