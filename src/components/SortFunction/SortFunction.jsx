@@ -1,35 +1,31 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function SortFunction(props) 
 {
-  const [sortedArray, setSort] = useState(props.products);
+  var newProducts = [...props.products]
 
   function AtoZ() {
 
-    setSort(props.products.sort((a, b) => a.name.localeCompare(b.name)));
-    GiveSortedArrayToSideBar();
+    props.takeArrayToMain(newProducts.sort((a, b) => a.name.localeCompare(b.name)));
   
   }
   function ZtoA() {
-    setSort(props.products.sort((a, b) => b.name.localeCompare(a.name)));
-    GiveSortedArrayToSideBar();
+    
+    props.takeArrayToMain(newProducts.sort((a, b) => b.name.localeCompare(a.name)));
    
   }
   function LowToHigh() {
-    setSort(props.products.sort((a, b) => a.price-b.price));
-    GiveSortedArrayToSideBar();
+    
+    props.takeArrayToMain(newProducts.sort((a, b) => a.price-b.price));
    
   }
   function HighToLow() {
-    setSort(props.products.sort((a, b) => b.price-a.price));
-    GiveSortedArrayToSideBar();
+
+    props.takeArrayToMain(newProducts.sort((a, b) => b.price-a.price));
    
   }
 
-  const GiveSortedArrayToSideBar=()=>
-  {
-     props.takeArrayToMain(sortedArray);
-  }
+ 
   
 
   return (
