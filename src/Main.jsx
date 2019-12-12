@@ -13,70 +13,64 @@ function Main() {
 
     //add Product to cart
     const [addProducts, setAddedProducts] = useState([])
-    // const [total,caculateTotal]=useState(0);
-    const addCart = (value) => {
-       
-        if(addProducts.length===0)
-        {
-            value.quantity=1;
-            setAddedProducts([...addProducts,value])
-        }
-        else
-        {
-            let i=addProducts.findIndex( a => a.name === value.name)
-           if(i !== -1)
-           {
-            
-            // [...addProducts][i].quantity++;
-            // setAddedProducts(addProducts);
-            // console.log(addProducts[i].quantity)
 
-            const newProductsArray = [...addProducts];
-            newProductsArray[i].quantity += 1;
-            setAddedProducts(newProductsArray);
-          
-            
-          
-           }
-           else
-           {
-            value.quantity=1;
-            setAddedProducts([...addProducts,value])
-           }
+    const addCart = (value) => {
+
+        if (addProducts.length === 0) {
+            value.quantity = 1;
+            setAddedProducts([...addProducts, value])
         }
-        
-      
+        else {
+            let i = addProducts.findIndex(a => a.name === value.name)
+            if (i !== -1) {
+
+                // [...addProducts][i].quantity++;
+                // setAddedProducts(addProducts);
+                // console.log(addProducts[i].quantity)
+
+                const newProductsArray = [...addProducts];
+                newProductsArray[i].quantity += 1;
+                setAddedProducts(newProductsArray);
+
+
+
+            }
+            else {
+                value.quantity = 1;
+                setAddedProducts([...addProducts, value])
+            }
+        }
+
+
     }
-    
+
     //add Product to cart
 
 
-    //caculate Total Price
-   var total=addProducts.reduce((acc,curr) => acc+(curr.price*curr.quantity),0);
 
     //caculate Total Price
+    var total = addProducts.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    //caculate Total Price
 
-
-    //Get data from json file
-    
-    //Get data from json file
 
     //show SortedArray and set Products = SortedArray
     const [products, setProducts] = useState(data.data)
-    function showSortedArray(value)
-    {
-      console.log(value);
-      setProducts(value);
+    function showSortedArray(value) {
+        console.log(value);
+        setProducts(value);
     }
 
     return (
         <>
             <Header productCount={addProducts.length}>
-                <Cart products={addProducts}  totalPrice={total}  ></Cart>
+                <Cart products={addProducts} totalPrice={total}  ></Cart>
             </Header>
-<Loader>
+            <Loader>
 
-</Loader>
+            </Loader>
+            <div id="container">
+
+</div>
             <Layout>
 
                 <ProductList addItemNamex={addCart} data={products}></ProductList>
