@@ -34,7 +34,7 @@ function SortFunction(props)
     <div className="shop-widget">
       <h3 className="shop-title">SHOP BY</h3>
       <ul className="shop-link">
-        <li onClick={AtoZ}><a >Name: A-Z</a></li>
+        <li onClick={AtoZ}><a href="#">Name: A-Z</a></li>
         <li onClick={ZtoA}><a href="#">Name: Z-A</a></li>
         <li onClick={HighToLow}><a href="#">Price: High to Low</a></li>
         <li onClick={LowToHigh}><a href="#">Price: Low to High</a></li>
