@@ -256,7 +256,7 @@ label {
 }
 
 .loader-close {
-    animation: divao 1s forwards;
+    animation: divao 2s forwards;
 }
 
 @keyframes divao {

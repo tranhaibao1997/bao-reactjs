@@ -26,8 +26,14 @@ function Main() {
             let i=addProducts.findIndex( a => a.name === value.name)
            if(i !== -1)
            {
-            [...addProducts][i].quantity++;
-            console.log(addProducts[i].quantity)
+            
+            // [...addProducts][i].quantity++;
+            // setAddedProducts(addProducts);
+            // console.log(addProducts[i].quantity)
+
+            const newProductsArray = [...addProducts];
+            newProductsArray[i].quantity += 1;
+            setAddedProducts(newProductsArray);
           
             
           
@@ -41,6 +47,7 @@ function Main() {
         
       
     }
+    
     //add Product to cart
 
 

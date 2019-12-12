@@ -16,7 +16,7 @@ return (
             </div>
             <div className="cart-content">
                 <h3>
-<a href="#">{elm.name} X <span>{elm.quantity}</span></a>
+<a href="#">{elm.name}  <span style={{color: 'red'}}>X {elm.quantity}</span></a>
                 </h3>
                 <div className="cart-price">
                     <span className="new">${elm.price}</span>
