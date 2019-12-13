@@ -20,7 +20,7 @@ function MyRouter() {
         <BrowserRouter>
     <div>
       
-    <Route path="/home" component={Main}/>
+    {/* <Route path="/home" component={Main}/> */}
     <Route path="/register" component={Register} />
     <Route path="/register" component={Header} />
     <Route path="/login" component={Header} />

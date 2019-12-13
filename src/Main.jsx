@@ -11,6 +11,7 @@ import Register from './components/Register/Register'
 import Login from './components/Login/Login'
 import { BrowserRouter } from 'react-router-dom';
 import { Router, Route } from "react-router";
+import MyRouter from './MyRouter'
 
 
 function Main() {
@@ -76,6 +77,7 @@ function Main() {
             <div id="container">
 
 </div>
+<MyRouter></MyRouter>
 {/* <Register></Register> */}
 {/* <Login></Login> */}
             <Layout>
