@@ -77,7 +77,7 @@ function Main() {
             <div id="container">
 
 </div>
-<MyRouter></MyRouter>
+{/* <MyRouter></MyRouter> */}
 {/* <Register></Register> */}
 {/* <Login></Login> */}
             <Layout>
