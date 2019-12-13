@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import firebase from 'firebase'
+import {Link } from 'react-router-dom';
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -61,7 +62,7 @@ console.log(error)
                   <div className="mt-10" />
                   <button type="submit" className="btn theme-btn-2 w-100">Register Now</button>
                   <div className="or-divide"><span>or</span></div>
-                  <button type="button" className="btn theme-btn w-100">login Now</button>
+                  <Link to="/login">  <button type="button" className="btn theme-btn w-100">login Now</button></Link>
                 </form>
               </div>
             </div>

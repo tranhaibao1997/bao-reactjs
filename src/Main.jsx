@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import SideBar from './components/Sidebar/Sidebar'
-// import ProductList from './components/ProductList/ProductList'
+import ProductList from './components/ProductList/ProductList'
 import Layout from './components/Layout/Layout'
 import data from './data.json'
 import Cart from './components/Cart/Cart'
 import Loader from './components/Loader/Loader'
 import Register from './components/Register/Register'
 import Login from './components/Login/Login'
+import { BrowserRouter } from 'react-router-dom';
+import { Router, Route } from "react-router";
 
 
 function Main() {
@@ -63,8 +65,9 @@ function Main() {
     }
 
     return (
-        <>
-            <Header productCount={addProducts.length}>
+        
+    <div>
+    <Header productCount={addProducts.length}>
                 <Cart products={addProducts} totalPrice={total}  ></Cart>
             </Header>
             <Loader>
@@ -74,19 +77,20 @@ function Main() {
 
 </div>
 {/* <Register></Register> */}
-<Login></Login>
+{/* <Login></Login> */}
             <Layout>
 
-                {/* <ProductList addItemNamex={addCart} data={products}></ProductList> */}
+                <ProductList addItemNamex={addCart} data={products}></ProductList>
 
                 
-                {/* <SideBar products={products} TakeArrayToMain1={showSortedArray}></SideBar> */}
+                <SideBar products={products} TakeArrayToMain1={showSortedArray}></SideBar>
             </Layout>
 
             <Footer></Footer>
 
-
-        </>
+    </div>
+  
+       
 
     )
 

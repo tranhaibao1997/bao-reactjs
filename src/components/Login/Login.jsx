@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import firebase from 'firebase'
+import {Link } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -49,7 +50,7 @@ function Login() {
               </div>
               <button type="submit"className="btn theme-btn-2 w-100">Login Now</button>
               <div className="or-divide"><span>or</span></div>
-              <button className="btn theme-btn w-100">Register Now</button>
+             <Link to="/register"> <button className="btn theme-btn w-100">Register Now</button></Link>
             </form>
           </div>
         </div>

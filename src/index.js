@@ -4,12 +4,14 @@ import './index.css';
 import Main from './Main';
 import * as serviceWorker from './serviceWorker';
 import firebaseInit from './firebase'
+import MyRouter from './MyRouter';
+import Login from './components/Login/Login';
 
 
 
 
 firebaseInit();
-ReactDOM.render( < Main / > , document.getElementById('root'));
+ReactDOM.render( < MyRouter / > , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

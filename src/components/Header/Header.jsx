@@ -9,7 +9,7 @@ function Header(props)
                 <div className="row align-items-center">
                     <div className="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                         <div className="logo">
-                            <a href="#"><img src="./assets/logo_shop.png" alt=""/></a>
+                            <a href="/home"><img src="./assets/logo_shop.png" alt=""/></a>
                         </div>
 
                         <div className="category-menu">
@@ -30,7 +30,7 @@ function Header(props)
                             <nav id="mobile-menu" style={{display:"block"}}>
                                 <ul>
                                     <li>
-                                        <a href="./index.html">Home</a>
+                                        <a href="/home">Home</a>
                                     </li>
                                     <li>
                                         <a href="#">Pages</a>
@@ -59,7 +59,7 @@ function Header(props)
                                 <li className="search-btn">
                                     <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search"></i></a>
                                 </li>
-                                <li className="login-btn"><a href="#"><i className="far fa-user"></i></a></li>
+                                <li className="login-btn"><a href="/login"><i className="far fa-user"></i></a></li>
                                 <li className="d-shop-cart"><a href="#"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{props.productCount}</span></a>
                                    {props.children}
                                 </li>
