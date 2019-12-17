@@ -22,8 +22,8 @@ function MyRouter() {
       
     {/* <Route path="/home" component={Main}/> */}
     <Route path="/register" component={Register} />
-    <Route path="/register" component={Header} />
-    <Route path="/login" component={Header} />
+    {/* <Route path="/register" component={Header} />
+    <Route path="/login" component={Header} /> */}
     <Route path="/login" component={Login} />
     
 

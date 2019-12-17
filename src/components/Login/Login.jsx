@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import firebase from 'firebase'
-import {Link } from 'react-router-dom';
+// import {Link } from 'react-router-dom';
+import { ThemeContext } from '../../ThemeContext';
 
-function Login() {
+
+function Login(props) {
+  const theme = useContext(ThemeContext)
     const [email, setEmail] = useState("");
     const [password, setPass] = useState("");
-    
-  
+    const [errorMgs, setErrorMgs] = useState("");
     function handleChange1(event) {
       setEmail(event.target.value)
     }
@@ -18,17 +20,24 @@ function Login() {
       try {
         console.log(email,password)
         await firebase.auth().signInWithEmailAndPassword(email, password);
-        console.log("Dang nhap thanh cong")
+        console.log("Dang nhap thanh cong");
+        setErrorMgs("");
       }
       catch(error){
-  console.log(error)
+  setErrorMgs(error.message)
       }
 
   }
+  function nhanUser()
+  {
+    theme.recieveUser();
+  }
+  const textColor = theme.value === 'white' ?  "black" : 'white'
+
 
   return (
 
-    <section className="login-area pt-100 pb-100">
+    <section style={{ backgroundColor: textColor }} className="login-area pt-100 pb-100">
     <div className="container">
       <div className="row">
         <div className="col-lg-8 offset-lg-2">
@@ -49,8 +58,14 @@ function Login() {
                 </span>
               </div>
               <button type="submit"className="btn theme-btn-2 w-100">Login Now</button>
-              <div className="or-divide"><span>or</span></div>
-             <Link to="/register"> <button className="btn theme-btn w-100">Register Now</button></Link>
+               <div className="or-divide"><span>or</span></div>
+             {/* <Link to="/register"> <button className="btn theme-btn w-100">Register Now</button></Link> */}
+             <button onClick={nhanUser}></button>
+             
+           
+
+            
+             
             </form>
           </div>
         </div>

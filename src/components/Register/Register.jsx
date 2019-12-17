@@ -16,7 +16,7 @@ function Register() {
   const Submit = async (event) => {
     event.preventDefault();
     try {
-      console.log(email,password)
+      console.log(email,password);
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       console.log("Dang ki thanh cong")
     }

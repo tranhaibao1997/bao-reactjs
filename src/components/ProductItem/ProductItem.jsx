@@ -1,10 +1,14 @@
 import React from 'react'
 
-function ProductItem({ img_url, shop_name, name, price, final_price, addItemName }) {
+function ProductItem({ img_url, shop_name, name, price, final_price, addItemName,showItemDetail1 }) {
 
  const addItemNameItem=() =>
 {
   addItemName({name,price,final_price,img_url});
+}
+function showItemDetail()
+{
+  showItemDetail1({name,price,final_price,img_url,shop_name});
 }
 
   return (
@@ -20,8 +24,8 @@ function ProductItem({ img_url, shop_name, name, price, final_price, addItemName
             <a title="Shopping Cart" onClick={addItemNameItem} >
               <i className="fas fa-shopping-cart" />
             </a>
-            <a title="Quick View" >
-              <i className="fas fa-search" />
+            <a title="Quick View" onClick={showItemDetail} >
+              <i className="fas fa-search"  />
             </a>
           </div>
         </div>

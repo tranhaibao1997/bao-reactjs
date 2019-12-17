@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import SideBar from './components/Sidebar/Sidebar'
@@ -12,9 +12,13 @@ import Login from './components/Login/Login'
 import { BrowserRouter } from 'react-router-dom';
 import { Router, Route } from "react-router";
 import MyRouter from './MyRouter'
+import { ThemeContext } from './ThemeContext'
+import ProductDetail from './components/ProductDetail/ProductDetail'
 
 
 function Main() {
+      
+      const context=useContext(ThemeContext);
 
     //add Product to cart
     const [addProducts, setAddedProducts] = useState([])
@@ -59,11 +63,22 @@ function Main() {
 
 
     //show SortedArray and set Products = SortedArray
-    const [products, setProducts] = useState(data.data)
+    // const [products, setProducts] = useState(data.data)
     function showSortedArray(value) {
         console.log(value);
-        setProducts(value);
+        context.setProducts(value);
     }
+    //show details
+    const [itemDetail,setItemDetail]=useState([]);
+    function showItem(value)
+    {
+        
+setItemDetail(value);
+
+    }
+    console.log(itemDetail);
+
+
 
     return (
         
@@ -77,17 +92,17 @@ function Main() {
             <div id="container">
 
 </div>
-{/* <MyRouter></MyRouter> */}
-{/* <Register></Register> */}
+{/* <MyRouter></MyRouter>  */}
+{/*      */}
 {/* <Login></Login> */}
             <Layout>
 
-                <ProductList addItemNamex={addCart} data={products}></ProductList>
+                <ProductList addItemNamex={addCart} data={context.products} showItemDetail2={showItem}></ProductList>
 
                 
-                <SideBar products={products} TakeArrayToMain1={showSortedArray}></SideBar>
+                <SideBar products={context.products} TakeArrayToMain1={showSortedArray}></SideBar>
             </Layout>
-
+<ProductDetail itemDetail={itemDetail}></ProductDetail>
             <Footer></Footer>
 
     </div>

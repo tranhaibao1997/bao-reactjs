@@ -22,7 +22,9 @@ return(
             {
                 return <ProductItem  
                 addItemName={props.addItemNamex}
-                {...elm}></ProductItem>
+                {...elm}
+                showItemDetail1={props.showItemDetail2}
+                ></ProductItem>
             })
             }
           </div>
