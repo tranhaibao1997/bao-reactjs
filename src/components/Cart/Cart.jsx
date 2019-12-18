@@ -1,19 +1,28 @@
 import React,{useContext} from 'react'
 import { ThemeContext } from '../../ThemeContext';
 
-function Cart(props)
+function Cart()
 {
     const context=useContext(ThemeContext);
-
-    //add Product to cart
-    
-    //add Product to cart
-
-
 
     //caculate Total Price
     const total = context.cartItem.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
     //caculate Total Price
+
+    function deleteItem(value)
+    {
+        var newArray=[...context.cartItem]
+        for( let i = 0; i < newArray.length; i++){ 
+            if ( newArray[i].name === value) {
+              newArray.splice(i, 1); 
+            }
+         }
+         context.setCartItem(newArray);
+         console.log(newArray)
+        
+        
+
+    }
 
 
 return (
@@ -39,7 +48,7 @@ return (
                 </div>
             </div>
             <div className="del-icon">
-                <a>
+                <a onClick={(e)=>deleteItem(elm.name)}>
                     <i className="far fa-trash-alt"></i>
                 </a>
             </div>
