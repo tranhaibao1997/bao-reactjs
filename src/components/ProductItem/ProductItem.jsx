@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from '../../ThemeContext';
 
-function ProductItem({ img_url, shop_name, name, price, final_price, addItemName,showItemDetail1 }) {
+function ProductItem({name, price, final_price, img_url, shop_name}) {
 
- const addItemNameItem=() =>
-{
-  addItemName({name,price,final_price,img_url});
+  const context = useContext(ThemeContext);
+  function showItemDetail() {
+     const value={name, price, final_price, img_url, shop_name};
+     context.setItemDetail(value);
+    
+
+  }
+  function addToCart() {
+    
+    const value = { name, price, final_price, img_url, shop_name };
+    if (context.cartItem.length === 0) {
+      value.quantity = 1;
+      context.setCartItem([...context.cartItem, value])
+
+    }
+    else {
+      let i = context.cartItem.findIndex(a => a.name === value.name)
+      if (i !== -1) {
+        const newProductsArray = [...context.cartItem];
+        newProductsArray[i].quantity += 1;
+        context.setCartItem(newProductsArray);
 }
-function showItemDetail()
-{
-  showItemDetail1({name,price,final_price,img_url,shop_name});
-}
+      else {
+        value.quantity = 1;
+        context.setCartItem([...context.cartItem, value])
+      }
+    }
+  }
+ 
+
 
   return (
 
@@ -18,14 +41,14 @@ function showItemDetail()
         <div className="product-img mb-25">
           <a href="#">
             <img src={img_url} alt="" />
-         
+
           </a>
           <div className="product-action text-center">
-            <a title="Shopping Cart" onClick={addItemNameItem} >
+            <a title="Shopping Cart" onClick={addToCart}>
               <i className="fas fa-shopping-cart" />
             </a>
             <a title="Quick View" onClick={showItemDetail} >
-              <i className="fas fa-search"  />
+              <i className="fas fa-search" />
             </a>
           </div>
         </div>

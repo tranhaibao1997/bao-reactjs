@@ -6,8 +6,17 @@ export const ThemeContext = React.createContext("");
 function ThemeContextComponent({ children }) {
 
 
-//Product
-const [products,setProducts]= useState(data.data);
+    //Product
+    const [products, setProducts] = useState(data.data);
+
+    //cart
+    const [cartItem, setCartItem] = useState([]);
+
+    //user
+    const [userInfo, setUserInfo] = useState();
+
+    //product detail
+    const [itemDetail, setItemDetail] = useState([]);
 
 
 
@@ -24,13 +33,13 @@ const [products,setProducts]= useState(data.data);
         m = checkTime(m);
         s = checkTime(s);
         document.getElementById('txt').innerHTML =
-        h + ":" + m + ":" + s;
+            h + ":" + m + ":" + s;
         var t = setTimeout(startTime, 500);
-      }
-      function checkTime(i) {
-        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    }
+    function checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
         return i;
-      }
+    }
 
 
 
@@ -46,13 +55,16 @@ const [products,setProducts]= useState(data.data);
         }
     }
     //switch background-color
-
-    function recieveUser(value)
-    {
-       console.log(value);
-    }
     return (
-        <ThemeContext.Provider value={{ switchTheme, value: themeValue, startTime,products,setProducts}}>
+        <ThemeContext.Provider value={{
+            switchTheme, value: themeValue,
+            startTime,
+            products, setProducts,
+            cartItem, setCartItem,
+            userInfo, setUserInfo,
+            itemDetail, setItemDetail
+
+        }}>
             {children}
         </ThemeContext.Provider>
     )

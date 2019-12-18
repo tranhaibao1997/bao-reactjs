@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import { ThemeContext } from '../../ThemeContext'
 
-export default function ProductDetail(props)
+export default function ProductDetail()
 {
+  const context = useContext(ThemeContext)
     return (
 
         <div>
@@ -13,17 +15,17 @@ export default function ProductDetail(props)
                   <div className="tab-content" id="myTabContentpro">
                     <div className="tab-pane fade show active" id="home" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={props.itemDetail.img_url} alt="" />
+                        <img src={context.itemDetail.img_url} alt="" />
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={props.itemDetail.img_url} alt="" />
+                        <img src={context.itemDetail.img_url} alt="" />
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile1" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={props.itemDetail.img_url} alt="" />
+                        <img src={context.itemDetail.img_url} alt="" />
                       </div>
                     </div>
                   </div>
@@ -48,10 +50,10 @@ export default function ProductDetail(props)
                     <a href="#">decor,</a>
                     <a href="#">furniture</a>
                   </div>
-                  <h2 className="pro-details-title mb-15">{props.itemDetail.name}</h2>
+                  <h2 className="pro-details-title mb-15">{context.itemDetail.name}</h2>
                   <div className="details-price mb-20">
-                    <span>{props.itemDetail.final_price}</span>
-                    <span className="old-price">{props.itemDetail.price}</span>
+                    <span>{context.itemDetail.final_price}</span>
+                    <span className="old-price">{context.itemDetail.price}</span>
                   </div>
                   <div className="product-variant">
                     <div className="product-desc variant-item">
@@ -60,7 +62,7 @@ export default function ProductDetail(props)
                     </div>
                     <div className="product-info-list variant-item">
                       <ul>
-                        <li><span>Brands:</span>{props.itemDetail.shop_name}</li>
+                        <li><span>Brands:</span>{context.itemDetail.shop_name}</li>
                         <li><span>Product Code:</span> d12</li>
                         <li><span>Reward Points:</span> 100</li>
                         <li><span>Stock:</span> <span className="in-stock">In Stock</span></li>

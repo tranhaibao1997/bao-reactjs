@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import ProductItem from '../ProductItem/ProductItem'
+import { ThemeContext } from '../../ThemeContext';
 
-function ProductList(props)
+function ProductList()
 {
+  const context = useContext(ThemeContext);
 return(
     <div className="col-xl-9 col-lg-8">
     {/* tab filter */}
@@ -18,12 +20,10 @@ return(
       <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div className="row">
             {
-         props.data.map(elm=>
+         context.products.map(elm=>
             {
                 return <ProductItem  
-                addItemName={props.addItemNamex}
-                {...elm}
-                showItemDetail1={props.showItemDetail2}
+                {...elm}     
                 ></ProductItem>
             })
             }

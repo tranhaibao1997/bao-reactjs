@@ -1,27 +1,29 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import { ThemeContext } from '../../ThemeContext';
 
-function SortFunction(props) 
+function SortFunction() 
 {
-  var newProducts = [...props.products]
+  const context = useContext(ThemeContext)
+  var newProducts = [...context.products]
 
   function AtoZ() {
 
-    props.takeArrayToMain(newProducts.sort((a, b) => a.name.localeCompare(b.name)));
+    context.setProducts(newProducts.sort((a, b) => a.name.localeCompare(b.name)));
   
   }
   function ZtoA() {
     
-    props.takeArrayToMain(newProducts.sort((a, b) => b.name.localeCompare(a.name)));
+    context.setProducts(newProducts.sort((a, b) => b.name.localeCompare(a.name)));
    
   }
   function LowToHigh() {
     
-    props.takeArrayToMain(newProducts.sort((a, b) => a.price-b.price));
+    context.setProducts(newProducts.sort((a, b) => a.price-b.price));
    
   }
   function HighToLow() {
 
-    props.takeArrayToMain(newProducts.sort((a, b) => b.price-a.price));
+    context.setProducts(newProducts.sort((a, b) => b.price-a.price));
    
   }
 

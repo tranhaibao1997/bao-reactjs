@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { ThemeContext } from '../../ThemeContext';
 
 function Header(props) {
-    const theme = useContext(ThemeContext)
+    const context = useContext(ThemeContext)
     const [userInfo, setUserInfo] = useState({})
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -17,17 +17,13 @@ function Header(props) {
         window.location.href = "/"
     }
     function switchTheme() {
-        theme.switchTheme();
-        console.log(theme.value);
+        context.switchTheme();
+       
     }
     function showClock() {
-        console.log("a");
-        theme.startTime();
+        context.startTime();
     }
-    function giveToContext()
-    {
-        theme.recieveUser(setUserInfo,userInfo);
-    }
+   
     const userEmail = userInfo && userInfo.email
     return (
         <header >
@@ -93,7 +89,7 @@ function Header(props) {
 </button>
                                     </li>
                                     <li onClick={switchTheme} className="">
-                                        <a  ><i className="badge badge-pill badge-dark">{theme.value}</i></a>
+                                        <a  ><i className="badge badge-pill badge-dark">{context.value}</i></a>
                                     </li>
                                     <li className="search-btn">
                                         <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search"></i></a>
@@ -103,7 +99,7 @@ function Header(props) {
                                             ? <li style={{ color: 'red' }} className="login-btn"><a onClick={onLogout}><i className="fas fa-sign-out-alt"></i></a></li>
                                             : <li className="login-btn"><a href="#"><i className="fas fa-user"></i></a></li>
                                     }
-                                    <li className="d-shop-cart"><a href="#"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{props.productCount}</span></a>
+                                    <li className="d-shop-cart"><a href="#"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{context.cartItem.length}</span></a>
                                         {
                                             props.children
                                         }

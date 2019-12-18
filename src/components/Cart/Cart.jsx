@@ -1,12 +1,25 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import { ThemeContext } from '../../ThemeContext';
 
 function Cart(props)
 {
- 
+    const context=useContext(ThemeContext);
+
+    //add Product to cart
+    
+    //add Product to cart
+
+
+
+    //caculate Total Price
+    const total = context.cartItem.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    //caculate Total Price
+
+
 return (
         <ul className="minicart">
             {
-                props.products.map(elm => {
+                context.cartItem.map(elm => {
 return (
 <li>
             <div className="cart-img">
@@ -38,7 +51,7 @@ return (
         <li>
             <div className="total-price">
                 <span className="f-left">Total:</span>
-                <span className="f-right">${props.totalPrice}</span>
+                <span className="f-right">${total}</span>
             </div>
         </li>
         <li>
