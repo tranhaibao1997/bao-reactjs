@@ -235,9 +235,9 @@ label {
     border-top: 1px solid #f2f2f2
 }
 
-.loader {
+.loader1 {
     position: fixed;
-    width: 100%;
+    width: 50%;
     height: 100%;
     /* float: left; */
     transition: 0.5s;
@@ -245,31 +245,69 @@ label {
     background-repeat: no-repeat;
     z-index: 10000;
     background-size: cover;
+    transform: translateX(100%);
+}
+.loader2 {
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    /* float: left; */
+    transition: 0.5s;
+    background-image: url(BG1.jpg);
+    background-repeat: no-repeat;
+    z-index: 10000;
+    background-size: cover;
 }
 
 #canv {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     transition: 0.5s;
     z-index: 10000;
 }
 
-.loader-close {
-    animation: divao 2s forwards;
+.loader1-close {
+    animation: ditrai 2s forwards;
 }
-
-@keyframes divao {
+.loader2-close {
+    animation: diphai 2s forwards;
+}
+.snow-dis
+{
+    animation: bienmat 0s forwards;
+}
+@keyframes ditrai {
     from {
-        transform: translateX(0);
+        transform: translateX(100%);
         opacity: 1;
     }
     to {
-        transform: translateX(100%);
+        transform: translateX(200%);
         opacity: 0;
     }
 }
+@keyframes diphai {
+    from {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+@keyframes bienmat {
+    from {
 
+        opacity: 1;
+    }
+    to {
+       
+        opacity: 0;
+        z-index: 0;
+    }
+}
 .dot {
     width: 35px;
     height: 35px;

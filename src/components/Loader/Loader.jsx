@@ -5,11 +5,15 @@ export default function Loader(props)
     return (
 
       <>
-      <div class="loader">
-       <canvas id="canv">
-
-       </canvas>
+      <div class="loader1">
+       
       </div>
+      <div class="loader2">
+      
+      </div>
+      <canvas id="canv">
+
+</canvas>
       </>
     )
 }

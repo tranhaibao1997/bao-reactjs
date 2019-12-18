@@ -15,15 +15,10 @@ function ThemeContextComponent({ children }) {
     //user
     const [userInfo, setUserInfo] = useState();
 
-    //product detail
+    //product detail    
     const [itemDetail, setItemDetail] = useState([]);
-
-
-
-
-
-
-
+    
+    
     //make clock
     function startTime() {
         var today = new Date();

@@ -112,12 +112,16 @@
 
 
         function close() {
-            const loader = document.querySelectorAll(".loader");
-            console.log(loader)
-            const snow = document.querySelectorAll("#canv");
-            for (let i = 0; i < loader.length; i++) {
-                loader[i].classList.add("loader-close");
+            const loader1 = document.querySelectorAll(".loader1");
+            for (let i = 0; i < loader1.length; i++) {
+                loader1[i].classList.add("loader1-close");
             }
+            const loader2 = document.querySelectorAll(".loader2");
+            for (let i = 0; i < loader2.length; i++) {
+                loader2[i].classList.add("loader2-close");
+            }
+            const snow=document.getElementById("canv");
+            snow.classList.add("snow-dis")
 
 
         }
