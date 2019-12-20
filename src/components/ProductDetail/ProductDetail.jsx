@@ -34,7 +34,7 @@ export default function ProductDetail()
   }
   function addToCart()
   {
-    
+    console.log(context.products);
     const value=parseInt(document.getElementById("quantity-input").value);
     let i = context.cartItem.findIndex(a => a.name === product.name)
     if (i !== -1) {
@@ -116,7 +116,7 @@ export default function ProductDetail()
                     </div>
                     <div className="product-action-details variant-item">
                       <div className="product-details-action">
-                        <form action="#">
+                        <form>
                           <div className="plus-minus">
                             <div className="cart-plus-minus">
                             <input id="quantity-input" type="text" defaultValue={1} />
@@ -125,7 +125,7 @@ export default function ProductDetail()
                           </div>
                           <button className="details-action-icon" type="submit"><i className="fas fa-heart" /></button>
                           <div className="details-cart mt-40">
-                            <button className="btn theme-btn" onClick={addToCart}>purchase now</button>
+                            <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
                           </div>
                         </form>
                       </div>
