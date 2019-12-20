@@ -1,15 +1,17 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from '../../ThemeContext';
+import { Link } from 'react-router-dom'
 
-function ProductItem({name, price, final_price, img_url, shop_name}) {
+function ProductItem({name, price, final_price, img_url, shop_name,product_id}) {
 
   const context = useContext(ThemeContext);
-  function showItemDetail() {
-     const value={name, price, final_price, img_url, shop_name};
-     context.setItemDetail(value);
+  // function showItemDetail() {
+  //    const value={name, price, final_price, img_url, shop_name};
+  //    context.setItemDetail(value);
+  //    console.log(value);
     
 
-  }
+  // }
   function addToCart() {
     
     const value = { name, price, final_price, img_url, shop_name };
@@ -30,6 +32,7 @@ function ProductItem({name, price, final_price, img_url, shop_name}) {
         context.setCartItem([...context.cartItem, value])
       }
     }
+    console.log(context.cartItem)
   }
  
 
@@ -47,9 +50,9 @@ function ProductItem({name, price, final_price, img_url, shop_name}) {
             <a title="Shopping Cart" onClick={addToCart}>
               <i className="fas fa-shopping-cart" />
             </a>
-            <a title="Quick View" onClick={showItemDetail} >
+            <Link to={`/product-detail/${product_id}`} title="Quick View">
               <i className="fas fa-search" />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="product-content pr-0">

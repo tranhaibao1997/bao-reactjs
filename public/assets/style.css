@@ -32,10 +32,15 @@ body {
     font-weight: normal;
     font-style: normal;
     font-size: 14px;
+    overflow-x: hidden;
 }
 
 .product-action a:hover {
     cursor: pointer;
+}
+
+.tab-content .fa-search {
+    color: black
 }
 
 .img,
@@ -247,6 +252,7 @@ label {
     background-size: cover;
     transform: translateX(100%);
 }
+
 .loader2 {
     position: fixed;
     width: 50%;
@@ -270,13 +276,15 @@ label {
 .loader1-close {
     animation: ditrai 2s forwards;
 }
+
 .loader2-close {
     animation: diphai 2s forwards;
 }
-.snow-dis
-{
+
+.snow-dis {
     animation: bienmat 0s forwards;
 }
+
 @keyframes ditrai {
     from {
         transform: translateX(100%);
@@ -287,6 +295,7 @@ label {
         opacity: 0;
     }
 }
+
 @keyframes diphai {
     from {
         transform: translateX(0%);
@@ -297,17 +306,17 @@ label {
         opacity: 0;
     }
 }
+
 @keyframes bienmat {
     from {
-
         opacity: 1;
     }
     to {
-       
         opacity: 0;
         z-index: 0;
     }
 }
+
 .dot {
     width: 35px;
     height: 35px;

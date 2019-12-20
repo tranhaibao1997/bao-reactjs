@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import firebase from 'firebase';
 import { ThemeContext } from '../../ThemeContext';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 function Header(props) {
     const context = useContext(ThemeContext)
@@ -32,7 +33,7 @@ function Header(props) {
                     <div className="row align-items-center">
                         <div className="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                             <div className="logo">
-                                <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
+                                <Link to="/"><img src="./assets/logo_shop.png" alt="" /></Link>
                             </div>
                             <div className="category-menu">
                                 <h4>Category</h4>
@@ -53,7 +54,7 @@ function Header(props) {
                                 <nav id="mobile-menu" style={{ display: "block" }} >
                                     <ul>
                                         <li>
-                                            <a href="./index.html">Home</a>
+                                            <Link to="/">Home</Link>
                                         </li>
                                         <li>
                                             <a href="#">Pages</a>
@@ -89,7 +90,7 @@ function Header(props) {
 </button>
                                     </li>
                                     <li onClick={switchTheme} className="">
-                                        <a  ><i className="badge badge-pill badge-dark">{context.value}</i></a>
+                                        <a ><i className="badge badge-pill badge-dark">{context.value}</i></a>
                                     </li>
                                     <li className="search-btn">
                                         <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search"></i></a>
@@ -97,9 +98,9 @@ function Header(props) {
                                     {
                                         userEmail
                                             ? <li style={{ color: 'red' }} className="login-btn"><a onClick={onLogout}><i className="fas fa-sign-out-alt"></i></a></li>
-                                            : <li className="login-btn"><a href="#"><i className="fas fa-user"></i></a></li>
+                                            : <li className="login-btn"><Link to="/login"><i className="fas fa-user"></i></Link></li>
                                     }
-                                    <li className="d-shop-cart"><a href="#"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{context.cartItem.length}</span></a>
+                                    <li className="d-shop-cart"><Link to="/check-out"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{context.cartItem.length}</span></Link>
                                         {
                                             props.children
                                         }

@@ -1,11 +1,57 @@
 import React,{useContext} from 'react'
 import { ThemeContext } from '../../ThemeContext'
+import { Link,useParams } from 'react-router-dom'
+
 
 export default function ProductDetail()
 {
   const context = useContext(ThemeContext)
-    return (
+  const param=useParams();
+  const id=param.id;
+  console.log(id);
+  
+  const product=context.products.find(item => item.product_id===parseInt(id));
+  function minus()
+  {
+    
+    if(document.getElementById("quantity-input").value >0)
+    {
+      document.getElementById("quantity-input").value--
+    }
+    else
+    {
+      document.getElementById("quantity-input").value=0;
+    }
+    console.log( document.getElementById("quantity-input").value)
+  }
+  function plus()
+  {
+    
+    
+      document.getElementById("quantity-input").value++;
+      console.log( document.getElementById("quantity-input").value)
+   
+  }
+  function addToCart()
+  {
+    
+    const value=parseInt(document.getElementById("quantity-input").value);
+    let i = context.cartItem.findIndex(a => a.name === product.name)
+    if (i !== -1) {
+      const newProductsArray = [...context.cartItem];
+      newProductsArray[i].quantity=newProductsArray[i].quantity+value ;
+      context.setCartItem(newProductsArray);
+}
+    else {
+      product.quantity = value;
+      context.setCartItem([...context.cartItem, product])
+    }
+    console.log(context.cartItem)
+  }
 
+
+    return (
+        
         <div>
         <section className="shop-details-area pt-100 pb-100">
           <div className="container">
@@ -15,17 +61,17 @@ export default function ProductDetail()
                   <div className="tab-content" id="myTabContentpro">
                     <div className="tab-pane fade show active" id="home" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={context.itemDetail.img_url} alt="" />
+                        <Link to="/detail"><img src={product.img_url} alt="" /></Link>
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={context.itemDetail.img_url} alt="" />
+                        <img src={product.img_url} alt="" />
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile1" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={context.itemDetail.img_url} alt="" />
+                        <img src={product.img_url} alt="" />
                       </div>
                     </div>
                   </div>
@@ -50,10 +96,10 @@ export default function ProductDetail()
                     <a href="#">decor,</a>
                     <a href="#">furniture</a>
                   </div>
-                  <h2 className="pro-details-title mb-15">{context.itemDetail.name}</h2>
+                  <h2 className="pro-details-title mb-15">{product.name}</h2>
                   <div className="details-price mb-20">
-                    <span>{context.itemDetail.final_price}</span>
-                    <span className="old-price">{context.itemDetail.price}</span>
+                    <span>{product.final_price}đ</span>
+                    <span className="old-price">{product.price}đ</span>
                   </div>
                   <div className="product-variant">
                     <div className="product-desc variant-item">
@@ -62,7 +108,7 @@ export default function ProductDetail()
                     </div>
                     <div className="product-info-list variant-item">
                       <ul>
-                        <li><span>Brands:</span>{context.itemDetail.shop_name}</li>
+                        <li><span>Brands:</span>{product.shop_name}</li>
                         <li><span>Product Code:</span> d12</li>
                         <li><span>Reward Points:</span> 100</li>
                         <li><span>Stock:</span> <span className="in-stock">In Stock</span></li>
@@ -72,11 +118,14 @@ export default function ProductDetail()
                       <div className="product-details-action">
                         <form action="#">
                           <div className="plus-minus">
-                            <div className="cart-plus-minus"><input type="text" defaultValue={1} /><div className="dec qtybutton">-</div><div className="inc qtybutton">+</div></div>
+                            <div className="cart-plus-minus">
+                            <input id="quantity-input" type="text" defaultValue={1} />
+                            <div className="dec qtybutton" onClick={minus}>-</div>
+                            <div className="inc qtybutton" onClick={plus}>+</div></div>
                           </div>
                           <button className="details-action-icon" type="submit"><i className="fas fa-heart" /></button>
                           <div className="details-cart mt-40">
-                            <button className="btn theme-btn">purchase now</button>
+                            <button className="btn theme-btn" onClick={addToCart}>purchase now</button>
                           </div>
                         </form>
                       </div>

@@ -2,6 +2,7 @@ import React, { useState,useContext } from 'react'
 import firebase from 'firebase'
 // import {Link } from 'react-router-dom';
 import { ThemeContext } from '../../ThemeContext';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 
 function Login(props) {
@@ -32,7 +33,7 @@ function Login(props) {
   {
     theme.recieveUser();
   }
-  const textColor = theme.value === 'white' ?  "black" : 'white'
+  const textColor = theme.value === 'black' ?  "white" : 'black'
 
 
   return (
@@ -59,7 +60,7 @@ function Login(props) {
               </div>
               <button type="submit"className="btn theme-btn-2 w-100">Login Now</button>
                <div className="or-divide"><span>or</span></div>
-             {/* <Link to="/register"> <button className="btn theme-btn w-100">Register Now</button></Link> */}
+             <Link to="/register"> <button className="btn theme-btn w-100">Register Now</button></Link>
              <button onClick={nhanUser}></button>
              
            

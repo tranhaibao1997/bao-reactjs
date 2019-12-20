@@ -16,7 +16,7 @@ function ThemeContextComponent({ children }) {
     const [userInfo, setUserInfo] = useState();
 
     //product detail    
-    const [itemDetail, setItemDetail] = useState([]);
+    // const [itemDetail, setItemDetail] = useState([]);
     
     
     //make clock
@@ -40,13 +40,13 @@ function ThemeContextComponent({ children }) {
 
 
     //switch background-color
-    const [themeValue, setThemeValue] = useState("white");
+    const [themeValue, setThemeValue] = useState("black");
     function switchTheme() {
-        if (themeValue === "white") {
-            setThemeValue("black")
+        if (themeValue === "black") {
+            setThemeValue("white")
         }
         else {
-            setThemeValue("white")
+            setThemeValue("black")
         }
     }
     //switch background-color
@@ -57,7 +57,7 @@ function ThemeContextComponent({ children }) {
             products, setProducts,
             cartItem, setCartItem,
             userInfo, setUserInfo,
-            itemDetail, setItemDetail
+            // itemDetail, setItemDetail
 
         }}>
             {children}
