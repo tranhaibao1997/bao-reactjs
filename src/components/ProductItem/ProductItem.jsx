@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ThemeContext } from '../../ThemeContext';
 import { Link } from 'react-router-dom'
 
@@ -32,9 +32,10 @@ function ProductItem({name, price, final_price, img_url, shop_name,product_id}) 
         context.setCartItem([...context.cartItem, value])
       }
     }
-    console.log(context.cartItem)
+    console.log(context.cartItem);
+  
   }
- 
+  
 
 
   return (

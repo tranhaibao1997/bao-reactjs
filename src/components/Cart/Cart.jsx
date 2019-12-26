@@ -67,6 +67,7 @@ function Cart() {
                     <Link to="/check-out">Shopping Cart</Link>
                     <a className="red-color" href="#">Checkout</a>
                 </div>
+                
             </li>
         </ul>
     )

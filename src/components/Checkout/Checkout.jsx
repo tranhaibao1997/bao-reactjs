@@ -122,7 +122,8 @@ export default function CheckOut() {
                           <li>Subtotal <span>{total}đ</span></li>
                           <li>Total <span>{total}đ</span></li>
                         </ul>
-                        <a className="btn theme-btn" href="#">Proceed to checkout</a>
+                        <a className="btn theme-btn" id="paypal-button-container" href="#">Proceed to checkout</a>
+                        <div id="paypal-button-container"></div>
                       </div>
                     </div>
                   </div>

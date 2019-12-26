@@ -29,10 +29,7 @@ function Login(props) {
       }
 
   }
-  function nhanUser()
-  {
-    theme.recieveUser();
-  }
+  
   const textColor = theme.value === 'black' ?  "white" : 'black'
 
 
@@ -61,7 +58,7 @@ function Login(props) {
               <button type="submit"className="btn theme-btn-2 w-100">Login Now</button>
                <div className="or-divide"><span>or</span></div>
              <Link to="/register"> <button className="btn theme-btn w-100">Register Now</button></Link>
-             <button onClick={nhanUser}></button>
+             
              
            
 

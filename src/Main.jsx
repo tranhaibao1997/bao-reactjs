@@ -9,6 +9,7 @@ import FallingLeaf from './components/FallingLeaf/FallingLeaf'
 
 import { BrowserRouter, Switch, Route} from "react-router-dom";
 import Loading from './components/Loading/Loading'
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 
 const HomePage = React.lazy(() => import('./components/Layout/Layout'))
@@ -31,7 +32,9 @@ function Main() {
                 </Header>
                 <React.Suspense fallback={<Loading/>}>
                <Switch>
-                    <Route path="/register" component={RegisterPage}/>
+               <Route path="/register">
+            <RegisterPage></RegisterPage>
+          </Route>
                      
                    
                     <Route path="/login" component={LoginPage}/>
@@ -42,7 +45,10 @@ function Main() {
                     </Layout>
                     </Route>
                     <Route path="/product-detail/:id" component={DetailPage}/>
-                    <Route path="/check-out" component={CheckoutPage}/>
+                    
+                    <PrivateRoute path="/check-out" >
+                    <CheckoutPage></CheckoutPage>
+                    </PrivateRoute>
                     <Route path="*">
                     {NotFoundPage}
                     </Route>
@@ -57,6 +63,7 @@ function Main() {
                 <Footer></Footer>
 
             </div>
+            
            
         </BrowserRouter>
 

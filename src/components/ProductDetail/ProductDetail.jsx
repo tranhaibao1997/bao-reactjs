@@ -1,10 +1,18 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect} from 'react'
 import { ThemeContext } from '../../ThemeContext'
 import { Link,useParams } from 'react-router-dom'
 
 
 export default function ProductDetail()
 {
+
+   //useEffect
+   useEffect(()=>
+   {
+     
+     window.scrollTo(100, 0);
+   });
+  
   const context = useContext(ThemeContext)
   const param=useParams();
   const id=param.id;
@@ -29,12 +37,12 @@ export default function ProductDetail()
     
     
       document.getElementById("quantity-input").value++;
-      console.log( document.getElementById("quantity-input").value)
+
    
   }
   function addToCart()
   {
-    console.log(context.products);
+    
     const value=parseInt(document.getElementById("quantity-input").value);
     let i = context.cartItem.findIndex(a => a.name === product.name)
     if (i !== -1) {
