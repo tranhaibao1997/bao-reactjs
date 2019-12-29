@@ -92,7 +92,7 @@ export default function CheckOut() {
                                   <div className="inc qtybutton" onClick={(e)=>plus(elm.name)}>+</div></div>
                             </td>
                         <td className="product-subtotal"><span className="amount">{elm.final_price * elm.quantity}</span></td>
-                            <td className="product-remove"><a href="#" onClick={(e)=>deleteItem(elm.name)}><i className="fa fa-times" /></a></td>
+                            <td className="product-remove"><a onClick={(e)=>deleteItem(elm.name)}><i className="fa fa-times" /></a></td>
                           </tr>
                         )
                     })

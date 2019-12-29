@@ -4,11 +4,12 @@ import './index.css';
 import Main from './Main';
 import * as serviceWorker from './serviceWorker';
 import firebaseInit from './firebase'
-import MyRouter from './MyRouter';
-import Login from './components/Login/Login';
 import ThemeContextComponent from './ThemeContext';
+import { Provider } from "react-redux"
+import { store } from './App.store'
 
 firebaseInit();
-ReactDOM.render( <ThemeContextComponent >
-        <Main/> </ThemeContextComponent>, document.getElementById('root'));
+ReactDOM.render( < ThemeContextComponent >
+    <
+    Provider store = { store } > < Main / > < /Provider> </ThemeContextComponent > , document.getElementById('root'));
 serviceWorker.unregister();

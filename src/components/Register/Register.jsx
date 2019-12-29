@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import firebase from 'firebase'
 import {Link } from 'react-router-dom';
 
-function Register() {
+function Register(props) {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   
@@ -14,15 +14,9 @@ function Register() {
     setPass(event.target.value)
   }
   const Submit = async (event) => {
-    event.preventDefault();
-    try {
-      console.log(email,password);
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-      console.log("Dang ki thanh cong")
-    }
-    catch(error){
-console.log(error)
-    }
+//     
+event.preventDefault();
+props.registerAction(email, password);
 
   }
 

@@ -1,10 +1,19 @@
-import React,{useContext} from 'react'
+import React,{useContext, useEffect} from 'react'
 import ProductItem from '../ProductItem/ProductItem'
 import { ThemeContext } from '../../ThemeContext';
 
-function ProductList()
+function ProductList(props)
 {
-  const context = useContext(ThemeContext);
+  useEffect(() => {
+    props.getProductList();
+   
+   
+  }, [])
+  function Test()
+  {
+    console.log(props.data)
+  }
+  
 return(
     <div className="col-xl-9 col-lg-8">
     {/* tab filter */}
@@ -19,13 +28,16 @@ return(
     <div className="tab-content" id="myTabContent">
       <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div className="row">
+         
             {
-         context.products.map(elm=>
+              
+         props.data.map(elm=>
             {
                 return <ProductItem  
                 {...elm}     
                 ></ProductItem>
-            })
+            }) 
+          
             }
           </div>
         </div>

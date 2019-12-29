@@ -16,20 +16,24 @@ function Login(props) {
     function handleChange2(event) {
       setPass(event.target.value)
     }
-    const Login = async (event) => {
-      event.preventDefault();
-      try {
-        console.log(email,password)
-        await firebase.auth().signInWithEmailAndPassword(email, password);
-        console.log("Dang nhap thanh cong");
-        setErrorMgs("");
-      }
-      catch(error){
-  setErrorMgs(error.message)
-      }
+  //   const Login = async (event) => {
+  //     event.preventDefault();
+  //     try {
+  //       console.log(email,password)
+  //       await firebase.auth().signInWithEmailAndPassword(email, password);
+  //       console.log("Dang nhap thanh cong");
+  //       setErrorMgs("");
+  //     }
+  //     catch(error){
+  // setErrorMgs(error.message)
+  //     }
 
+  // }
+  async function Login(e)
+  {
+    e.preventDefault();
+    props.loginAction(email,password);
   }
-  
   const textColor = theme.value === 'black' ?  "white" : 'black'
 
 

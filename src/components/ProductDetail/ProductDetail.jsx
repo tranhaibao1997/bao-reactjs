@@ -3,22 +3,22 @@ import { ThemeContext } from '../../ThemeContext'
 import { Link,useParams } from 'react-router-dom'
 
 
-export default function ProductDetail()
+export default function ProductDetail(props)
 {
 
    //useEffect
-   useEffect(()=>
-   {
-     
-     window.scrollTo(100, 0);
-   });
+   useEffect(()=> { window.scrollTo(0, 0);
+        props.getProductDetailById(id)
+    },[]);
   
   const context = useContext(ThemeContext)
   const param=useParams();
   const id=param.id;
   console.log(id);
   
-  const product=context.products.find(item => item.product_id===parseInt(id));
+  
+  const product=props.data;
+  
   function minus()
   {
     
@@ -69,12 +69,12 @@ export default function ProductDetail()
                   <div className="tab-content" id="myTabContentpro">
                     <div className="tab-pane fade show active" id="home" role="tabpanel">
                       <div className="product-large-img">
-                        <Link to="/detail"><img src={product.img_url} alt="" /></Link>
+                      {/* <img src={`https://media3.scdn.vn/${props.data.images[0]}`} alt="" /> */}
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={product.img_url} alt="" />
+                      
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile1" role="tabpanel">

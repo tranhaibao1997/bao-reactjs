@@ -4,18 +4,19 @@ import Footer from './components/Footer/Footer'
 import SideBar from './components/Sidebar/Sidebar'
 import ProductList from './components/ProductList/ProductList'
 import Layout from './components/Layout/Layout'
-import Cart from './components/Cart/Cart'
+// import Cart from './components/Cart/Cart'
 import FallingLeaf from './components/FallingLeaf/FallingLeaf'
 
 import { BrowserRouter, Switch, Route} from "react-router-dom";
 import Loading from './components/Loading/Loading'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+import ProductListContainer from './components/ProductList/ProductList.container'
 
 
 const HomePage = React.lazy(() => import('./components/Layout/Layout'))
-const LoginPage = React.lazy(() => import('./components/Login/Login'))
-const DetailPage = React.lazy(() => import('./components/ProductDetail/ProductDetail'))
-const RegisterPage = React.lazy(() => import('./components/Register/Register'))
+const LoginPage = React.lazy(() => import('./components/Login/Login.container'))
+const DetailPage = React.lazy(() => import('./components/ProductDetail/ProductDetail.container'))
+const RegisterPage = React.lazy(() => import("./components/Register/Register.container"))
 const CheckoutPage = React.lazy(() => import('./components/Checkout/Checkout'))
 const NotFoundPage = React.lazy(() => import('./components/NotFound/NotFound'))
 
@@ -28,7 +29,7 @@ function Main() {
         
             <div>
                 <Header >
-                    <Cart></Cart>
+                    {/* <Cart></Cart> */}
                 </Header>
                 <React.Suspense fallback={<Loading/>}>
                <Switch>
@@ -40,7 +41,7 @@ function Main() {
                     <Route path="/login" component={LoginPage}/>
                     <Route path="/" exact>
                     <Layout>
-                        <ProductList ></ProductList>
+                        <ProductListContainer ></ProductListContainer>
                         <SideBar></SideBar>
                     </Layout>
                     </Route>

@@ -1,8 +1,9 @@
 import React from 'react'
-import SearchFunction from '../SearchFunction/SearchFunction'
+import SearchFunctionContainer from '../SearchFunction/Search.container'
 import SortFunction from '../SortFunction/SortFunction'
 import RecentProductFunction from '../RecentProductFunction/RecentProductFunction'
 import Unknow from '../Unknow/Unknow'
+import SortFunctionContainer from '../SortFunction/SortFunction.container'
 
 function SideBar()
 {
@@ -11,8 +12,8 @@ function SideBar()
 return (
     <div className="col-xl-3 col-lg-4">
         <div className="sidebar-shop">
-         <SearchFunction></SearchFunction>
-         <SortFunction></SortFunction>
+         <SearchFunctionContainer></SearchFunctionContainer>
+         <SortFunctionContainer></SortFunctionContainer>
          <RecentProductFunction></RecentProductFunction>
          <Unknow></Unknow>
         </div>

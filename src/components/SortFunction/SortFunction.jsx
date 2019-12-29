@@ -1,31 +1,37 @@
 import React,{useContext} from 'react'
 import { ThemeContext } from '../../ThemeContext';
 
-function SortFunction() 
+function SortFunction(props) 
 {
-  const context = useContext(ThemeContext)
-  var newProducts = [...context.products]
+  
+  var newProducts = [...props.data]
 
   function AtoZ() {
 
-    context.setProducts(newProducts.sort((a, b) => a.name.localeCompare(b.name)));
+    props.getProductListBySort(newProducts.sort((a, b) => a.name.localeCompare(b.name)));
   
   }
   function ZtoA() {
     
-    context.setProducts(newProducts.sort((a, b) => b.name.localeCompare(a.name)));
+    props.getProductListBySort(newProducts.sort((a, b) => b.name.localeCompare(a.name)));
    
   }
   function LowToHigh() {
     
-    context.setProducts(newProducts.sort((a, b) => a.price-b.price));
+    props.getProductListBySort(newProducts.sort((a, b) => a.final_price-b.final_price));
    
   }
   function HighToLow() {
 
-    context.setProducts(newProducts.sort((a, b) => b.price-a.price));
+    props.getProductListBySort(newProducts.sort((a, b) => b.final_price-a.final_price));
    
   }
+  function TopSales() {
+
+ props.getProductListBySort(newProducts.filter(a => a.promotion_percent >35));
+ console.log(newProducts.filter(a => a.promotion_percent >50))
+   }
+  
 
  
   
@@ -40,7 +46,7 @@ function SortFunction()
         <li onClick={ZtoA}><a href="#">Name: Z-A</a></li>
         <li onClick={HighToLow}><a href="#">Price: High to Low</a></li>
         <li onClick={LowToHigh}><a href="#">Price: Low to High</a></li>
-        <li><a href="#">Product: Top Sales</a></li>
+        <li onClick={TopSales}><a href="#">Product: Top Sales</a></li>
       </ul>
     </div>
 
