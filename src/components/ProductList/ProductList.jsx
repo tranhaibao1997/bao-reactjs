@@ -1,6 +1,7 @@
 import React,{useContext, useEffect} from 'react'
-import ProductItem from '../ProductItem/ProductItem'
+import ProductItemContainer from '../ProductItem/ProductItem.container'
 import { ThemeContext } from '../../ThemeContext';
+import SuggestionFunctionContainer from '../Suggestion/Suggestion.container';
 
 function ProductList(props)
 {
@@ -10,7 +11,7 @@ function ProductList(props)
    
   }, [])
   function Test()
-  {
+  {   
     console.log(props.data)
   }
   
@@ -23,6 +24,9 @@ return(
           <p>Showing 1–22 of 32 results</p>
         </div>
       </div>
+      <div className="col-xl-7 col-lg-6 col-md-6">
+        <SuggestionFunctionContainer></SuggestionFunctionContainer>
+      </div>
     </div>
     {/* tab content */}
     <div className="tab-content" id="myTabContent">
@@ -33,9 +37,9 @@ return(
               
          props.data.map(elm=>
             {
-                return <ProductItem  
-                {...elm}     
-                ></ProductItem>
+                return <ProductItemContainer  
+                {...elm}    
+                ></ProductItemContainer>
             }) 
           
             }

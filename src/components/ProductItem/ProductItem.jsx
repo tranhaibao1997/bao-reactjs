@@ -1,41 +1,29 @@
-import React, { useContext, useEffect } from 'react'
-import { ThemeContext } from '../../ThemeContext';
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-function ProductItem({name, price, final_price, img_url, shop_name,product_id}) {
+function ProductItem({ name, price, final_price, img_url, shop_name, product_id,data,getCartSuccess }) {
 
-  const context = useContext(ThemeContext);
-  // function showItemDetail() {
-  //    const value={name, price, final_price, img_url, shop_name};
-  //    context.setItemDetail(value);
-  //    console.log(value);
-    
-
-  // }
+  
+  const cart = [...data];
   function addToCart() {
-    
-    const value = { name, price, final_price, img_url, shop_name };
-    if (context.cartItem.length === 0) {
-      value.quantity = 1;
-      context.setCartItem([...context.cartItem, value])
 
+    const value = { name, price, final_price, img_url, shop_name };
+
+    let i = cart.findIndex(a => a.name === value.name)
+    if (i !== -1) {
+      const newProductsArray = [...data];
+      newProductsArray[i].quantity += 1;
+      getCartSuccess(newProductsArray);
     }
     else {
-      let i = context.cartItem.findIndex(a => a.name === value.name)
-      if (i !== -1) {
-        const newProductsArray = [...context.cartItem];
-        newProductsArray[i].quantity += 1;
-        context.setCartItem(newProductsArray);
-}
-      else {
-        value.quantity = 1;
-        context.setCartItem([...context.cartItem, value])
-      }
+      value.quantity = 1;
+      getCartSuccess([...cart, value])
     }
-    console.log(context.cartItem);
-  
+
+    console.log(cart);
+
   }
-  
+
 
 
   return (

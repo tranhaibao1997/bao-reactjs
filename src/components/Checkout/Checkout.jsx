@@ -1,28 +1,28 @@
-import React,{useContext} from 'react'
-import { ThemeContext } from '../../ThemeContext';
+import React from 'react'
+
 import { Link } from 'react-router-dom';
 
 
 
-export default function CheckOut() {
-    const context = useContext(ThemeContext);
+export default function CheckOut(props) {
+    
     //caculate Total Price
-    const total = context.cartItem.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    const total = props.data.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
     //caculate Total Price
     function deleteItem(value) {
-        var newArray = [...context.cartItem]
+        var newArray = [...props.data]
         for (let i = 0; i < newArray.length; i++) {
             if (newArray[i].name === value) {
                 newArray.splice(i, 1);
             }
         }
-        context.setCartItem(newArray);
-        console.log(newArray)
+        props.getCartSuccess(newArray);
+        
      }
      function minus(value)
      {
-        let i = context.cartItem.findIndex(a => a.name === value);
-        const newArray=[...context.cartItem];
+        let i =props.data.findIndex(a => a.name === value);
+        const newArray=[...props.data];
         if(newArray[i].quantity >0)
         {
             newArray[i].quantity--;
@@ -33,14 +33,14 @@ export default function CheckOut() {
         }
        
         
-        context.setCartItem(newArray);
+        props.getCartSuccess(newArray);
      }
      function plus(value)
      {
-        let i = context.cartItem.findIndex(a => a.name === value);
-        const newArray=[...context.cartItem];
+        let i = props.data.findIndex(a => a.name === value);
+        const newArray=[...props.data];
         newArray[i].quantity++;
-        context.setCartItem(newArray);
+        props.getCartSuccess(newArray);
      }
     
     return (
@@ -79,7 +79,7 @@ export default function CheckOut() {
                       </thead>
                       <tbody>
                     { 
-                    context.cartItem.map(elm =>{
+                    props.data.map(elm =>{
                         return(
                             <tr>
                             <td className="product-thumbnail"><Link to={`/product-detail/${elm.product_id}`}><img src={elm.img_url} alt="" /></Link></td>

@@ -3,6 +3,7 @@ import loginReducer from './components/Login/Login.reducer'
 import registerReducer from './components/Register/Register.reducer'
 import ProductListReducer from './components/ProductList/ProductList.reducer'
 import ProductDetailReducer from './components/ProductDetail/ProductDetail.reducer'
+import CartReducer from './components/Cart/Cart.reducer'
 
 import thunk from 'redux-thunk'
 
@@ -20,7 +21,7 @@ const crashReporter = store => next => action => {
         console.error('Caught an exception!', err)
     }
 }
-const reducers = combineReducers({ loginReducer, registerReducer, ProductListReducer, ProductDetailReducer })
+const reducers = combineReducers({ loginReducer, registerReducer, ProductListReducer, ProductDetailReducer, CartReducer })
 
 export const store = createStore(reducers,
     compose(

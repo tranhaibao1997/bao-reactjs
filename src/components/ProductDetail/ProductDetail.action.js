@@ -40,7 +40,7 @@ export function getProductDetailById(id) {
                 method: "GET",
                 url: `https://mapi.sendo.vn/mob/product/${id}/detail/`
             })
-            console.log(result, "result")
+
             dispatch(productDetailSuccessAction(result.data))
         } catch (error) {
             dispatch(productDetailFailAction(error))

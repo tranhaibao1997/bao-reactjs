@@ -239,6 +239,11 @@ label {
     border-top: 1px solid #f2f2f2
 }
 
+a.badge.badge-danger {
+    color: white;
+    margin-right: 20px;
+}
+
 .loader1 {
     position: fixed;
     width: 50%;
@@ -731,7 +736,7 @@ label {
     right: 0;
     top: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 100;
 }
 
 @keyframes fadeInDown {
@@ -810,34 +815,65 @@ label {
 
 /* minicart */
 
-.header-right ul.minicart {
+ul.minicart {
+    height: 500px;
+    overflow: scroll;
     background: #fff;
-    opacity: 0;
+    opacity: 1;
     padding: 25px;
     position: absolute;
-    right: 0;
-    top: 100%;
+    /* right: 0; */
+    /* top: 100%; */
     transition: all 0.3s ease 0s;
-    width: 450px;
+    /* width: 450px; */
     z-index: 9;
     box-shadow: 0px 12px 24px 0px rgba(254, 69, 54, 0.3);
-    visibility: hidden;
     display: flex;
     flex-direction: column;
+    z-index: 1000;
+    width: 80%;
+    transform: translateX(-50%);
+    left: 50%;
+    top: -1000px;
 }
 
-.header-right li:hover ul.minicart {
+.show-up {
+    top: 150px !important;
+}
+
+#div-bu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.2;
+    display: none;
+    z-index: 101;
+}
+
+.show-up1 {
+    display: block !important;
+}
+
+.show-up2 {
+    overflow: hidden !important;
+}
+
+.check-out-part {}
+
+
+/* .header-right li:hover ul.minicart {
     opacity: 1;
     visibility: visible;
     z-index: 99;
-}
+} */
 
-.header-right ul li .minicart .cart-img {
+ul li .minicart .cart-img {
     float: left;
     width: 150px;
 }
 
-.header-right ul li .minicart .cart-content {
+ul li .minicart .cart-content {
     float: left;
     padding-left: 15px;
     text-align: left;
@@ -880,31 +916,39 @@ ul.minicart .cart-price span {
     font-weight: 500;
 }
 
-.header-right ul li .minicart>li {
+.minicart>li {
     display: flex;
     margin-bottom: 22px;
     margin-left: 0;
-    overflow: hidden;
     padding: 0;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 30px;
 }
 
-.header-right ul li .minicart>li:last-child {
+.minicart>li:last-child {
     margin-bottom: 0;
 }
 
-.header-right ul li .minicart .del-icon>a {
+.minicart .del-icon>a {
     color: #fe4536;
 }
 
-.header-right ul li .minicart .del-icon>a:hover {
+.minicart .del-icon>a:hover {
     color: #a5a7bc;
     background: none;
 }
 
-.header-right ul li .minicart .del-icon {
+.minicart .del-icon {
     float: right;
     margin-top: 30px;
+}
+
+#close-cart-btn {
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .total-price span {
@@ -913,13 +957,14 @@ ul.minicart .cart-price span {
 }
 
 .total-price {
-    border-top: 1px solid #cacadb;
     overflow: hidden;
     padding-top: 25px;
     margin-top: 10px;
+    width: 15%;
+    margin: 0 auto;
 }
 
-.header-right ul li .minicart .checkout-link a {
+.minicart .checkout-link a {
     background: #84b77c;
     color: #fff;
     display: block;
@@ -932,16 +977,16 @@ ul.minicart .cart-price span {
     letter-spacing: 2px;
 }
 
-.header-right ul li .minicart .checkout-link a:last-child {
+.minicart .checkout-link a:last-child {
     margin: 0;
 }
 
-.header-right ul li .minicart .checkout-link a:hover,
-.header-right ul li .minicart .checkout-link a.red-color {
+.minicart .checkout-link a:hover,
+.minicart .checkout-link a.red-color {
     background: #fe4536;
 }
 
-.header-right ul li .minicart .checkout-link a.red-color:hover {
+ul li .minicart .checkout-link a.red-color:hover {
     background: #84b77c;
 }
 

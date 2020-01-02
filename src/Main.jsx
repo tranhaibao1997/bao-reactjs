@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Header from './components/Header/Header'
+import HeaderContainer from './components/Header/Header.container'
 import Footer from './components/Footer/Footer'
 import SideBar from './components/Sidebar/Sidebar'
 import ProductList from './components/ProductList/ProductList'
@@ -11,13 +11,14 @@ import { BrowserRouter, Switch, Route} from "react-router-dom";
 import Loading from './components/Loading/Loading'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import ProductListContainer from './components/ProductList/ProductList.container'
+import CartContainer from  './components/Cart/Cart.container'
 
 
 const HomePage = React.lazy(() => import('./components/Layout/Layout'))
 const LoginPage = React.lazy(() => import('./components/Login/Login.container'))
 const DetailPage = React.lazy(() => import('./components/ProductDetail/ProductDetail.container'))
 const RegisterPage = React.lazy(() => import("./components/Register/Register.container"))
-const CheckoutPage = React.lazy(() => import('./components/Checkout/Checkout'))
+const CheckoutPage = React.lazy(() => import('./components/Checkout/Checkout.container'))
 const NotFoundPage = React.lazy(() => import('./components/NotFound/NotFound'))
 
 
@@ -28,9 +29,14 @@ function Main() {
         <BrowserRouter>
         
             <div>
-                <Header >
-                    {/* <Cart></Cart> */}
-                </Header>
+                <HeaderContainer >
+                
+                    
+                </HeaderContainer>
+                <div id="div-bu">
+
+                </div>
+                <CartContainer></CartContainer>
                 <React.Suspense fallback={<Loading/>}>
                <Switch>
                <Route path="/register">

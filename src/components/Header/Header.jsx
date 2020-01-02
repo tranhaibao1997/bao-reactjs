@@ -19,16 +19,20 @@ function Header(props) {
     }
     function switchTheme() {
         context.switchTheme();
-       
+
     }
     function showClock() {
         context.startTime();
     }
-   
+    function openCart()
+    {
+        console.log("da click")
+    }
+
     const userEmail = userInfo && userInfo.email
     return (
         <header >
-          
+
             <div id="header-sticky" className="header-area box-90 sticky-header">
                 <div className="container-fluid">
                     <div className="row align-items-center">
@@ -87,11 +91,11 @@ function Header(props) {
                                 <ul>
                                     <li>
                                         <button id="txt" className="btn btn-danger" onClick={showClock}> Show Clock
-    
+
 </button>
                                     </li>
                                     <li onClick={switchTheme} className="">
-                                        <a ><i className="badge badge-pill badge-dark">{context.value}</i></a>
+                                        <a style={{ display: 'unset' }}><i className="badge badge-pill badge-dark">{context.value}</i></a>
                                     </li>
                                     <li className="search-btn">
                                         <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search"></i></a>
@@ -101,10 +105,8 @@ function Header(props) {
                                             ? <li style={{ color: 'red' }} className="login-btn"><a onClick={onLogout}><i className="fas fa-sign-out-alt"></i></a></li>
                                             : <li className="login-btn"><Link to="/login"><i className="fas fa-user"></i></Link></li>
                                     }
-                                    <li className="d-shop-cart"><Link to="/check-out"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{context.cartItem.length}</span></Link>
-                                        {
-                                            props.children
-                                        }
+                                    <li className="d-shop-cart"><a href="#" onClick={openCart} id="cart-on-website"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{props.data.length}</span></a>
+
                                     </li>
 
                                 </ul>
