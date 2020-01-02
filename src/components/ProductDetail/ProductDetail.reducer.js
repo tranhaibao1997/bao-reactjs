@@ -1,7 +1,7 @@
 import { PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS } from "./ProductDetail.action"
 
 const initialState = {
-    data: {},
+    data: null,
     load: false,
     error: null
 }

@@ -16,6 +16,7 @@ function SearchFunction(props)
   let keyWord = inputTextArray.join("-");
   console.log(keyWord);
     props.getProductListBySearch(keyWord);
+  setText("");
   }
   
 
@@ -24,7 +25,7 @@ return (
           <div className="shop-widget">
             <h3 className="shop-title">Search by</h3>
             <form onSubmit={submit} className="shop-search" >
-              <input name="text" id="input" type="text" placeholder="Your keyword...."  onChange={handleChange} />
+              <input name="text" id="input" type="text" placeholder="Your keyword...." value={searchText}  onChange={handleChange} />
               <button type="submit"><i className="fa fa-search" /></button>
             </form>
           </div>

@@ -108,6 +108,9 @@ function Header(props) {
                                     <li className="d-shop-cart"><a href="#" onClick={openCart} id="cart-on-website"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{props.data.length}</span></a>
 
                                     </li>
+                                    <li className="favorite"><a href="#" ><i className="fas fa-heart"></i> <span className="favorite-count">1</span></a>
+
+</li>
 
                                 </ul>
                             </div>

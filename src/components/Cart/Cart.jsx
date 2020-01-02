@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 
 function Cart(props) {
@@ -28,6 +28,7 @@ function Cart(props) {
     }
     return (
         <ul className="minicart" id="minicart">
+            <h1  style={{textAlign: 'center'}} class="display-7">SHOPPING CARTS</h1>
             <button type="button" id="close-cart-btn" class="btn btn-outline-dark">X</button>
             {   
                 props.data.map(elm => {
@@ -36,6 +37,7 @@ function Cart(props) {
                             <div className="cart-img">
                                 <a href="#">
                                     <img src={elm.img_url} alt="" />
+                                  
                                 </a>
                             </div>
                             <div className="cart-content">

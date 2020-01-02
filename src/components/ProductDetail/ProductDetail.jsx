@@ -18,6 +18,7 @@ export default function ProductDetail(props) {
   const product = props.data;
   const cart= [...props.cartdata]
   const [inputValue, setInputValue] = useState(1);
+  
 
   // set quantity -
   function minus(e) {
@@ -59,7 +60,9 @@ export default function ProductDetail(props) {
     
     console.log(cart, "cart from detail ")
   }
-
+if(!product){
+  return <p>Loading</p>
+}
 
   return (
     <div>
@@ -71,7 +74,7 @@ export default function ProductDetail(props) {
                 <div className="tab-content" id="myTabContentpro">
                   <div className="tab-pane fade show active" id="home" role="tabpanel">
                     <div className="product-large-img">
-                      {/* <img src={`https://media3.scdn.vn/${props.data.images[0]}`} alt="" /> */}
+                      <img src={`https://media3.scdn.vn/${product.images[0]}`} alt="" />
                     </div>
                   </div>
                   <div className="tab-pane fade" id="profile" role="tabpanel">
