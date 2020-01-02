@@ -1,119 +1,101 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom'
-import NotFound from "../NotFound/NotFound.jsx";
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+
 
 export default function ProductDetail(props) {
-  const [tabActive, setTabActive] = useState("description")
-  const params = useParams()
-  const { getProductDetailById } = props
-  const product = props.data
-  const id = params.id
 
+  //useEffect
   useEffect(() => {
-    getProductDetailById(id)
-  }, [getProductDetailById, id])
+    window.scrollTo(0, 0);
+    props.getProductDetailById(id)
+  }, []);
 
-  if (props.error || product === null) {
-    return <NotFound />
+  const param = useParams();
+  const id = param.id;
+
+
+
+  const product = props.data;
+  const cart= [...props.cartdata]
+  const [inputValue, setInputValue] = useState(1);
+
+  // set quantity -
+  function minus(e) {
+
+    if (inputValue > 0) {
+      let a = inputValue;
+      let a1 = a - 1;
+      setInputValue(a1);
+      
+    }
+    else {
+      setInputValue(0);
+    }
+    console.log(document.getElementById("quantity-input").value)
   }
 
-  const onClickTab = (name) => {
-    setTabActive(name)
+  // set quantity +
+  function plus() {
+    let a = inputValue;
+    let a1 = a + 1;
+    setInputValue(a1);
+    
   }
-  console.log(product.comments)
-  console.log(product.images)
+
+  //add to Cart
+  function addToCart() {
+    const value = inputValue;
+    let i = cart.findIndex(a => a.name === product.name)
+    if (i !== -1) {
+      const newProductsArray = [...cart];
+      newProductsArray[i].quantity = newProductsArray[i].quantity + value;
+      props.getCartSuccess(newProductsArray);
+    }
+    else {
+      product.quantity = value;
+      const newProductsArray = [...cart];
+      props.getCartSuccess([...newProductsArray, product])
+    }
+    
+    console.log(cart, "cart from detail ")
+  }
+
+
   return (
-    <main>
-      {/* breadcrumb-area-start */}
-      <section
-        className="breadcrumb-area"
-        style={{ backgroundImage: 'url("./assets/page-title.png")' }}
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="breadcrumb-text text-center">
-                <h1>Our Shop: {product.shop_name}</h1>
-                <ul className="breadcrumb-menu">
-                  <li>
-                    <a href="index.html">home</a>
-                  </li>
-                  <li>
-                    <span>shop details</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* breadcrumb-area-end */}
-      {/* shop-area start */}
+    <div>
       <section className="shop-details-area pt-100 pb-100">
         <div className="container">
           <div className="row">
             <div className="col-xl-6 col-lg-4">
               <div className="product-details-img mb-10">
                 <div className="tab-content" id="myTabContentpro">
-                  <div
-                    className="tab-pane fade show active"
-                    id="home"
-                    role="tabpanel"
-                  >
+                  <div className="tab-pane fade show active" id="home" role="tabpanel">
                     <div className="product-large-img">
-                   
-                      {/* <img src={`https://media3.scdn.vn/${product.images[0]}`} alt="" /> */}
+                      {/* <img src={`https://media3.scdn.vn/${props.data.images[0]}`} alt="" /> */}
                     </div>
                   </div>
-                  {/* <div className="tab-pane fade" id="profile" role="tabpanel">
+                  <div className="tab-pane fade" id="profile" role="tabpanel">
                     <div className="product-large-img">
-                      <img src="img/product/pro2.jpg" alt="" />
+
                     </div>
                   </div>
                   <div className="tab-pane fade" id="profile1" role="tabpanel">
                     <div className="product-large-img">
-                      <img src="img/product/pro3.jpg" alt="" />
+                      <img src={product.img_url} alt="" />
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
               <div className="shop-thumb-tab mb-30">
                 <ul className="nav" id="myTab2" role="tablist">
                   <li className="nav-item">
-                    <a
-                      className="nav-link active"
-                      id="home-tab"
-                      data-toggle="tab"
-                      href="#home"
-                      role="tab"
-                      aria-selected="true"
-                    >
-                      <img src="img/product/pro1.jpg" alt="" />{" "}
-                    </a>
+                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-selected="true"><img src="img/product/pro1.jpg" alt="" /> </a>
                   </li>
                   <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      id="profile-tab"
-                      data-toggle="tab"
-                      href="#profile"
-                      role="tab"
-                      aria-selected="false"
-                    >
-                      <img src="img/product/pro2.jpg" alt="" />
-                    </a>
+                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-selected="false"><img src="img/product/pro2.jpg" alt="" /></a>
                   </li>
                   <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      id="profile-tab2"
-                      data-toggle="tab"
-                      href="#profile1"
-                      role="tab"
-                      aria-selected="false"
-                    >
-                      <img src="img/product/pro3.jpg" alt="" />
-                    </a>
+                    <a className="nav-link" id="profile-tab2" data-toggle="tab" href="#profile1" role="tab" aria-selected="false"><img src="img/product/pro3.jpg" alt="" /></a>
                   </li>
                 </ul>
               </div>
@@ -124,52 +106,36 @@ export default function ProductDetail(props) {
                   <a href="#">decor,</a>
                   <a href="#">furniture</a>
                 </div>
-                <h2 className="pro-details-title mb-15">
-                  {product.name}
-                </h2>
+                <h2 className="pro-details-title mb-15">{product.name}</h2>
                 <div className="details-price mb-20">
-                  <span>{product.final_price}</span>
-                  <span className="old-price">{product.price}</span>
+                  <span>{product.final_price}đ</span>
+                  <span className="old-price">{product.price}đ</span>
                 </div>
                 <div className="product-variant">
                   <div className="product-desc variant-item">
-                    <p dangerouslySetInnerHTML={{ __html: product.short_description }} />
-
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                   </div>
                   <div className="product-info-list variant-item">
                     <ul>
-                      <li>
-                        <span>Brands:</span> Hewlett-Packard
-                      </li>
-                      <li>
-                        <span>Product Code:</span> d12
-                      </li>
-                      <li>
-                        <span>Reward Points:</span> 100
-                      </li>
-                      <li>
-                        <span>Stock:</span>{" "}
-                        <span className="in-stock">{product.status_text}</span>
-                      </li>
+                      <li><span>Brands:</span>{product.shop_name}</li>
+                      <li><span>Product Code:</span> d12</li>
+                      <li><span>Reward Points:</span> 100</li>
+                      <li><span>Stock:</span> <span className="in-stock">In Stock</span></li>
                     </ul>
                   </div>
                   <div className="product-action-details variant-item">
                     <div className="product-details-action">
-                      <form action="#">
+                      <form>
                         <div className="plus-minus">
                           <div className="cart-plus-minus">
-                            <input type="text" defaultValue={1} />
-                            <div className="dec qtybutton">-</div>
-                            <div className="inc qtybutton">+</div>
-                          </div>
+                            <input id="quantity-input" type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+                            <div className="dec qtybutton" onClick={minus}>-</div>
+                            <div className="inc qtybutton" onClick={plus}>+</div></div>
                         </div>
-                        <button className="details-action-icon" type="submit">
-                          <i className="fas fa-heart" />
-                        </button>
+                        <button className="details-action-icon" type="submit"><i className="fas fa-heart" /></button>
                         <div className="details-cart mt-40">
-                          <button className="btn theme-btn">
-                            purchase now
-                          </button>
+                          <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
                         </div>
                       </form>
                     </div>
@@ -183,52 +149,19 @@ export default function ProductDetail(props) {
               <div className="product-review">
                 <ul className="nav review-tab" id="myTabproduct" role="tablist">
                   <li className="nav-item">
-                    <a
-                      className={`nav-link ${tabActive === "description" && "active"}`}
-                      id="home-tab6"
-                      data-toggle="tab"
-                      role="tab"
-                      aria-controls="home"
-                      aria-selected="true"
-                      onClick={() => onClickTab("description")}
-                    >
-                      Description{" "}
-                    </a>
+                    <a className="nav-link active" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home" aria-selected="true">Description </a>
                   </li>
                   <li className="nav-item">
-                    <a
-                      className={`nav-link ${tabActive === "comments" && "active"}`}
-                      id="profile-tab6"
-                      data-toggle="tab"
-                      role="tab"
-                      aria-controls="profile"
-                      aria-selected="false"
-                      onClick={() => onClickTab("comments")}
-                    >
-                      Reviews ({})
-                    </a>
+                    <a className="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile" aria-selected="false">Reviews (2)</a>
                   </li>
                 </ul>
                 <div className="tab-content" id="myTabContent2">
-                  <div
-                    className={`tab-pane fade show ${tabActive === "description" && "active"}`}
-                    id="home6"
-                    role="tabpanel"
-                    aria-labelledby="home-tab6"
-                  >
+                  <div className="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
                     <div className="desc-text">
-                      <p dangerouslySetInnerHTML={{ __html: product.description }} />
-
-
+                    <p dangerouslySetInnerHTML={{__html: props.data.description}}/ >
                     </div>
                   </div>
-                  <div
-                    className={`tab-pane fade show ${tabActive === "comments" && "active"}`}
-                    id="profile6"
-                    role="tabpanel"
-                    aria-labelledby="profile-tab6"
-                    style={{ display: 'block' }}
-                  >
+                  <div className="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
                     <div className="desc-text review-text">
                       <div className="product-commnets">
                         <div className="product-commnets-list mb-25 pb-15">
@@ -236,8 +169,8 @@ export default function ProductDetail(props) {
                             <img src="img/product/comments/01.png" alt="" />
                           </div>
                           <div className="pro-commnets-text">
-                            <h4>
-                              Roger West -<span>June 5, 2018</span>
+                            <h4>Roger West -
+                                <span>June 5, 2018</span>
                             </h4>
                             <div className="pro-rating">
                               <i className="far fa-star" />
@@ -245,12 +178,10 @@ export default function ProductDetail(props) {
                               <i className="far fa-star" />
                               <i className="far fa-star" />
                             </div>
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipisicing elit, sed do eiusmod tempor incididunt
-                              ut labore et dolore magna aliqua. Ut enim ad minim
-                              veniam, quis nostrud exercitation.
-                            </p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                              incididunt
+                              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation.</p>
                           </div>
                         </div>
                         <div className="product-commnets-list mb-25 pb-15">
@@ -258,8 +189,8 @@ export default function ProductDetail(props) {
                             <img src="img/product/comments/02.png" alt="" />
                           </div>
                           <div className="pro-commnets-text">
-                            <h4>
-                              Roger West -<span>June 5, 2018</span>
+                            <h4>Roger West -
+                                <span>June 5, 2018</span>
                             </h4>
                             <div className="pro-rating">
                               <i className="far fa-star" />
@@ -267,12 +198,10 @@ export default function ProductDetail(props) {
                               <i className="far fa-star" />
                               <i className="far fa-star" />
                             </div>
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipisicing elit, sed do eiusmod tempor incididunt
-                              ut labore et dolore magna aliqua. Ut enim ad minim
-                              veniam, quis nostrud exercitation.
-                            </p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                              incididunt
+                              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation.</p>
                           </div>
                         </div>
                       </div>
@@ -302,13 +231,7 @@ export default function ProductDetail(props) {
                           <div className="row">
                             <div className="col-xl-12">
                               <label htmlFor="message">YOUR REVIEW</label>
-                              <textarea
-                                name="message"
-                                id="message"
-                                cols={30}
-                                rows={10}
-                                defaultValue={""}
-                              />
+                              <textarea name="message" id="message" cols={30} rows={10} defaultValue={""} />
                             </div>
                             <div className="col-xl-6">
                               <label htmlFor="r-name">Name</label>
@@ -319,9 +242,7 @@ export default function ProductDetail(props) {
                               <input type="email" id="r-email" />
                             </div>
                             <div className="col-xl-12">
-                              <button className="btn theme-btn">
-                                Add your Review
-                              </button>
+                              <button className="btn theme-btn">Add your Review</button>
                             </div>
                           </div>
                         </form>
@@ -333,9 +254,7 @@ export default function ProductDetail(props) {
             </div>
             <div className="col-xl-4 col-lg-4">
               <div className="pro-details-banner">
-                <a href="shop.html">
-                  <img src="img/banner/pro-details.jpg" alt="" />
-                </a>
+                <a href="shop.html"><img src="img/banner/pro-details.jpg" alt="" /></a>
               </div>
             </div>
           </div>
@@ -359,11 +278,7 @@ export default function ProductDetail(props) {
                 <div className="product-img mb-25">
                   <a href="product-details.html">
                     <img src="img/product/pro4.jpg" alt="" />
-                    <img
-                      className="secondary-img"
-                      src="img/product/pro5.jpg"
-                      alt=""
-                    />
+                    <img className="secondary-img" src="img/product/pro5.jpg" alt="" />
                   </a>
                   <div className="product-action text-center">
                     <a href="#" title="Shoppingb Cart">
@@ -372,12 +287,7 @@ export default function ProductDetail(props) {
                     <a href="#" title="Quick View">
                       <i className="flaticon-eye" />
                     </a>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Compare"
-                    >
+                    <a href="#" data-toggle="tooltip" data-placement="right" title="Compare">
                       <i className="flaticon-compare" />
                     </a>
                   </div>
@@ -388,9 +298,7 @@ export default function ProductDetail(props) {
                     <a href="shop.html">furniture</a>
                   </div>
                   <h4>
-                    <a href="product-details.html">
-                      Raglan Baseball Style shirt
-                    </a>
+                    <a href="product-details.html">Raglan Baseball Style shirt</a>
                   </h4>
                   <div className="product-meta">
                     <div className="pro-price">
@@ -399,9 +307,7 @@ export default function ProductDetail(props) {
                     </div>
                   </div>
                   <div className="product-wishlist">
-                    <a href="#">
-                      <i className="far fa-heart" title="Wishlist" />
-                    </a>
+                    <a href="#"><i className="far fa-heart" title="Wishlist" /></a>
                   </div>
                 </div>
               </div>
@@ -411,11 +317,7 @@ export default function ProductDetail(props) {
                 <div className="product-img mb-25">
                   <a href="product-details.html">
                     <img src="img/product/pro5.jpg" alt="" />
-                    <img
-                      className="secondary-img"
-                      src="img/product/pro6.jpg"
-                      alt=""
-                    />
+                    <img className="secondary-img" src="img/product/pro6.jpg" alt="" />
                   </a>
                   <div className="product-action text-center">
                     <a href="#" title="Shoppingb Cart">
@@ -424,12 +326,7 @@ export default function ProductDetail(props) {
                     <a href="#" title="Quick View">
                       <i className="flaticon-eye" />
                     </a>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Compare"
-                    >
+                    <a href="#" data-toggle="tooltip" data-placement="right" title="Compare">
                       <i className="flaticon-compare" />
                     </a>
                   </div>
@@ -444,9 +341,7 @@ export default function ProductDetail(props) {
                     <a href="shop.html">furniture</a>
                   </div>
                   <h4>
-                    <a href="product-details.html">
-                      Raglan Baseball Style shirt
-                    </a>
+                    <a href="product-details.html">Raglan Baseball Style shirt</a>
                   </h4>
                   <div className="product-meta">
                     <div className="pro-price">
@@ -455,9 +350,7 @@ export default function ProductDetail(props) {
                     </div>
                   </div>
                   <div className="product-wishlist">
-                    <a href="#">
-                      <i className="far fa-heart" title="Wishlist" />
-                    </a>
+                    <a href="#"><i className="far fa-heart" title="Wishlist" /></a>
                   </div>
                 </div>
               </div>
@@ -467,11 +360,7 @@ export default function ProductDetail(props) {
                 <div className="product-img mb-25">
                   <a href="product-details.html">
                     <img src="img/product/pro7.jpg" alt="" />
-                    <img
-                      className="secondary-img"
-                      src="img/product/pro8.jpg"
-                      alt=""
-                    />
+                    <img className="secondary-img" src="img/product/pro8.jpg" alt="" />
                   </a>
                   <div className="product-action text-center">
                     <a href="#" title="Shoppingb Cart">
@@ -480,12 +369,7 @@ export default function ProductDetail(props) {
                     <a href="#" title="Quick View">
                       <i className="flaticon-eye" />
                     </a>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Compare"
-                    >
+                    <a href="#" data-toggle="tooltip" data-placement="right" title="Compare">
                       <i className="flaticon-compare" />
                     </a>
                   </div>
@@ -496,9 +380,7 @@ export default function ProductDetail(props) {
                     <a href="shop.html">furniture</a>
                   </div>
                   <h4>
-                    <a href="product-details.html">
-                      Raglan Baseball Style shirt
-                    </a>
+                    <a href="product-details.html">Raglan Baseball Style shirt</a>
                   </h4>
                   <div className="product-meta">
                     <div className="pro-price">
@@ -507,9 +389,7 @@ export default function ProductDetail(props) {
                     </div>
                   </div>
                   <div className="product-wishlist">
-                    <a href="#">
-                      <i className="far fa-heart" title="Wishlist" />
-                    </a>
+                    <a href="#"><i className="far fa-heart" title="Wishlist" /></a>
                   </div>
                 </div>
               </div>
@@ -519,11 +399,7 @@ export default function ProductDetail(props) {
                 <div className="product-img mb-25">
                   <a href="product-details.html">
                     <img src="img/product/pro9.jpg" alt="" />
-                    <img
-                      className="secondary-img"
-                      src="img/product/pro10.jpg"
-                      alt=""
-                    />
+                    <img className="secondary-img" src="img/product/pro10.jpg" alt="" />
                   </a>
                   <div className="product-action text-center">
                     <a href="#" title="Shoppingb Cart">
@@ -532,12 +408,7 @@ export default function ProductDetail(props) {
                     <a href="#" title="Quick View">
                       <i className="flaticon-eye" />
                     </a>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Compare"
-                    >
+                    <a href="#" data-toggle="tooltip" data-placement="right" title="Compare">
                       <i className="flaticon-compare" />
                     </a>
                   </div>
@@ -552,9 +423,7 @@ export default function ProductDetail(props) {
                     <a href="shop.html">furniture</a>
                   </div>
                   <h4>
-                    <a href="product-details.html">
-                      Raglan Baseball Style shirt
-                    </a>
+                    <a href="product-details.html">Raglan Baseball Style shirt</a>
                   </h4>
                   <div className="product-meta">
                     <div className="pro-price">
@@ -563,9 +432,7 @@ export default function ProductDetail(props) {
                     </div>
                   </div>
                   <div className="product-wishlist">
-                    <a href="#">
-                      <i className="far fa-heart" title="Wishlist" />
-                    </a>
+                    <a href="#"><i className="far fa-heart" title="Wishlist" /></a>
                   </div>
                 </div>
               </div>
@@ -575,11 +442,7 @@ export default function ProductDetail(props) {
                 <div className="product-img mb-25">
                   <a href="product-details.html">
                     <img src="img/product/pro1.jpg" alt="" />
-                    <img
-                      className="secondary-img"
-                      src="img/product/pro11.jpg"
-                      alt=""
-                    />
+                    <img className="secondary-img" src="img/product/pro11.jpg" alt="" />
                   </a>
                   <div className="product-action text-center">
                     <a href="#" title="Shoppingb Cart">
@@ -588,12 +451,7 @@ export default function ProductDetail(props) {
                     <a href="#" title="Quick View">
                       <i className="flaticon-eye" />
                     </a>
-                    <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Compare"
-                    >
+                    <a href="#" data-toggle="tooltip" data-placement="right" title="Compare">
                       <i className="flaticon-compare" />
                     </a>
                   </div>
@@ -608,9 +466,7 @@ export default function ProductDetail(props) {
                     <a href="shop.html">furniture</a>
                   </div>
                   <h4>
-                    <a href="product-details.html">
-                      Raglan Baseball Style shirt
-                    </a>
+                    <a href="product-details.html">Raglan Baseball Style shirt</a>
                   </h4>
                   <div className="product-meta">
                     <div className="pro-price">
@@ -619,9 +475,7 @@ export default function ProductDetail(props) {
                     </div>
                   </div>
                   <div className="product-wishlist">
-                    <a href="#">
-                      <i className="far fa-heart" title="Wishlist" />
-                    </a>
+                    <a href="#"><i className="far fa-heart" title="Wishlist" /></a>
                   </div>
                 </div>
               </div>
@@ -630,6 +484,6 @@ export default function ProductDetail(props) {
         </div>
       </section>
       {/* product-area end */}
-    </main>
-  );
+    </div>
+  )
 }
