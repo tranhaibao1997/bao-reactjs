@@ -6,6 +6,7 @@ import ProductList from './components/ProductList/ProductList'
 import Layout from './components/Layout/Layout'
 // import Cart from './components/Cart/Cart'
 import FallingLeaf from './components/FallingLeaf/FallingLeaf'
+import Favorite from './components/Favorite/Favorite.container'
 
 import { BrowserRouter, Switch, Route} from "react-router-dom";
 import Loading from './components/Loading/Loading'
@@ -37,6 +38,7 @@ function Main() {
 
                 </div>
                 <CartContainer></CartContainer>
+                <Favorite></Favorite>
                 <React.Suspense fallback={<Loading/>}>
                <Switch>
                <Route path="/register">

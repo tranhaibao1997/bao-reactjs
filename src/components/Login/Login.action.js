@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import { Redirect } from 'react-router-dom'
 
 export const LOGIN_REQUEST = "LOGIN-REQUEST"
 export const LOGIN_SUCCESS = "LOGIN-SUCCESS"
@@ -29,7 +30,8 @@ export const loginAction = (email, password) => {
         dispatch(loginRequestAction())
         try {
             const result = await firebase.auth().signInWithEmailAndPassword(email, password);
-            dispatch(loginSuccessAction(result))
+            dispatch(loginSuccessAction(result));
+
         } catch (error) {
             dispatch(loginFailAction(error))
         }

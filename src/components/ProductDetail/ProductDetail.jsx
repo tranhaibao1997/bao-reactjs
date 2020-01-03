@@ -17,6 +17,7 @@ export default function ProductDetail(props) {
 
   const product = props.data;
   const cart= [...props.cartdata]
+  const favorite=[...props.favoritedata]
   const [inputValue, setInputValue] = useState(1);
   
 
@@ -59,6 +60,20 @@ export default function ProductDetail(props) {
     }
     
     console.log(cart, "cart from detail ")
+  }
+
+  //add to Favorite
+  function addToFavorite() {
+    
+    let i = favorite.findIndex(a => a.name === product.name)
+    if (i !== -1) {
+     alert("Đã có item này trong danh sách yêu thích")
+    }
+    else {
+      
+      const newProductsArray = [...favorite];
+      props.getFavoriteSuccess([...newProductsArray, product])
+    }
   }
 if(!product){
   return <p>Loading</p>
@@ -136,7 +151,7 @@ if(!product){
                             <div className="dec qtybutton" onClick={minus}>-</div>
                             <div className="inc qtybutton" onClick={plus}>+</div></div>
                         </div>
-                        <button className="details-action-icon" type="submit"><i className="fas fa-heart" /></button>
+                        <button className="details-action-icon" type="button" onClick={addToFavorite}><i className="fas fa-heart" /></button>
                         <div className="details-cart mt-40">
                           <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
                         </div>

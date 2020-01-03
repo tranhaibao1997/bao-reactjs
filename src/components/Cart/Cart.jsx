@@ -5,7 +5,7 @@ function Cart(props) {
     console.log(props.data, "cart store")
    
     //caculate Total Price
-    const total = props.data.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    const total = props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0);
     //caculate Total Price
 
     function deleteItem(value) {
@@ -45,9 +45,9 @@ function Cart(props) {
                                     <a href="#">{elm.name}  <span style={{ color: 'red' }}>X {elm.quantity}</span></a>
                                 </h3>
                                 <div className="cart-price">
-                                    <span className="new">${elm.price}</span>
+                                    <span className="new">${elm.final_price}</span>
                                     <span>
-                                        <del>${elm.final_price}</del>
+                                        <del>${elm.price}</del>
                                     </span>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@ function Cart(props) {
             </li>
             <li>
                 <div className="checkout-link">
-                    <Link to="/check-out">Shopping Cart</Link>
+                    <Link id="checkout"to="/check-out">Shopping Cart</Link>
                     <a className="red-color" href="#" onClick={Test}>Checkout</a>
                 </div>
                 

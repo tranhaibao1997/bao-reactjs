@@ -24,10 +24,7 @@ function Header(props) {
     function showClock() {
         context.startTime();
     }
-    function openCart()
-    {
-        console.log("da click")
-    }
+   
 
     const userEmail = userInfo && userInfo.email
     return (
@@ -56,7 +53,7 @@ function Header(props) {
                         </div>
                         <div className="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
                             <div className="main-menu text-center">
-                                <nav id="mobile-menu" style={{ display: "block" }} >
+                                <nav id="mobile-menu" style={{ display: "block",visibility:"hidden" }} >
                                     <ul>
                                         <li>
                                             <Link to="/">Home</Link>
@@ -105,10 +102,10 @@ function Header(props) {
                                             ? <li style={{ color: 'red' }} className="login-btn"><a onClick={onLogout}><i className="fas fa-sign-out-alt"></i></a></li>
                                             : <li className="login-btn"><Link to="/login"><i className="fas fa-user"></i></Link></li>
                                     }
-                                    <li className="d-shop-cart"><a href="#" onClick={openCart} id="cart-on-website"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{props.data.length}</span></a>
+                                    <li className="d-shop-cart"><a href="#" id="cart-on-website"><i className="fas fa-shopping-cart"></i> <span className="cart-count">{props.cartdata.length}</span></a>
 
                                     </li>
-                                    <li className="favorite"><a href="#" ><i className="fas fa-heart"></i> <span className="favorite-count">1</span></a>
+                                    <li className="favorite"><a href="#" id="favorite"><i className="fas fa-heart"></i> <span className="favorite-count">{props.favoritedata.length}</span></a>
 
 </li>
 

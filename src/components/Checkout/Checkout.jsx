@@ -7,16 +7,29 @@ import { Link } from 'react-router-dom';
 export default function CheckOut(props) {
     
     //caculate Total Price
-    const total = props.data.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    React.useEffect(() => {
+    if(props.data.length===0)
+    {
+alert("Bạn chưa có gì trong giỏ hàng. Bạn có muốn ra trang chủ để xem hàng không ?")
+window.location.href="/"
+    } 
+    else
+    {
+
+    } 
+    
+    })
+    const [total,setTotal]=React.useState(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0))
     //caculate Total Price
-    function deleteItem(value) {
+    async function deleteItem(value) {
         var newArray = [...props.data]
         for (let i = 0; i < newArray.length; i++) {
             if (newArray[i].name === value) {
                 newArray.splice(i, 1);
             }
         }
-        props.getCartSuccess(newArray);
+        await props.getCartSuccess(newArray);
+        await setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0));
         
      }
      function minus(value)
@@ -34,6 +47,7 @@ export default function CheckOut(props) {
        
         
         props.getCartSuccess(newArray);
+        setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0));
      }
      function plus(value)
      {
@@ -41,6 +55,29 @@ export default function CheckOut(props) {
         const newArray=[...props.data];
         newArray[i].quantity++;
         props.getCartSuccess(newArray);
+        setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0));
+     }
+     function applyCoupon()
+     {
+       var couponInput=document.getElementById("coupon_code").value
+       if(!couponInput)
+       {
+alert("Mời bạn nhập code")
+       }
+       else 
+       {
+         if(couponInput="REACT")
+         {
+           alert("Giỏ hàng hiện tại dc giảm 50% giá trị")
+          setTotal(total/2);
+         }
+         else
+         {
+           alert("Sai code rồi nha ahihihihihihihihih")
+         }
+        
+       }
+       
      }
     
     return (
@@ -105,8 +142,10 @@ export default function CheckOut(props) {
                     <div className="col-12">
                       <div className="coupon-all">
                         <div className="coupon">
-                          <input id="coupon_code" className="input-text" name="coupon_code" defaultValue placeholder="Coupon code" type="text" />
-                          <button className="btn theme-btn-2" name="apply_coupon" type="submit">Apply coupon</button>
+                          
+                          <p>Nhập "REACT" để dc giảm 50%. Nếu bạn đã áp dụng coupon, vui lòng không chỉnh sửa giỏ hàng do chưa code tới bước đó :(</p>
+                          <input id="coupon_code" className="input-text" name="coupon_code"  placeholder="Coupon code" type="text" />
+                          <button className="btn theme-btn-2" name="apply_coupon" onClick={applyCoupon} type="button">Apply coupon</button>
                         </div>
                         <div className="coupon2">
                           <input className="btn theme-btn" name="update_cart" defaultValue="Update cart" type="submit" />

@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import Header from './Header'
 
 const mapStateToProps = (store) => ({
-    data: store.CartReducer.data
+    cartdata: store.CartReducer.data,
+    favoritedata: store.FavoriteReducer.data
 })
 
 const mapDispatchToProps = {
