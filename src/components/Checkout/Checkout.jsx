@@ -161,7 +161,8 @@ alert("Mời bạn nhập code")
                           <li>Subtotal <span>{total}đ</span></li>
                           <li>Total <span>{total}đ</span></li>
                         </ul>
-                        <a className="btn theme-btn" id="paypal-button-container" href="#">Proceed to checkout</a>
+                       
+                        <Link className="btn theme-btn" id="paypal-button-container" to="/payment">Proceed to checkout</Link>
                         <div id="paypal-button-container"></div>
                       </div>
                     </div>

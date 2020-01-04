@@ -20,6 +20,7 @@ const LoginPage = React.lazy(() => import('./components/Login/Login.container'))
 const DetailPage = React.lazy(() => import('./components/ProductDetail/ProductDetail.container'))
 const RegisterPage = React.lazy(() => import("./components/Register/Register.container"))
 const CheckoutPage = React.lazy(() => import('./components/Checkout/Checkout.container'))
+const CheckOut2=React.lazy(() => import('./components/Checkout-step2/Checkout-step2'))
 const NotFoundPage = React.lazy(() => import('./components/NotFound/NotFound'))
 
 
@@ -56,8 +57,10 @@ function Main() {
                     <Route path="/product-detail/:id" component={DetailPage}/>
                     
                     <PrivateRoute path="/check-out" >
+                  
                     <CheckoutPage></CheckoutPage>
                     </PrivateRoute>
+                    <Route path="/payment" component={CheckOut2}/>
                     <Route path="*">
                     {NotFoundPage}
                     </Route>

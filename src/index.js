@@ -12,4 +12,4 @@ firebaseInit();
 ReactDOM.render( < ThemeContextComponent >
     <
     Provider store = { store } > < Main / > < /Provider> </ThemeContextComponent > , document.getElementById('root'));
-serviceWorker.unregister();
+serviceWorker.register();

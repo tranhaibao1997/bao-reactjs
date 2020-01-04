@@ -4,6 +4,7 @@
 <head>
 
     <head>
+        <meta name="theme-color" content="#2196F3">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -11,7 +12,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="manifest" href="./site.webmanifest">
+        <link rel="manifest" href="./manifest.json">
         <link rel="shortcut icon" type="image/x-icon" href="./assets/logo_shop.png">
 
 
@@ -33,7 +34,13 @@
 
 <body id="body">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+
+        <p class="page-info">
+            Loading...
+        </p>
+
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -47,6 +54,20 @@
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('worker.js').then(function(registration) {
+                    console.log('Worker registration successful', registration.scope);
+                }, function(err) {
+                    console.log('Worker registration failed', err);
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            });
+        } else {
+            console.log('Service Worker is not supported by browser.');
+        }
         // var c = document.getElementById('canv'),
         //     $ = c.getContext("2d");
         // var w = c.width = window.innerWidth,
