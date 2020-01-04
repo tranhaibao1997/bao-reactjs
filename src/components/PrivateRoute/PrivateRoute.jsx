@@ -1,11 +1,17 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, useHistory, useLocation } from 'react-router-dom'
 import firebase from 'firebase'
 
 export default function PrivateRoute(props){
-    const RenderChildren=firebase.auth().currentUser
+    let location = useLocation();
+    const RenderChildren= firebase.auth().currentUser
     ? props.children
-    :<Redirect to="/login"/>
+    :<Redirect
+    to={{
+      pathname: "/login",
+      state: { from: location }
+    }}
+  />
     return (
        
         <Route path={props.path}>

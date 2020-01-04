@@ -15,6 +15,8 @@ function ThemeContextComponent({ children }) {
     //user
     const [userInfo, setUserInfo] = useState();
 
+    const [waitForLogin_checkout, setWaitForLogin_checkout] = useState(false);
+
     //product detail    
     // const [itemDetail, setItemDetail] = useState([]);
     

@@ -13,6 +13,7 @@ function ProductList(props) {
   function Test() {
     console.log(props.data)
   }
+  console.log(props.data,"mang productlist")
 
   return (
     <div className="col-xl-9 col-lg-8">

@@ -2,7 +2,7 @@ import React, { useState,useContext } from 'react'
 import firebase from 'firebase'
 // import {Link } from 'react-router-dom';
 import { ThemeContext } from '../../ThemeContext';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 
 
 function Login(props) {
@@ -10,6 +10,8 @@ function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPass] = useState("");
     const [errorMgs, setErrorMgs] = useState("");
+    const location = useLocation()
+    let history = useHistory();
     function handleChange1(event) {
       setEmail(event.target.value)
     }
@@ -32,7 +34,9 @@ function Login(props) {
   async function Login(e)
   {
     e.preventDefault();
-    props.loginAction(email,password);
+   await props.loginAction(email,password);
+   let { from } = location.state || { from: { pathname: "/" } };
+   history.replace(from);
   }
   const textColor = theme.value === 'black' ?  "white" : 'black'
 
