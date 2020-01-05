@@ -54,7 +54,7 @@ function Cart(props) {
                                     <th scope="row" className="border-0">
                                         <div className="p-2">
                                             <img src={elm.img_url} alt="" width={100} className="img-fluid rounded shadow-sm" />
-                                            <div className="ml-3 d-inline-block align-middle">
+                                            <div style={{width:"70%"}}className="ml-3 d-inline-block align-middle">
                                                 <h5 className="mb-0"> <a href="#" className="text-dark d-inline-block align-middle">{elm.name}</a></h5><span className="text-muted font-weight-normal font-italic d-block">{elm.shop_name}</span>
                                             </div>
                                         </div>

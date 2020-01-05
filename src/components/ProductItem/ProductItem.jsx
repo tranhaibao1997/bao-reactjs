@@ -29,7 +29,7 @@ function ProductItem({ name, price, final_price, img_url, shop_name, product_id,
 
   return (
 
-    <div className="col-xl-4 col-lg-6 col-md-6">
+    <div className="col-xl-4 col-lg-6 col-md-6" data-aos="flip-left">
       <div className="product-wrapper mb-50">
         <div className="product-img mb-25">
           <a href="#">
