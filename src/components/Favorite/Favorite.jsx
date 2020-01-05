@@ -24,7 +24,7 @@ function Favorite(props) {
 
     return (
         <ul className="favorite-cart" id="favorite-cart">
-            <h1  style={{textAlign: 'center'}} class="display-7">FAVORITE</h1>
+            <h1  style={{textAlign: 'center'}} class="display-7"><i className="fas fa-heart"></i></h1>
             <button type="button" id="close-favorite-btn" class="btn btn-outline-dark">X</button>
             {   
                 props.data.map(elm => {

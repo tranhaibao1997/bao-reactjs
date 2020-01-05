@@ -55,19 +55,19 @@
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
 
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('worker.js').then(function(registration) {
-                    console.log('Worker registration successful', registration.scope);
-                }, function(err) {
-                    console.log('Worker registration failed', err);
-                }).catch(function(err) {
-                    console.log(err);
-                });
-            });
-        } else {
-            console.log('Service Worker is not supported by browser.');
-        }
+        // if ('serviceWorker' in navigator) {
+        //     window.addEventListener('load', function() {
+        //         navigator.serviceWorker.register('worker.js').then(function(registration) {
+        //             console.log('Worker registration successful', registration.scope);
+        //         }, function(err) {
+        //             console.log('Worker registration failed', err);
+        //         }).catch(function(err) {
+        //             console.log(err);
+        //         });
+        //     });
+        // } else {
+        //     console.log('Service Worker is not supported by browser.');
+        // }
         // var c = document.getElementById('canv'),
         //     $ = c.getContext("2d");
         // var w = c.width = window.innerWidth,
@@ -208,7 +208,56 @@
         // function R(min, max) {
         //     return min + Math.random() * (max - min)
         // };
+        //    event for cart
+        var cartBtn = document.getElementById("cart-on-website");
+        var miniCart = document.getElementById("minicart");
+        var divbu = document.getElementById("div-bu");
+        var body = document.getElementById("body");
+        var closeCartBtn = document.getElementById("close-cart-btn")
+        cartBtn.addEventListener("click", function() {
+            miniCart.classList.add("show-up");
+            divbu.classList.add("show-up1")
+            body.classList.add("show-up2")
 
+        })
+        closeCartBtn.addEventListener("click", function() {
+            miniCart.classList.remove("show-up");
+            divbu.classList.remove("show-up1")
+            body.classList.remove("show-up2");
+
+
+        })
+
+        //
+
+
+        //event for favorite
+        var FavoritetBtn = document.getElementById("favorite");
+        var FavoriteCart = document.getElementById("favorite-cart");
+        var divbu = document.getElementById("div-bu");
+        var body = document.getElementById("body");
+        var closeFavorite = document.getElementById("close-favorite-btn");
+        var checkoutbtn = document.getElementById("checkout")
+        FavoritetBtn.addEventListener("click", function() {
+            FavoriteCart.classList.add("show-up");
+            divbu.classList.add("show-up1")
+            body.classList.add("show-up2")
+
+        })
+        closeFavorite.addEventListener("click", function() {
+            FavoriteCart.classList.remove("show-up");
+            divbu.classList.remove("show-up1")
+            body.classList.remove("show-up2");
+
+
+        })
+        checkoutbtn.addEventListener("click", function() {
+            miniCart.classList.remove("show-up");
+            divbu.classList.remove("show-up1")
+            body.classList.remove("show-up2");
+
+
+        })
 
 
 

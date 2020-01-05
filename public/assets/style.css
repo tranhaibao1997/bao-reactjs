@@ -27,9 +27,143 @@
 /* 1. Theme default css */
 
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+.payment-form .d-flex {
+    display: flex;
+    flex-direction: row;
+    background: #f6f6f6;
+    border-radius: 0 0 5px 5px;
+    padding: 25px;
+}
+
+.payment-form form {
+    flex: 4;
+}
+
+.payment-form .Yorder {
+    flex: 2;
+}
+
+.payment-form h2 {
+    margin: 0;
+    padding-left: 15px;
+}
+
+.payment-form .required {
+    color: red;
+}
+
+.payment-form label,
+.payment-form table {
+    display: block;
+    margin: 15px;
+}
+
+.payment-form label>span {
+    float: left;
+    width: 25%;
+    margin-top: 12px;
+    padding-right: 10px;
+}
+
+.payment-form input[type="text"],
+.payment-form input[type="tel"],
+.payment-form input[type="email"],
+.payment-form select {
+    width: 70%;
+    height: 30px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dadada;
+    color: #888;
+}
+
+.payment-form select {
+    width: 72%;
+    height: 45px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.payment-form .Yorder {
+    margin-top: 15px;
+    height: 600px;
+    padding: 20px;
+    border: 1px solid #dadada;
+}
+
+.payment-form table {
+    margin: 0;
+    padding: 0;
+}
+
+.payment-form th {
+    border-bottom: 1px solid #dadada;
+    padding: 10px 0;
+}
+
+.payment-form tr>td:nth-child(1) {
+    text-align: left;
+    color: #2d2d2a;
+}
+
+.payment-form tr>td:nth-child(2) {
+    text-align: right;
+    color: #52ad9c;
+}
+
+.payment-form td {
+    border-bottom: 1px solid #dadada;
+    padding: 25px 25px 25px 0;
+}
+
+.payment-form p {
+    display: block;
+    color: #888;
+    margin: 0;
+    padding-left: 25px;
+}
+
+.payment-form .Yorder>div {
+    padding: 15px 0;
+}
+
+.payment-form button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    background: #52ad9c;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.payment-form button:hover {
+    cursor: pointer;
+    background: #428a7d;
+}
+
 .navbar {
     background-color: #4169e1;
 }
+
+.hidden-input {}
 
 .navbar h3 {
     display: inline-block;

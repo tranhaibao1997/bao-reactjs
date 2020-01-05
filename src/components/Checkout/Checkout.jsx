@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom';
+import formatPrice from '../../format'
 
 
 
@@ -17,6 +18,7 @@ export default function CheckOut(props) {
     }
 
   })
+  const [couponInput,setCounponInput]=React.useState("");
   const [total, setTotal] = React.useState(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0))
   //caculate Total Price
   async function deleteItem(value) {
@@ -54,17 +56,24 @@ export default function CheckOut(props) {
     props.getCartSuccess(newArray);
     setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0));
   }
+
+  function couponInputChange(e)
+  {
+    
+    setCounponInput(e.target.value)
+  }
   function applyCoupon() {
-    var couponInput = document.getElementById("coupon_code").value
-    if (!couponInput) {
+    let coupon=couponInput;
+    console.log(coupon);
+    if (!coupon) {
       alert("Mời bạn nhập code")
     }
     else {
-      if (couponInput = "REACT") {
+      if (coupon === "REACT") {
+      
         alert("Giỏ hàng hiện tại dc giảm 50% giá trị")
         setTotal(total / 2);
-        applyCoupon.style.display="none"
-      }
+        }
       else {
         alert("Sai code rồi nha ahihihihihihihihih")
       }
@@ -114,14 +123,14 @@ export default function CheckOut(props) {
                             <tr>
                               <td className="product-thumbnail"><Link to={`/product-detail/${elm.product_id}`}><img src={elm.img_url} alt="" /></Link></td>
                               <td className="product-name"><a href="#">{elm.name}</a></td>
-                              <td className="product-price"><span className="amount">{elm.final_price}</span></td>
+                              <td className="product-price"><span className="amount">{formatPrice(elm.final_price)}</span></td>
                               <td className="product-quantity">
                                 <div className="cart-plus-minus">
                                   <input type="text" id="quantity-input" value={elm.quantity} />
                                   <div className="dec qtybutton" onClick={(e) => minus(elm.name)}>-</div>
                                   <div className="inc qtybutton" onClick={(e) => plus(elm.name)}>+</div></div>
                               </td>
-                              <td className="product-subtotal"><span className="amount">{elm.final_price * elm.quantity}</span></td>
+                              <td className="product-subtotal"><span className="amount">{formatPrice(elm.final_price * elm.quantity)}</span></td>
                               <td className="product-remove"><a onClick={(e) => deleteItem(elm.name)}><i className="fa fa-times" /></a></td>
                             </tr>
                           )
@@ -137,7 +146,7 @@ export default function CheckOut(props) {
                       <div className="coupon">
 
                         <p>Nhập "REACT" để dc giảm 50%. Nếu bạn đã áp dụng coupon, vui lòng không chỉnh sửa giỏ hàng do chưa code tới bước đó :(</p>
-                        <input id="coupon_code" className="input-text" name="coupon_code" placeholder="Coupon code" type="text" />
+                        <input id="coupon_code" className="input-text" name="coupon_code" placeholder="Coupon code" type="text" onChange={couponInputChange}  />
                         <button className="btn theme-btn-2" name="apply_coupon" onClick={applyCoupon} type="button">Apply coupon</button>
                       </div>
                       <div className="coupon2">
@@ -151,8 +160,8 @@ export default function CheckOut(props) {
                     <div className="cart-page-total">
                       <h2>Cart totals</h2>
                       <ul className="mb-20">
-                        <li>Subtotal <span>{total}đ</span></li>
-                        <li>Total <span>{total}đ</span></li>
+                        <li>Subtotal <span>{formatPrice(total)}đ</span></li>
+                        <li>Total <span>{formatPrice(total)}đ</span></li>
                       </ul>
 
                       <Link className="btn theme-btn" id="paypal-button-container" to="/payment">Proceed to checkout</Link>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import formatPrice from '../../format'
 
 function ProductItem({ name, price, final_price, img_url, shop_name, product_id,data,getCartSuccess }) {
 
@@ -53,7 +54,7 @@ function ProductItem({ name, price, final_price, img_url, shop_name, product_id,
           </h4>
           <div className="product-meta">
             <div className="pro-price">
-              <span>{final_price}đ</span>
+              <span>{formatPrice(final_price)}đ</span>
               <span className="old-price">{price}đ</span>
             </div>
           </div>
