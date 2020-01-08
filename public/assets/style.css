@@ -552,7 +552,7 @@ a.badge.badge-danger {
 }
 
 .owl-carousel .owl-nav div {
-    background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
+    /* background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
     height: 40px;
     left: 20px;
     line-height: 40px;
@@ -563,22 +563,22 @@ a.badge.badge-danger {
     transform: translateY(-50%);
     transition: all 0.3s ease 0s;
     visibility: hidden;
-    width: 40px;
+    width: 40px; */
 }
 
 .owl-carousel .owl-nav div.owl-next {
-    left: auto;
-    right: 20px;
+    /* left: auto;
+    right: 20px; */
 }
 
 .owl-carousel:hover .owl-nav div {
-    opacity: 1;
-    visibility: visible;
+    /* opacity: 1;
+    visibility: visible; */
 }
 
 .owl-carousel .owl-nav div:hover {
-    background: #2B96CC;
-    color: #fff
+    /* background: #2B96CC;
+    color: #fff */
 }
 
 
@@ -1968,6 +1968,12 @@ ul li .favorite-cart .checkout-link a.red-color:hover {
 .product-img {
     position: relative;
     overflow: hidden;
+    transition: 0.4s;
+}
+
+.product-img:hover img {
+    transform: scale(1.2);
+    transition: 0.4s;
 }
 
 .product-img>a {}
@@ -2159,9 +2165,13 @@ img.secondary-img {
     border-color: #fe4536;
 }
 
+.owl-item .active {
+    width: 100% !important;
+}
+
 .product-slider.owl-carousel .owl-nav div,
 .product-slider-2.owl-carousel .owl-nav div {
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     left: -70px;
     transform: translateY(-50%);
@@ -2178,26 +2188,26 @@ img.secondary-img {
     border-radius: 0;
     cursor: pointer;
     background: #fff1f0;
-    line-height: 100px;
+    line-height: 100px; */
 }
 
 .product-slider.owl-carousel .owl-nav div.owl-next,
 .product-slider-2.owl-carousel .owl-nav div.owl-next {
-    left: auto;
-    right: -70px;
+    /* left: auto;
+    right: -70px; */
 }
 
 .product-slider:hover .owl-nav div,
 .product-slider-2:hover .owl-nav div {
-    opacity: 1;
-    visibility: visible;
+    /* opacity: 1;
+    visibility: visible; */
 }
 
 .product-slider .owl-nav div:hover,
 .product-slider-2 .owl-nav div:hover {
-    background: #fe4536;
+    /* background: #fe4536;
     color: #fff;
-    box-shadow: 0px 6px 12px 0px rgba(254, 69, 54, 0.4);
+    box-shadow: 0px 6px 12px 0px rgba(254, 69, 54, 0.4); */
 }
 
 
@@ -5634,3 +5644,98 @@ ul.cat li a:hover {
 
 
 /*--- end of preloader ---*/
+
+.product-hint-item-iphone {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item {
+    border-radius: 5%;
+}
+
+.product-hint-item-bag {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item-book {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item-cook {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item-laptop {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item:hover {
+    padding: 10px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.product-hint-item:hover img {
+    transform: scale(1.5);
+}
+
+.product-hint-item-watch {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item-sport {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item-womenFashion {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.product-hint-item-comestic {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.shop-link-sale a {
+    color: red !important;
+    font-weight: bold;
+}
+
+.modal-footerr-textTotal {
+    color: #fe4536 !important;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: "Segoe UI Symbol" !important;
+}
+
+.modal-title-text {
+    color: #fe4536 !important;
+    font-weight: 700;
+}
+
+.product-hint {
+    display: flex;
+    text-align: center;
+}
+
+.product-hint-img {
+    width: 100%;
+}
+
+.product-hint-item-text {
+    color: #747691;
+    font-weight: bold;
+}
+
+.disable {
+    pointer-events: none;
+    opacity: 0.4;
+}

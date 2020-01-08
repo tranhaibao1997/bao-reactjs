@@ -6,7 +6,7 @@ function Cart(props) {
     console.log(props.data, "cart store")
 
     //caculate Total Price
-    const total = props.data.reduce((acc, curr) => acc + (curr.final_price * curr.quantity), 0);
+    const total = props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0);
     //caculate Total Price
 
     function deleteItem(value) {
@@ -23,9 +23,7 @@ function Cart(props) {
 
 
 
-    function Test() {
-        console.log(props.data, "access to cart")
-    }
+
     return (
         <ul className="minicart" id="minicart">
             <button type="button" id="close-cart-btn" class="btn btn-outline-dark">X</button>
@@ -53,14 +51,14 @@ function Cart(props) {
                                 <tr>
                                     <th scope="row" className="border-0">
                                         <div className="p-2">
-                                            <img src={elm.img_url} alt="" width={100} className="img-fluid rounded shadow-sm" />
+                                            <img src={`https://media3.scdn.vn${elm.images[0]}`} alt="" width={100} className="img-fluid rounded shadow-sm" />
                                             <div style={{width:"70%"}}className="ml-3 d-inline-block align-middle">
-                                                <h5 className="mb-0"> <a href="#" className="text-dark d-inline-block align-middle">{elm.name}</a></h5><span className="text-muted font-weight-normal font-italic d-block">{elm.shop_name}</span>
+                            <h5 className="mb-0"> <a href="#" className="text-dark d-inline-block align-middle">{elm.name}{`(${elm.attribute1}`}{` ${elm.attribute2})`}</a></h5><span className="text-muted font-weight-normal font-italic d-block">{elm.shop_name}</span>
                                             </div>
                                         </div>
                                     </th>
                             <td className="border-0 align-middle" style={{textAlign: 'center'}}><strong>${formatPrice(elm.final_price)}</strong></td>
-                            <td className="border-0 align-middle" style={{textAlign: 'center'}}><strong>{elm.quantity}</strong></td>
+                            <td className="border-0 align-middle" style={{textAlign: 'center'}}><strong>{elm.cartQuantity}</strong></td>
                                     <td className="border-0 align-middle" style={{textAlign: 'center'}}><a href="#" className="text-dark" onClick={(a)=>deleteItem(elm.name)}><i className="fa fa-trash" /></a></td>
                                 </tr>
                             )
@@ -82,7 +80,7 @@ function Cart(props) {
                 <li>
                     <div className="checkout-link">
                         <Link id="checkout" to="/check-out">Shopping Cart</Link>
-                        <a className="red-color" href="#" onClick={Test}>Checkout</a>
+                        <a className="red-color" href="#" >Checkout</a>
                     </div>
 
 

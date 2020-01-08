@@ -2,11 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 function Favorite(props) {
-    // console.log(props.data, "cart store")
    
-    // //caculate Total Price
-    
-    // //caculate Total Price
 
     function deleteItem(value) {
         var newArray = [...props.data]

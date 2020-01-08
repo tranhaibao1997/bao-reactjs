@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, forwardRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import formatPrice from '../../format'
 
 
-export default function ProductDetail(props) {
+
+export default function ProductDetail(props, { ref }) {
 
   //useEffect
   useEffect(() => {
@@ -15,11 +20,30 @@ export default function ProductDetail(props) {
 
 
 
+  //set tab active
+
+
+
+
+
   const product = props.data;
-  const cart= [...props.cartdata]
-  const favorite=[...props.favoritedata]
+  const cart = [...props.cartdata]
+  const favorite = [...props.favoritedata]
   const [inputValue, setInputValue] = useState(1);
-  
+  const [attribute1, setAttribute1] = useState("");
+  const [attribute2, setAttribute2] = useState("")
+
+  //set btn active
+  const [ActiveAttribute1Btn, setActiveAttribute1Btn] = useState(-1);
+  const [ActiveAttribute2Btn, setActiveAttribute2Btn] = useState(-1);
+  function setActiveAttribute1(value) {
+setActiveAttribute1Btn(value);
+setAttribute1(product.attribute[0].value[value].name)
+}
+function setActiveAttribute2(value) {
+  setActiveAttribute2Btn(value);
+  setAttribute2(product.attribute[1].value[value].name)
+  }
 
   // set quantity -
   function minus(e) {
@@ -28,7 +52,7 @@ export default function ProductDetail(props) {
       let a = inputValue;
       let a1 = a - 1;
       setInputValue(a1);
-      
+
     }
     else {
       setInputValue(0);
@@ -41,7 +65,7 @@ export default function ProductDetail(props) {
     let a = inputValue;
     let a1 = a + 1;
     setInputValue(a1);
-    
+
   }
 
   //add to Cart
@@ -50,34 +74,71 @@ export default function ProductDetail(props) {
     let i = cart.findIndex(a => a.name === product.name)
     if (i !== -1) {
       const newProductsArray = [...cart];
-      newProductsArray[i].quantity = newProductsArray[i].quantity + value;
+      newProductsArray[i].cartQuantity = newProductsArray[i].cartQuantity + value;
       props.getCartSuccess(newProductsArray);
     }
     else {
-      product.quantity = value;
+      product.cartQuantity = value;
+      product.attribute1 = attribute1;
+      product.attribute2 = attribute2;
       const newProductsArray = [...cart];
       props.getCartSuccess([...newProductsArray, product])
     }
-    
+
     console.log(cart, "cart from detail ")
   }
 
   //add to Favorite
   function addToFavorite() {
-    
-    let i = favorite.findIndex(a => a.name === product.name)
+
+    let i = localStorage.findIndex(a => a.name === product.name)
     if (i !== -1) {
-     alert("Đã có item này trong danh sách yêu thích")
+      alert("Đã có item này trong danh sách yêu thích")
     }
     else {
-      
+
       const newProductsArray = [...favorite];
       props.getFavoriteSuccess([...newProductsArray, product])
     }
+
+
+
   }
-if(!product){
-  return <p>Loading</p>
-}
+
+  //add slideshow
+  const mapImage = (product) => {
+    return product.images.map((value, key) => {
+      return (<div>
+        <img src={`https://media3.scdn.vn${value}`} alt="GTA V" />
+      </div>
+      )
+    })
+  }
+
+  if (!product) {
+    return <p>Loading</p>
+  }
+
+  //add size,color
+  //   const showProp = (product) => {
+  //     return product.attribute.map((attribute, key) => {
+  //       return (
+
+  //       <li key={key}><span><b>{attribute.name}:</b></span>
+  //         {
+  //           //value.value= attribute
+  //           attribute.value.map((data, keyAtr) => { return <a href="#dss" key={key[keyAtr]} type="button" className={'btn btn-warning btn-color'} onClick={(a,b) => setActiveClass(key,keyAtr)}  >{data.value ? data.value : data.name}</a> })
+  //         }
+
+  //       </li>)
+
+
+  //     })
+  //   }
+  // console.log(product.attribute[0].value)
+
+
+
 
   return (
     <div>
@@ -85,38 +146,27 @@ if(!product){
         <div className="container">
           <div className="row">
             <div className="col-xl-6 col-lg-4">
-              <div className="product-details-img mb-10">
-                <div className="tab-content" id="myTabContentpro">
-                  <div className="tab-pane fade show active" id="home" role="tabpanel">
-                    <div className="product-large-img">
-                      <img src={`https://media3.scdn.vn/${product.images[0]}`} alt="" />
-                    </div>
-                  </div>
-                  <div className="tab-pane fade" id="profile" role="tabpanel">
-                    <div className="product-large-img">
+              <OwlCarousel items={1}
+                className="owl-theme"
+                loop
+                margin={10}
+                nav
 
-                    </div>
-                  </div>
-                  <div className="tab-pane fade" id="profile1" role="tabpanel">
-                    <div className="product-large-img">
-                      <img src={product.img_url} alt="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shop-thumb-tab mb-30">
-                <ul className="nav" id="myTab2" role="tablist">
-                  <li className="nav-item">
-                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-selected="true"><img src="img/product/pro1.jpg" alt="" /> </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-selected="false"><img src="img/product/pro2.jpg" alt="" /></a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" id="profile-tab2" data-toggle="tab" href="#profile1" role="tab" aria-selected="false"><img src="img/product/pro3.jpg" alt="" /></a>
-                  </li>
-                </ul>
-              </div>
+              >
+                {
+                  product.images.map(elm =>
+
+                    <div class="item"><img src={`https://media3.scdn.vn/${elm}`} alt="" /></div>
+                  )
+                }
+
+
+
+
+
+              </OwlCarousel>
+
+
             </div>
             <div className="col-xl-6 col-lg-8">
               <div className="product-details mb-30 pl-30">
@@ -126,8 +176,8 @@ if(!product){
                 </div>
                 <h2 className="pro-details-title mb-15">{product.name}</h2>
                 <div className="details-price mb-20">
-                  <span>{product.final_price}đ</span>
-                  <span className="old-price">{product.price}đ</span>
+                  <span>{formatPrice(product.final_price)}đ</span>
+                  <span className="old-price">{formatPrice(product.price)}đ</span>
                 </div>
                 <div className="product-variant">
                   <div className="product-desc variant-item">
@@ -136,10 +186,33 @@ if(!product){
                   </div>
                   <div className="product-info-list variant-item">
                     <ul>
-                      <li><span>Brands:</span>{product.shop_name}</li>
-                      <li><span>Product Code:</span> d12</li>
-                      <li><span>Reward Points:</span> 100</li>
-                      <li><span>Stock:</span> <span className="in-stock">In Stock</span></li>
+                      {
+                        product.attribute[0]
+                          ? <li>
+                            <p>{product.attribute[0].name}</p>
+                            {
+
+                              product.attribute[0].value.map((data, key) => { return <a key={key} type="button" className={ActiveAttribute1Btn === key ? "btn btn-danger btn-color active" : "btn btn-danger btn-color"} onClick={(a) => setActiveAttribute1(key)}  >{data.value ? data.value : data.name}</a> })
+                            }
+
+                          </li>
+                          : <span></span>
+
+                      }
+                      {
+                        product.attribute[1]
+                          ? <li>
+                            <p>{product.attribute[1].name}</p>
+                            {
+
+                              product.attribute[1].value.map((data, key) => { return <a key={key} type="button" className={ActiveAttribute2Btn === key ? "btn btn-danger btn-color active" : "btn btn-danger btn-color"} onClick={(a) => setActiveAttribute2(key)}  >{data.value ? data.value : data.name}</a> })
+                            }
+
+                          </li>
+                          : <span></span>
+
+                      }
+                      <li><span>Stock:</span> <span className="in-stock">{product.quantity}</span></li>
                     </ul>
                   </div>
                   <div className="product-action-details variant-item">
@@ -176,7 +249,7 @@ if(!product){
                 <div className="tab-content" id="myTabContent2">
                   <div className="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
                     <div className="desc-text">
-                    <p dangerouslySetInnerHTML={{__html: props.data.description}}/ >
+                      <p dangerouslySetInnerHTML={{ __html: props.data.description }} />
                     </div>
                   </div>
                   <div className="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
@@ -406,6 +479,7 @@ if(!product){
                       <span className="old-price">$230.00 USD</span>
                     </div>
                   </div>
+
                   <div className="product-wishlist">
                     <a href="#"><i className="far fa-heart" title="Wishlist" /></a>
                   </div>
