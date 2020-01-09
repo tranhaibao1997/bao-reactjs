@@ -17,65 +17,67 @@ export default function CheckOut(props) {
 
     }
 
-  })  
-  const [couponInput,setCounponInput]=React.useState("");
-  const [disableClasses,setDisableClasses]=React.useState(false)
+  })
+  const [couponInput, setCounponInput] = React.useState("");
+  const [disableClasses, setDisableClasses] = React.useState(false)
   const [total, setTotal] = React.useState(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0))
   //caculate Total Price
   async function deleteItem(value) {
     var newArray = [...props.data]
     for (let i = 0; i < newArray.length; i++) {
-      if (newArray[i].name === value) {
+      if (i === value) {
         newArray.splice(i, 1);
       }
     }
 
 
     await props.getCartSuccess(newArray);
-    console.log(newArray,"mang cart sau khi xoa")
+    console.log(newArray, "mang cart sau khi xoa")
     await setTotal(newArray.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
 
   }
   function minus(value) {
-    let i = props.data.findIndex(a => a.name === value);
-    const newArray = [...props.data];
-    if (newArray[i].cartQuantity > 0) {
-      newArray[i].cartQuantity--;
-    }
-    else {
-      deleteItem(newArray[i].name);
-    }
 
-
-    props.getCartSuccess(newArray);
-    setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
+    var newArray = [...props.data]
+    if(newArray[value].cartQuantity>0)
+    {
+      newArray[value].cartQuantity--;
+      props.getCartSuccess(newArray);
+      setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
+    }
+    else
+    {
+      newArray[value].cartQuantity=0;
+      props.getCartSuccess(newArray);
+      setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
+    }
+  
+  
   }
   function plus(value) {
-    let i = props.data.findIndex(a => a.name === value);
-    const newArray = [...props.data];
-    newArray[i].cartQuantity++;
+    var newArray = [...props.data]
+    newArray[value].cartQuantity++;
     props.getCartSuccess(newArray);
     setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
   }
 
-  function couponInputChange(e)
-  {
-    
+  function couponInputChange(e) {
+
     setCounponInput(e.target.value)
   }
   function applyCoupon() {
-    let coupon=couponInput;
+    let coupon = couponInput;
     console.log(coupon);
     if (!coupon) {
       alert("Mời bạn nhập code")
     }
     else {
       if (coupon === "REACT") {
-      
+
         alert("Giỏ hàng hiện tại dc giảm 50% giá trị")
         setTotal(total / 2);
         setDisableClasses(true);
-        }
+      }
       else {
         alert("Sai code rồi nha ahihihihihihihihih")
       }
@@ -120,20 +122,20 @@ export default function CheckOut(props) {
                     </thead>
                     <tbody>
                       {
-                        props.data.map(elm => {
+                        props.data.map((elm, key) => {
                           return (
-                            <tr>
+                            <tr key={key}>
                               <td className="product-thumbnail"><Link to={`/product-detail/${elm.product_id}`}><img src={`https://media3.scdn.vn${elm.images[0]}`} alt="" /></Link></td>
                               <td className="product-name"><a href="#">{elm.name}</a></td>
                               <td className="product-price"><span className="amount">{formatPrice(elm.final_price)}</span></td>
                               <td className="product-cartQuantity">
                                 <div className="cart-plus-minus">
                                   <input type="text" id="cartQuantity-input" value={elm.cartQuantity} />
-                                  <div className={disableClasses===true ?"dec qtybutton disable" :"dec qtybutton"} onClick={(e) => minus(elm.name)}>-</div>
-                                  <div className={disableClasses===true ?"inc qtybutton disable" :"inc qtybutton"} onClick={(e) => plus(elm.name)}>+</div></div>
+                                  <div className={disableClasses === true ? "dec qtybutton disable" : "dec qtybutton"} onClick={(e) => minus(key)}>-</div>
+                                  <div className={disableClasses === true ? "inc qtybutton disable" : "inc qtybutton"} onClick={(e) => plus(key)}>+</div></div>
                               </td>
                               <td className="product-subtotal"><span className="amount">{formatPrice(elm.final_price * elm.cartQuantity)}</span></td>
-                              <td className={disableClasses===true ?"product-remove disable" :"product-remove"}><a onClick={(e) => deleteItem(elm.name)}><i className="fa fa-times" /></a></td>
+                              <td className={disableClasses === true ? "product-remove disable" : "product-remove"}><a onClick={(e) => deleteItem(key)}><i className="fa fa-times" /></a></td>
                             </tr>
                           )
                         })
@@ -148,7 +150,7 @@ export default function CheckOut(props) {
                       <div className="coupon">
 
                         <p>Nhập "REACT" để dc giảm 50%. Nếu bạn đã áp dụng coupon, vui lòng không chỉnh sửa giỏ hàng do chưa code tới bước đó :(</p>
-                        <input id="coupon_code" className="input-text" name="coupon_code" placeholder="Coupon code" type="text" onChange={couponInputChange} readOnly={disableClasses}  />
+                        <input id="coupon_code" className="input-text" name="coupon_code" placeholder="Coupon code" type="text" onChange={couponInputChange} readOnly={disableClasses} />
                         <button className="btn theme-btn-2" name="apply_coupon" onClick={applyCoupon} type="button" disabled={disableClasses}>Apply coupon</button>
                       </div>
                       <div className="coupon2">

@@ -5,19 +5,20 @@ import SuggestionFunctionContainer from '../Suggestion/Suggestion.container';
 import NotFound from '../NotFound/NotFound';
 import SuggestionFunction from '../Suggestion/Suggestion.container';
 
+
 function ProductList(props) {
   useEffect(() => {
     props.getProductList();
 
 
   }, [])
-  function Test() {
-    console.log(props.data)
-  }
-  console.log(props.data,"mang productlist")
+  
+ console.log(props.data,"mang productlist")
 
   return (
     <>
+   
+   
     
     <div className="col-xl-9 col-lg-8">
     <SuggestionFunction></SuggestionFunction>

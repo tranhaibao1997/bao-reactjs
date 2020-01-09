@@ -4,6 +4,8 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import formatPrice from '../../format'
+import update from 'immutability-helper';
+import { useToasts,ToastProvider} from 'react-toast-notifications'
 
 
 
@@ -17,15 +19,24 @@ export default function ProductDetail(props, { ref }) {
 
   const param = useParams();
   const id = param.id;
-
+  const { addToast } = useToasts()
+function showAlertSuccess()
+{
+addToast("Thêm vào giỏ hàng thành công",{appearance: 'success',
+autoDismiss: true,autoDismissTimeout:2000})
+}
+function showAlertDelete()
+{
+addToast("Đã xóa",{appearance: 'success',
+autoDismiss: true,autoDismissTimeout:2000})
+}
 
 
   //set tab active
 
 
 
-
-
+ 
   const product = props.data;
   const cart = [...props.cartdata]
   const favorite = [...props.favoritedata]
@@ -38,11 +49,27 @@ export default function ProductDetail(props, { ref }) {
   const [ActiveAttribute2Btn, setActiveAttribute2Btn] = useState(-1);
   function setActiveAttribute1(value) {
 setActiveAttribute1Btn(value);
-setAttribute1(product.attribute[0].value[value].name)
+if(product.attribute[0].value[value].value)
+{
+  return setAttribute1(product.attribute[0].value[value].value  )
+}
+else
+{
+  setAttribute1(product.attribute[0].value[value].name)
+}
+
 }
 function setActiveAttribute2(value) {
   setActiveAttribute2Btn(value);
   setAttribute2(product.attribute[1].value[value].name)
+  if(product.attribute[1].value[value].value)
+{
+  return setAttribute2(product.attribute[1].value[value].value  )
+}
+else
+{
+  setAttribute2(product.attribute[1].value[value].name)
+}
   }
 
   // set quantity -
@@ -70,12 +97,37 @@ function setActiveAttribute2(value) {
 
   //add to Cart
   function addToCart() {
-    const value = inputValue;
-    let i = cart.findIndex(a => a.name === product.name)
-    if (i !== -1) {
+    const value = inputValue; //quantity trong input
+    let i = cart.findIndex(a => a.name === product.name) //tim index trong cart
+    if (i !== -1) //neu index khac -1 => product da co trong item
+    {
+      // product khac att voi product trong cart
+      if(cart[i].attribute1!==attribute1 || cart[i].attribute2!==attribute2 )
+      {
+        console.log("bi khac chi pu r kia")
+     
+        const deepClone = update(product,{cartQuantity:{$set:value},attribute1:{$set:attribute1},attribute2:{$set:attribute2}});
+       console.log(deepClone,"object");
+        const newProductsArray1 = [...cart];// ra mang
+        newProductsArray1.push(deepClone) // sai khuc này 
+      console.log(newProductsArray1,"bug here")
+        props.getCartSuccess(newProductsArray1) //add product vao mang 
+        showAlertSuccess()
+        
+      
+      }
+
+      //product trung toan bo 
+      else if(product.attribute1===attribute1 && product.attribute2===attribute2)
+      {
       const newProductsArray = [...cart];
-      newProductsArray[i].cartQuantity = newProductsArray[i].cartQuantity + value;
+      newProductsArray[i].cartQuantity = newProductsArray[i].cartQuantity + value; //+ quantity vào product da co san
       props.getCartSuccess(newProductsArray);
+      showAlertSuccess()
+     
+      
+        
+      }
     }
     else {
       product.cartQuantity = value;
@@ -83,23 +135,39 @@ function setActiveAttribute2(value) {
       product.attribute2 = attribute2;
       const newProductsArray = [...cart];
       props.getCartSuccess([...newProductsArray, product])
+      showAlertSuccess()
+      
+  
+      
+        
     }
 
     console.log(cart, "cart from detail ")
   }
 
+
+// - Xét trong cart
+  // Có item trong cart
+  // 1.Nếu  
+                     
+
+
+
+  // Không có item trong cart
+
   //add to Favorite
   function addToFavorite() {
 
-    let i = localStorage.findIndex(a => a.name === product.name)
-    if (i !== -1) {
-      alert("Đã có item này trong danh sách yêu thích")
-    }
-    else {
+    // let i = localStorage.findIndex(a => a.name === product.name)
+    // if (i !== -1) {
+    //   alert("Đã có item này trong danh sách yêu thích")
+    // }
+    // else {
 
-      const newProductsArray = [...favorite];
-      props.getFavoriteSuccess([...newProductsArray, product])
-    }
+    //   const newProductsArray = [...favorite];
+    //   props.getFavoriteSuccess([...newProductsArray, product])
+    // }
+    
 
 
 
@@ -181,8 +249,7 @@ function setActiveAttribute2(value) {
                 </div>
                 <div className="product-variant">
                   <div className="product-desc variant-item">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                    <p>{product.short_description}</p>
                   </div>
                   <div className="product-info-list variant-item">
                     <ul>
