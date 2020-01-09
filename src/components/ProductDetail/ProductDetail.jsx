@@ -9,7 +9,7 @@ import { useToasts,ToastProvider} from 'react-toast-notifications'
 
 
 
-export default function ProductDetail(props, { ref }) {
+export default function ProductDetail(props) {
 
   //useEffect
   useEffect(() => {
@@ -25,11 +25,7 @@ function showAlertSuccess()
 addToast("Thêm vào giỏ hàng thành công",{appearance: 'success',
 autoDismiss: true,autoDismissTimeout:2000})
 }
-function showAlertDelete()
-{
-addToast("Đã xóa",{appearance: 'success',
-autoDismiss: true,autoDismissTimeout:2000})
-}
+
 
 
   //set tab active
@@ -112,7 +108,8 @@ else
         newProductsArray1.push(deepClone) // sai khuc này 
       console.log(newProductsArray1,"bug here")
         props.getCartSuccess(newProductsArray1) //add product vao mang 
-        showAlertSuccess()
+        showAlertSuccess();
+        setInputValue(1);
         
       
       }
@@ -124,6 +121,7 @@ else
       newProductsArray[i].cartQuantity = newProductsArray[i].cartQuantity + value; //+ quantity vào product da co san
       props.getCartSuccess(newProductsArray);
       showAlertSuccess()
+      setInputValue(1);
      
       
         
@@ -136,6 +134,7 @@ else
       const newProductsArray = [...cart];
       props.getCartSuccess([...newProductsArray, product])
       showAlertSuccess()
+      setInputValue(1);
       
   
       

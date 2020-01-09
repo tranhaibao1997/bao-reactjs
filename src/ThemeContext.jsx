@@ -11,6 +11,7 @@ function ThemeContextComponent({ children }) {
 
     //cart
     const [cartItem, setCartItem] = useState([]);
+    const [cartTotal,setCartTotal]=useState(0);
 
     //user
     const [userInfo, setUserInfo] = useState();
@@ -59,6 +60,7 @@ function ThemeContextComponent({ children }) {
             products, setProducts,
             cartItem, setCartItem,
             userInfo, setUserInfo,
+            cartTotal,setCartTotal
             // itemDetail, setItemDetail
 
         }}>

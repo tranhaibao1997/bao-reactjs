@@ -3,6 +3,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 export default function CheckOut2(props) {
+  console.log(props.data);
+ 
+  const AppContext = React.createContext()
+  console.log(AppContext.cartTotal,"cart total from context")
      return (
         <div>
         <section className="breadcrumb-area" style={{backgroundImage: 'url("./assets/page-title.png")'}}>
@@ -325,13 +329,22 @@ export default function CheckOut2(props) {
               <tbody><tr>
                   <th colSpan={2}>Your order</th>
                 </tr>
-                <tr>
-                  <td>Product Name x 2(Qty)</td>
-                  <td>$88.00</td>
-                </tr>
+                {
+                  props.data.length!==0
+                  ?props.data.map(elm => {return(
+                    <tr>
+                    <td>{elm.name} x {elm.cartQuantity}</td>
+                    <td>${elm.cartQuantity * elm.final_price}đ</td>
+                  </tr>
+                  )
+                  }
+                    )
+                    : <p>Chưa có Item trong giỏ hàng</p>
+                
+}
                 <tr>
                   <td>Subtotal</td>
-                  <td>$88.00</td>
+<td>{AppContext.cartTotal}</td>
                 </tr>
                 <tr>
                   <td>Shipping</td>
