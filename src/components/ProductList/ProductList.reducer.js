@@ -2,6 +2,7 @@ import { PRODUCTLIST_FAIL, PRODUCTLIST_REQUEST, PRODUCTLIST_SUCCESS } from "./Pr
 
 const initialState = {
     data: [],
+    metadata: {},
     load: false,
     fail: null
 }
@@ -17,7 +18,8 @@ export default function ProductListReducer(state = initialState, action) {
         case PRODUCTLIST_SUCCESS:
             return {...state,
                 load: false,
-                data: action.payload
+                data: action.payload,
+                metadata: action.metadata
             }
         case PRODUCTLIST_FAIL:
             return {...state,

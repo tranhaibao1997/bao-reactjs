@@ -5754,3 +5754,25 @@ ul.cat li a:hover {
     width: 220px;
     margin-right: 30px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+    padding: 0px !important;
+}
+
+.pagination .page-link {
+    color: #747691;
+}
+
+.page-item.active .page-link {
+    background-color: #FE4536 !important;
+}
+
+.square-fill .is-active,
+.square-fill a:first-of-type,
+.square-fill a:last-of-type {
+    background-color: #fe5245 !important;
+    color: white !important;
+}

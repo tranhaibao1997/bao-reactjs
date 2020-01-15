@@ -15,7 +15,7 @@ function SearchFunction(props)
   let inputTextArray = inputText.split(" ");
   let keyWord = inputTextArray.join("-");
   console.log(keyWord);
-    props.getProductListBySearch(keyWord);
+    props.getProductListBySearch(keyWord,1);
   setText("");
   }
   

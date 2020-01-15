@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import SortFunction from './SortFunction'
-import { getProductListBySort } from '../ProductList/ProductList.action'
+import { getProductListBySort, getProductList } from '../ProductList/ProductList.action'
 
 
 const mapStateToProps = (store) => ({
@@ -8,7 +8,8 @@ const mapStateToProps = (store) => ({
 })
 
 const mapDispatchToProps = {
-    getProductListBySort
+    getProductListBySort,
+    getProductList
 }
 
 

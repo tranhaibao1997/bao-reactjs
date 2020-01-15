@@ -1,9 +1,14 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect} from 'react'
 import { ThemeContext } from '../../ThemeContext';
 
 function SortFunction(props) 
 {
-  
+  useEffect(() => {
+    props.getProductList();
+
+  }, [])
+  console.log(props.data,"from sort")
+
   var newProducts = [...props.data]
 
   function AtoZ() {

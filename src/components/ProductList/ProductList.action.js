@@ -10,10 +10,11 @@ export function ProductListRequestAction() {
     }
 }
 
-export function ProductListSuccessAction(payload) {
+export function ProductListSuccessAction(payload, metadata) {
     return {
         type: PRODUCTLIST_SUCCESS,
-        payload: payload
+        payload: payload,
+        metadata: metadata
     }
 }
 
@@ -23,17 +24,16 @@ export function ProductListFailAction(error) {
         error: error
     }
 }
-export function getProductList(searchText = "ao-so-mi-nam") {
+export function getProductList(searchText = "ao-so-mi-nam", pageNum) {
     return async(dispatch) => {
         dispatch(ProductListRequestAction())
-        console.log(searchText, "search text nha")
         try {
             const result = await axios({
                 method: "GET",
-                url: `https://mapi.sendo.vn/mob/product/cat/${searchText}?p=1`
+                url: `https://mapi.sendo.vn/mob/product/search?p=${pageNum}&q=${searchText}`
             })
             console.log(result, "result")
-            dispatch(ProductListSuccessAction(result.data.data))
+            dispatch(ProductListSuccessAction(result.data.data, result.data.meta_data))
         } catch (error) {
             dispatch(ProductListFailAction(error))
         }
