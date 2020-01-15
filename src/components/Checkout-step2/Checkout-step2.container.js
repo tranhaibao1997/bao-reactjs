@@ -5,6 +5,8 @@ import { getCartSuccess } from '../Cart/Cart.action'
 const mapStateToProps = (store) => ({
 
     data: store.CartReducer.data,
+    coupon: store.CartReducer.coupon,
+    total: store.CartReducer.total
 
 })
 

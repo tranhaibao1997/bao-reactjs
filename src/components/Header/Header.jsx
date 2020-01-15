@@ -86,14 +86,7 @@ function Header(props) {
                                     userEmail && <span>Hello {userInfo.email}</span>
                                 }
                                 <ul>
-                                    <li>
-                                        <button id="txt" className="btn btn-danger" onClick={showClock}> Show Clock
-
-</button>
-                                    </li>
-                                    <li onClick={switchTheme} className="">
-                                        <a style={{ display: 'unset' }}><i className="badge badge-pill badge-dark">{context.value}</i></a>
-                                    </li>
+                                 
                                     <li className="search-btn">
                                         <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search"></i></a>
                                     </li>

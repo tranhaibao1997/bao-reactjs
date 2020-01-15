@@ -61,8 +61,8 @@ function Cart(props) {
                                         <th scope="row" className="border-0">
                                             <div className="p-2">
                                                 <img src={`https://media3.scdn.vn${elm.images[0]}`} alt="" width={100} className="img-fluid rounded shadow-sm" />
-                                                <div style={{ width: "70%" }} className="ml-3 d-inline-block align-middle">
-                                                    <h5 className="mb-0"> <a href="#" className="text-dark d-inline-block align-middle">{elm.name}{`(${elm.attribute1}`}{` ${elm.attribute2})`}</a></h5><span className="text-muted font-weight-normal font-italic d-block">{elm.shop_name}</span>
+                                                <div style={{ width: "70%",fontFamily: '"Quicksand", sans-serif' }} className="ml-3 d-inline-block align-middle">
+                                                    <h5 className="mb-0"> <a style={{fontFamily: '"Quicksand", sans-serif', color:"black"}} href="#" className="text-dark d-inline-block align-middle">{elm.name}{`(${elm.attribute1}`}{` ${elm.attribute2})`}</a></h5><span  className="text-muted font-weight-normal font-italic d-block">{elm.shop_name}</span>
                                                 </div>
                                             </div>
                                         </th>
@@ -85,8 +85,8 @@ function Cart(props) {
             <div class="check-out-part">
                 <li style={{ borderTop: '1px solid darkgray' }}>
                     <div className="total-price">
-                        <span className="f-left">Total:</span>
-                        <span className="f-right">${formatPrice(total)}</span>
+                        <span className="">Total:</span>
+                        <span className="">${formatPrice(total)}</span>
                     </div>
                 </li>
                 <li>

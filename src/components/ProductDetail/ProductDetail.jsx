@@ -5,7 +5,8 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import formatPrice from '../../format'
 import update from 'immutability-helper';
-import { useToasts,ToastProvider} from 'react-toast-notifications'
+import { useToasts, ToastProvider } from 'react-toast-notifications'
+import Slider from "react-slick";
 
 
 
@@ -16,15 +17,22 @@ export default function ProductDetail(props) {
     window.scrollTo(0, 0);
     props.getProductDetailById(id)
   }, []);
-
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
   const param = useParams();
   const id = param.id;
   const { addToast } = useToasts()
-function showAlertSuccess()
-{
-addToast("Thêm vào giỏ hàng thành công",{appearance: 'success',
-autoDismiss: true,autoDismissTimeout:2000})
-}
+  function showAlertSuccess() {
+    addToast("Thêm vào giỏ hàng thành công", {
+      appearance: 'success',
+      autoDismiss: true, autoDismissTimeout: 2000
+    })
+  }
 
 
 
@@ -32,42 +40,41 @@ autoDismiss: true,autoDismissTimeout:2000})
 
 
 
- 
+
   const product = props.data;
   const cart = [...props.cartdata]
   const favorite = [...props.favoritedata]
   const [inputValue, setInputValue] = useState(1);
   const [attribute1, setAttribute1] = useState("");
-  const [attribute2, setAttribute2] = useState("")
+  const [attribute2, setAttribute2] = useState("");
+  const [tabActive, setTabActive] = useState("description")
 
   //set btn active
   const [ActiveAttribute1Btn, setActiveAttribute1Btn] = useState(-1);
   const [ActiveAttribute2Btn, setActiveAttribute2Btn] = useState(-1);
   function setActiveAttribute1(value) {
-setActiveAttribute1Btn(value);
-if(product.attribute[0].value[value].value)
-{
-  return setAttribute1(product.attribute[0].value[value].value  )
-}
-else
-{
-  setAttribute1(product.attribute[0].value[value].name)
-}
+    setActiveAttribute1Btn(value);
+    if (product.attribute[0].value[value].value) {
+      return setAttribute1(product.attribute[0].value[value].value)
+    }
+    else {
+      setAttribute1(product.attribute[0].value[value].name)
+    }
 
-}
-function setActiveAttribute2(value) {
-  setActiveAttribute2Btn(value);
-  setAttribute2(product.attribute[1].value[value].name)
-  if(product.attribute[1].value[value].value)
-{
-  return setAttribute2(product.attribute[1].value[value].value  )
-}
-else
-{
-  setAttribute2(product.attribute[1].value[value].name)
-}
   }
-
+  function setActiveAttribute2(value) {
+    setActiveAttribute2Btn(value);
+    setAttribute2(product.attribute[1].value[value].name)
+    if (product.attribute[1].value[value].value) {
+      return setAttribute2(product.attribute[1].value[value].value)
+    }
+    else {
+      setAttribute2(product.attribute[1].value[value].name)
+    }
+  }
+  const onClickTab = (name) => {
+    setTabActive(name)
+  }
   // set quantity -
   function minus(e) {
 
@@ -98,33 +105,41 @@ else
     if (i !== -1) //neu index khac -1 => product da co trong item
     {
       // product khac att voi product trong cart
-      if(cart[i].attribute1!==attribute1 || cart[i].attribute2!==attribute2 )
-      {
+      if (cart[i].attribute1 !== attribute1 || cart[i].attribute2 !== attribute2) {
         console.log("bi khac chi pu r kia")
-     
-        const deepClone = update(product,{cartQuantity:{$set:value},attribute1:{$set:attribute1},attribute2:{$set:attribute2}});
-       console.log(deepClone,"object");
-        const newProductsArray1 = [...cart];// ra mang
-        newProductsArray1.push(deepClone) // sai khuc này 
-      console.log(newProductsArray1,"bug here")
-        props.getCartSuccess(newProductsArray1) //add product vao mang 
+
+ 
+        // const deepClone = update(product, { cartQuantity: { $set: value }, attribute1: { $set: attribute1 }, attribute2: { $set: attribute2 } });
+        // console.log(deepClone, "object");
+        // const newProductsArray1 = [...cart];// ra mang
+        // newProductsArray1.push(deepClone) // sai khuc này 
+        // console.log(newProductsArray1, "bug here")
+        const _product = [
+          ...cart, 
+         {
+           ...product,
+           attribute1,
+           attribute2,
+           cartQuantity:value
+          }
+        ]
+        props.getCartSuccess(_product) //add product vao mang 
         showAlertSuccess();
         setInputValue(1);
-        
-      
+
+
       }
 
       //product trung toan bo 
-      else if(product.attribute1===attribute1 && product.attribute2===attribute2)
-      {
-      const newProductsArray = [...cart];
-      newProductsArray[i].cartQuantity = newProductsArray[i].cartQuantity + value; //+ quantity vào product da co san
-      props.getCartSuccess(newProductsArray);
-      showAlertSuccess()
-      setInputValue(1);
-     
-      
-        
+      else if (product.attribute1 === attribute1 && product.attribute2 === attribute2) {
+        const newProductsArray = [...cart];
+        newProductsArray[i].cartQuantity = newProductsArray[i].cartQuantity + value; //+ quantity vào product da co san
+        props.getCartSuccess(newProductsArray);
+        showAlertSuccess()
+        setInputValue(1);
+
+
+
       }
     }
     else {
@@ -135,20 +150,20 @@ else
       props.getCartSuccess([...newProductsArray, product])
       showAlertSuccess()
       setInputValue(1);
-      
-  
-      
-        
+
+
+
+
     }
 
     console.log(cart, "cart from detail ")
   }
 
 
-// - Xét trong cart
+  // - Xét trong cart
   // Có item trong cart
   // 1.Nếu  
-                     
+
 
 
 
@@ -166,21 +181,14 @@ else
     //   const newProductsArray = [...favorite];
     //   props.getFavoriteSuccess([...newProductsArray, product])
     // }
-    
+
 
 
 
   }
 
   //add slideshow
-  const mapImage = (product) => {
-    return product.images.map((value, key) => {
-      return (<div>
-        <img src={`https://media3.scdn.vn${value}`} alt="GTA V" />
-      </div>
-      )
-    })
-  }
+
 
   if (!product) {
     return <p>Loading</p>
@@ -213,25 +221,14 @@ else
         <div className="container">
           <div className="row">
             <div className="col-xl-6 col-lg-4">
-              <OwlCarousel items={1}
-                className="owl-theme"
-                loop
-                margin={10}
-                nav
-
-              >
+              <Slider {...settings}>
                 {
                   product.images.map(elm =>
 
                     <div class="item"><img src={`https://media3.scdn.vn/${elm}`} alt="" /></div>
                   )
                 }
-
-
-
-
-
-              </OwlCarousel>
+              </Slider>
 
 
             </div>
@@ -306,19 +303,52 @@ else
               <div className="product-review">
                 <ul className="nav review-tab" id="myTabproduct" role="tablist">
                   <li className="nav-item">
-                    <a className="nav-link active" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home" aria-selected="true">Description </a>
+                    <a
+                      className={`nav-link ${tabActive === "description" && "active"}`}
+                      id="home-tab6"
+                      data-toggle="tab"
+                      role="tab"
+                      aria-controls="home"
+                      aria-selected="true"
+                      onClick={() => onClickTab("description")}
+                    >
+                      Description{" "}
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile" aria-selected="false">Reviews (2)</a>
+                    <a
+                      className={`nav-link ${tabActive === "comments" && "active"}`}
+                      id="profile-tab6"
+                      data-toggle="tab"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                      onClick={() => onClickTab("comments")}
+                    >
+                      Reviews (2)
+                    </a>
                   </li>
                 </ul>
                 <div className="tab-content" id="myTabContent2">
-                  <div className="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
+                  <div
+                    className={`tab-pane fade show ${tabActive === "description" && "active"}`}
+                    id="home6"
+                    role="tabpanel"
+                    aria-labelledby="home-tab6"
+                  >
                     <div className="desc-text">
-                      <p dangerouslySetInnerHTML={{ __html: props.data.description }} />
+                      <p dangerouslySetInnerHTML={{__html: product.description}}/ >
+                        
+
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
+                  <div
+                    className={`tab-pane fade show ${tabActive === "comments" && "active"}`}
+                    id="profile6"
+                    role="tabpanel"
+                    aria-labelledby="profile-tab6"
+                    style={{ display: 'block' }}
+                  >
                     <div className="desc-text review-text">
                       <div className="product-commnets">
                         <div className="product-commnets-list mb-25 pb-15">
@@ -326,8 +356,8 @@ else
                             <img src="img/product/comments/01.png" alt="" />
                           </div>
                           <div className="pro-commnets-text">
-                            <h4>Roger West -
-                                <span>June 5, 2018</span>
+                            <h4>
+                              Roger West -<span>June 5, 2018</span>
                             </h4>
                             <div className="pro-rating">
                               <i className="far fa-star" />
@@ -335,10 +365,12 @@ else
                               <i className="far fa-star" />
                               <i className="far fa-star" />
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                              incididunt
-                              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation.</p>
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipisicing elit, sed do eiusmod tempor incididunt
+                              ut labore et dolore magna aliqua. Ut enim ad minim
+                              veniam, quis nostrud exercitation.
+                            </p>
                           </div>
                         </div>
                         <div className="product-commnets-list mb-25 pb-15">
@@ -346,8 +378,8 @@ else
                             <img src="img/product/comments/02.png" alt="" />
                           </div>
                           <div className="pro-commnets-text">
-                            <h4>Roger West -
-                                <span>June 5, 2018</span>
+                            <h4>
+                              Roger West -<span>June 5, 2018</span>
                             </h4>
                             <div className="pro-rating">
                               <i className="far fa-star" />
@@ -355,10 +387,12 @@ else
                               <i className="far fa-star" />
                               <i className="far fa-star" />
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                              incididunt
-                              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation.</p>
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipisicing elit, sed do eiusmod tempor incididunt
+                              ut labore et dolore magna aliqua. Ut enim ad minim
+                              veniam, quis nostrud exercitation.
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -388,7 +422,13 @@ else
                           <div className="row">
                             <div className="col-xl-12">
                               <label htmlFor="message">YOUR REVIEW</label>
-                              <textarea name="message" id="message" cols={30} rows={10} defaultValue={""} />
+                              <textarea
+                                name="message"
+                                id="message"
+                                cols={30}
+                                rows={10}
+                                defaultValue={""}
+                              />
                             </div>
                             <div className="col-xl-6">
                               <label htmlFor="r-name">Name</label>
@@ -399,7 +439,9 @@ else
                               <input type="email" id="r-email" />
                             </div>
                             <div className="col-xl-12">
-                              <button className="btn theme-btn">Add your Review</button>
+                              <button className="btn theme-btn">
+                                Add your Review
+                              </button>
                             </div>
                           </div>
                         </form>
@@ -411,7 +453,9 @@ else
             </div>
             <div className="col-xl-4 col-lg-4">
               <div className="pro-details-banner">
-                <a href="shop.html"><img src="img/banner/pro-details.jpg" alt="" /></a>
+                <a href="shop.html">
+                  <img src="img/banner/pro-details.jpg" alt="" />
+                </a>
               </div>
             </div>
           </div>

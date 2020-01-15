@@ -14,7 +14,7 @@ return (
         <div className="sidebar-shop">
          <SearchFunctionContainer></SearchFunctionContainer>
          <SortFunctionContainer></SortFunctionContainer>
-         <RecentProductFunction></RecentProductFunction>
+         {/* <RecentProductFunction></RecentProductFunction> */}
          <Unknow></Unknow>
         </div>
       </div>

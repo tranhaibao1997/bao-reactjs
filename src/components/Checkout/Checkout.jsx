@@ -2,26 +2,32 @@ import React from 'react'
 
 import { Link } from 'react-router-dom';
 import formatPrice from '../../format'
+import { coupons } from "../../coupons.js"
+
 
 
 
 export default function CheckOut(props) {
 
   //caculate Total Price
-  React.useEffect(() => {
-    if (props.data.length === 0) {
-      alert("Bạn chưa có gì trong giỏ hàng. Bạn có muốn ra trang chủ để xem hàng không ?")
-      window.location.href = "/"
-    }
-    else {
+  React.useEffect(
 
+    () => {
+    
+    props.getCartTotalSuccess(total)  
+      
     }
+    
+    , [])
 
-  })
-  const [couponInput, setCounponInput] = React.useState("");
+  
+  const [coupon, setCounpon] = React.useState();
   const [disableClasses, setDisableClasses] = React.useState(false)
-  const [total, setTotal] = React.useState(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0))
+ 
+  var total=(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0)*(100-props.coupon.value))/100
+  
   //caculate Total Price
+ 
   async function deleteItem(value) {
     var newArray = [...props.data]
     for (let i = 0; i < newArray.length; i++) {
@@ -32,59 +38,61 @@ export default function CheckOut(props) {
 
 
     await props.getCartSuccess(newArray);
-    console.log(newArray, "mang cart sau khi xoa")
-    await setTotal(newArray.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
-
+    
+    props.getCartTotalSuccess((newArray.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) *  (100-props.coupon.value)) / 100);
+    console.log(props.total)
   }
   function minus(value) {
 
     var newArray = [...props.data]
-    if(newArray[value].cartQuantity>0)
-    {
+    if (newArray[value].cartQuantity > 0) {
       newArray[value].cartQuantity--;
       props.getCartSuccess(newArray);
-      setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
+      console.log(props.data)
+      props.getCartTotalSuccess((props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) *  (100-props.coupon.value)) / 100);
     }
-    else
-    {
-      newArray[value].cartQuantity=0;
+    else {
+      newArray[value].cartQuantity = 0;
       props.getCartSuccess(newArray);
-      setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
+      props.getCartTotalSuccess((props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) *  (100-props.coupon.value)) / 100);
     }
-  
-  
+
+
   }
   function plus(value) {
     var newArray = [...props.data]
     newArray[value].cartQuantity++;
     props.getCartSuccess(newArray);
-    setTotal(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0));
+    props.getCartTotalSuccess((props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) *  (100-props.coupon.value)) / 100);
   }
 
   function couponInputChange(e) {
 
-    setCounponInput(e.target.value)
-  }
-  function applyCoupon() {
-    let coupon = couponInput;
-    console.log(coupon);
-    if (!coupon) {
-      alert("Mời bạn nhập code")
-    }
-    else {
-      if (coupon === "REACT") {
-
-        alert("Giỏ hàng hiện tại dc giảm 50% giá trị")
-        setTotal(total / 2);
-        setDisableClasses(true);
-      }
-      else {
-        alert("Sai code rồi nha ahihihihihihihihih")
-      }
-
-    }
+    setCounpon(e.target.value)
 
   }
+  async function applyCoupon() {
+
+    console.log(coupon)
+    if(coupon==="--Choose a promo coupon--" || coupon===undefined)
+    {
+       alert("Bạn chưa chọn coupon")
+    }
+    else
+    {
+    let i = coupons.findIndex(elm => elm.name === coupon);
+    props.getCartAfterCouponSuccess(coupons[i]);
+    props.getCartTotalSuccess((props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) * (100 - coupons[i].value)) / 100);
+    }
+    // setTotal((props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) * 50) / 100);
+
+
+    // setDisableClasses(true);
+  }
+
+
+
+
 
   return (
     <div>
@@ -149,9 +157,25 @@ export default function CheckOut(props) {
                     <div className="coupon-all">
                       <div className="coupon">
 
-                        <p>Nhập "REACT" để dc giảm 50%. Nếu bạn đã áp dụng coupon, vui lòng không chỉnh sửa giỏ hàng do chưa code tới bước đó :(</p>
-                        <input id="coupon_code" className="input-text" name="coupon_code" placeholder="Coupon code" type="text" onChange={couponInputChange} readOnly={disableClasses} />
-                        <button className="btn theme-btn-2" name="apply_coupon" onClick={applyCoupon} type="button" disabled={disableClasses}>Apply coupon</button>
+                        <p>Chọn Coupon Giảm Giá:</p>
+                        <div style={{ display: 'flex' }}>
+                          <div style={{ display: 'flex' }}>
+                            <select class="selectpicker" onChange={couponInputChange}>
+                              <option selected>--Choose a promo coupon--</option>
+                              {
+
+                                coupons.map((elm, key) => {
+                                  return (
+                                  <option value={elm.name}>{elm.name}- Mã giảm {elm.value}%</option>
+                                  )
+                                })
+                              }
+                            </select>
+
+
+                          </div>
+                          <button className="btn theme-btn-2" name="apply_coupon" onClick={applyCoupon} type="button" disabled={disableClasses}>Apply coupon</button>
+                        </div>
                       </div>
                       <div className="coupon2">
                         <input className="btn theme-btn" name="update_cart" defaultValue="Update cart" type="submit" />
@@ -164,8 +188,13 @@ export default function CheckOut(props) {
                     <div className="cart-page-total">
                       <h2>Cart totals</h2>
                       <ul className="mb-20">
-                        <li>Subtotal <span>{formatPrice(total)}đ</span></li>
-                        <li>Total <span>{formatPrice(total)}đ</span></li>
+                        {
+                          props.coupon.name!=null
+                          ?<li>Sale <span>{props.coupon.value}%</span></li>
+                          :<li>Sale <span>Chưa có mã giảm được chọn</span></li>
+                          
+                        }
+                        <li>Total <span>{formatPrice(props.total)}đ</span></li>
                       </ul>
 
                       <Link className="btn theme-btn" id="paypal-button-container" to="/payment">Proceed to checkout</Link>
