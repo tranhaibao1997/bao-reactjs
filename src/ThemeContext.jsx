@@ -6,12 +6,7 @@ export const ThemeContext = React.createContext("");
 function ThemeContextComponent({ children }) {
 
 
-    //Product
-    const [products, setProducts] = useState(data.data);
-
-    //cart
-    const [cartItem, setCartItem] = useState([]);
-    const [cartTotal,setCartTotal]=useState(0);
+ 
 
     //user
     const [userInfo, setUserInfo] = useState();
@@ -20,7 +15,7 @@ function ThemeContextComponent({ children }) {
 
     //product detail    
     // const [itemDetail, setItemDetail] = useState([]);
-    
+    const [currentPage,setCurrentPage]=useState(1);
     
     //make clock
     function startTime() {
@@ -57,10 +52,9 @@ function ThemeContextComponent({ children }) {
         <ThemeContext.Provider value={{
             switchTheme, value: themeValue,
             startTime,
-            products, setProducts,
-            cartItem, setCartItem,
+            currentPage,setCurrentPage,
             userInfo, setUserInfo,
-            cartTotal,setCartTotal
+            
             // itemDetail, setItemDetail
 
         }}>

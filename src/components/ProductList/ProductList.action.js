@@ -3,6 +3,7 @@ import axios from 'axios'
 export const PRODUCTLIST_REQUEST = "PRODUCTLIST-REQUEST"
 export const PRODUCTLIST_SUCCESS = "PRODUCTLIST-SUCCESS"
 export const PRODUCTLIST_FAIL = "PRODUCTLIST-FAIL"
+export const PRODUCTLIST_SORT = "PRODUCTLIST-SORT"
 
 export function ProductListRequestAction() {
     return {
@@ -24,6 +25,12 @@ export function ProductListFailAction(error) {
         error: error
     }
 }
+export function ProductListSortAction(payload) {
+    return {
+        type: PRODUCTLIST_SORT,
+        payload: payload
+    }
+}
 export function getProductList(searchText = "ao-so-mi-nam", pageNum) {
     return async(dispatch) => {
         dispatch(ProductListRequestAction())
@@ -41,17 +48,16 @@ export function getProductList(searchText = "ao-so-mi-nam", pageNum) {
     }
 }
 
-export function getProductListBySearch(searchText) {
+export function getProductListBySearch(searchText, pageNum = 1) {
     return async(dispatch) => {
         dispatch(ProductListRequestAction())
-        console.log(searchText, "search text nha")
         try {
             const result = await axios({
                 method: "GET",
-                url: `https://mapi.sendo.vn/mob/product/search?p={1}&q=${searchText}`
+                url: `https://mapi.sendo.vn/mob/product/search?p=${pageNum}&q=${searchText}`
             })
             console.log(result, "result")
-            dispatch(ProductListSuccessAction(result.data.data))
+            dispatch(ProductListSuccessAction(result.data.data, result.data.meta_data))
         } catch (error) {
             dispatch(ProductListFailAction(error))
         }
@@ -62,6 +68,6 @@ export function getProductListBySearch(searchText) {
 export function getProductListBySort(Array) {
     return async(dispatch) => {
         dispatch(ProductListRequestAction())
-        dispatch(ProductListSuccessAction(Array))
+        dispatch(ProductListSortAction(Array))
     }
 }

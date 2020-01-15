@@ -6,11 +6,13 @@ const mapStateToProps = (store) => ({
     load: store.ProductListReducer.load,
     metadata: store.ProductListReducer.metadata,
     data: store.ProductListReducer.data,
-    error: store.ProductListReducer.error
+    error: store.ProductListReducer.error,
+    searchText: store.SearchReducer.searchText
 })
 
 const mapDispatchToProps = {
     getProductList,
+    getProductListBySearch
 
 }
 

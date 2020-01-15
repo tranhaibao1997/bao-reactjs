@@ -20,8 +20,9 @@ function ProductList(props) {
   }, [])
 
   const totalPage=props.metadata.total_page
+  const context=useContext(ThemeContext)
  
-  const [currentPage, setCurrentPage] = React.useState(1)
+  
   var settings = {
     dots: false,
     infinite: true,
@@ -32,9 +33,10 @@ function ProductList(props) {
     autoplaySpeed: 3000
   };
   const changeCurrentPage = numPage => {
-    setCurrentPage(numPage)
+    context.setCurrentPage(numPage)
     console.log(numPage)
-    props.getProductList("ao-so-mi-nam",numPage)
+    props.getProductList(props.searchText,numPage);
+    
     // props.getProductListBySearch(numPage)
     //fetch a data  
     //or update a query to get data
@@ -70,7 +72,7 @@ function ProductList(props) {
           </div>
           <div className="col-xl-7 col-lg-6 col-md-6">
             <Pagination
-              currentPage={currentPage}
+              currentPage={context.currentPage}
               totalPages={totalPage}
               changeCurrentPage={changeCurrentPage}
               theme="square-fill"

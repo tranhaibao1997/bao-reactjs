@@ -1,13 +1,16 @@
 import { connect } from 'react-redux'
 import SearchFunction from './SearchFunction'
-import { getProductListBySearch } from '../ProductList/ProductList.action'
+import { getProductList, getProductListBySearch } from '../ProductList/ProductList.action'
+import { getSearchTextAction } from './Search.action'
 
 const mapStateToProps = (store) => ({
 
 })
 
 const mapDispatchToProps = {
-    getProductListBySearch
+    getProductList,
+    getProductListBySearch,
+    getSearchTextAction
 }
 
 

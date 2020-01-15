@@ -1,4 +1,4 @@
-import { PRODUCTLIST_FAIL, PRODUCTLIST_REQUEST, PRODUCTLIST_SUCCESS } from "./ProductList.action"
+import { PRODUCTLIST_FAIL, PRODUCTLIST_REQUEST, PRODUCTLIST_SUCCESS, PRODUCTLIST_SORT } from "./ProductList.action"
 
 const initialState = {
     data: [],
@@ -10,21 +10,29 @@ const initialState = {
 export default function ProductListReducer(state = initialState, action) {
     switch (action.type) {
         case PRODUCTLIST_REQUEST:
-            return {...state,
+            return {
+                ...state,
                 loading: false,
                 error: action.error
 
             }
         case PRODUCTLIST_SUCCESS:
-            return {...state,
+            return {
+                ...state,
                 load: false,
                 data: action.payload,
                 metadata: action.metadata
             }
         case PRODUCTLIST_FAIL:
-            return {...state,
+            return {
+                ...state,
                 load: true,
                 error: action.error
+            }
+        case PRODUCTLIST_SORT:
+            return {
+                ...state,
+                data: action.payload
             }
 
         default:
