@@ -98,8 +98,8 @@ function ProductList(props) {
                   :<p>NOT FOUND</p>
 
 
-                  })
-              }
+                  }
+              
 
 
 

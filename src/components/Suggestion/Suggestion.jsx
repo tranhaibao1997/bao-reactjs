@@ -1,11 +1,14 @@
-import React from 'react'
-import { getProductListBySearch } from '../ProductList/ProductList.action'
+import React, { createContext } from 'react'
+import { ThemeContext } from '../../ThemeContext';
 
 function SuggestionFunction(props) {
+
+  const context=React.useContext(ThemeContext)
+
 function sendSuggestion(value)
 {
-    console.log(value);
-props.getProductListBySearch(value)
+props.getProductListBySearch(value,1);
+context.setCurrentPage(1);
 }
 
     return (

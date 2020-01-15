@@ -5776,3 +5776,22 @@ ul.cat li a:hover {
     background-color: #fe5245 !important;
     color: white !important;
 }
+
+.input-range__label-container {
+    visibility: hidden;
+}
+
+.input-range__track--active {
+    background: #fe5245 !important;
+}
+
+.input-range__slider {
+    background: #fe5245 !important;
+    border: 1px solid #fe5245 !important
+}
+
+.price-filer-fromTo-text {
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
