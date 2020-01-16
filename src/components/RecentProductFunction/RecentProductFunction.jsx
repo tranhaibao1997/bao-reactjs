@@ -33,7 +33,7 @@ class RecentProductFunction extends React.Component {
         let newArray = [...result.data.data]
         let filteredArray = newArray.filter(a => a.final_price > (this.state.value.min * 1000) && a.final_price < (this.state.value.max * 1000))
         await this.props.getProductListBySort(filteredArray)
-  
+        window.scrollTo(0, 550);
       } catch (error) {
         console.log(error)
       }

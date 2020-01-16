@@ -10,6 +10,7 @@ function sendSuggestion(value)
   props.getSearchTextAction(value)
 props.getProductListBySearch(value,1);
 context.setCurrentPage(1);
+window.scrollTo(0, 550);
 }
 
     return (

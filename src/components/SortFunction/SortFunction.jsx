@@ -25,6 +25,7 @@ function SortFunction(props)
        console.log(result)
        let newArray = [...result.data.data]
        props.getProductListBySort(newArray.sort((a, b) => a.name.localeCompare(b.name)));
+       window.scrollTo(0, 500);
  
      } catch (error) {
        console.log(error)
@@ -46,7 +47,7 @@ function SortFunction(props)
        console.log(result)
        let newArray = [...result.data.data]
        props.getProductListBySort(newArray.sort((a, b) => b.name.localeCompare(a.name)));
- 
+       window.scrollTo(0, 500);
      } catch (error) {
        console.log(error)
      }
@@ -67,7 +68,7 @@ function SortFunction(props)
        console.log(result)
        let newArray = [...result.data.data]
        props.getProductListBySort(newArray.sort((a, b) => a.final_price-b.final_price));
- 
+       window.scrollTo(0, 500);
      } catch (error) {
        console.log(error)
      }
@@ -88,7 +89,7 @@ function SortFunction(props)
        console.log(result)
        let newArray = [...result.data.data]
        props.getProductListBySort(newArray.sort((a, b) => b.final_price-a.final_price));
- 
+       window.scrollTo(0, 500);
      } catch (error) {
        console.log(error)
      }
@@ -111,7 +112,7 @@ function SortFunction(props)
        let filteredArray = newArray.filter(a => a.promotion_percent > 35)
        console.log(filteredArray)
        await props.getProductListBySort(filteredArray)
- 
+       window.scrollTo(0, 500);
      } catch (error) {
        console.log(error)
      }
