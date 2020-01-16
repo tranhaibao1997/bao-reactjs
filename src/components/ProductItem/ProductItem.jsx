@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import formatPrice from '../../format'
+import StarRatings from 'react-star-ratings';
 
-function ProductItem({ name, price, final_price, img_url, shop_name, product_id,data,getCartSuccess }) {
+function ProductItem({ name, price, final_price, img_url, shop_name, product_id,percent_star,total_rated,data,getCartSuccess }) {
 
 
-
+console.log(name)
 
   return (
 
@@ -19,6 +20,13 @@ function ProductItem({ name, price, final_price, img_url, shop_name, product_id,
          
         </div>
         <div className="product-content pr-0">
+        <StarRatings
+          rating={percent_star}
+          starRatedColor="red"
+          numberOfStars={5}
+          name='rating'
+          starDimension='20px'
+        /> ({total_rated} votes)
           <div className="pro-cat mb-10">
             <a href="#">{shop_name}</a>
           </div>

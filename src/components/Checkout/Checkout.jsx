@@ -104,7 +104,7 @@ export default function CheckOut(props) {
   }
 
 
-
+  
 
 
   return (
@@ -124,7 +124,10 @@ export default function CheckOut(props) {
           </div>
         </div>
       </section>
-      <section className="cart-area pt-100 pb-100">
+      {
+        props.data.length===0
+        ?  <p style={{textAlign: 'center', marginTop: '100px', fontSize: '30px'}}>Không có hàng trong giỏ</p>
+        : <section className="cart-area pt-100 pb-100">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -218,6 +221,8 @@ export default function CheckOut(props) {
           </div>
         </div>
       </section>
+      }
+     
     </div>
 
 

@@ -7,6 +7,7 @@ import SuggestionFunction from '../Suggestion/Suggestion.container';
 import Slider from "react-slick";
 import Pagination from "react-pagination-library";
 import "react-pagination-library/build/css/index.css";
+import Loading from '../Loading/Loading';
 
 
 
@@ -95,7 +96,7 @@ function ProductList(props) {
                       {...elm}
                     ></ProductItemContainer>
                   })
-                  :<p>NOT FOUND</p>
+                  : <Loading></Loading>
 
 
                   }

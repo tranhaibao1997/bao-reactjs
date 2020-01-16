@@ -9,6 +9,7 @@ function SortFunction(props)
 
   }, [])
   console.log(props.data,"from sort")
+  const context=useContext(ThemeContext)
 
 
   function AtoZ() {
@@ -16,7 +17,7 @@ function SortFunction(props)
     {
      try {
        let key_word = props.metadata.key_word;
-       let page_num = props.metadata.current_page;
+       let page_num = context.currentPage
        const result = await Axios({
          method: "GET",
          url: `https://mapi.sendo.vn/mob/product/search?p=${page_num}&q=${key_word}`
@@ -37,7 +38,7 @@ function SortFunction(props)
     {
      try {
        let key_word = props.metadata.key_word;
-       let page_num = props.metadata.current_page;
+       let page_num = context.currentPage
        const result = await Axios({
          method: "GET",
          url: `https://mapi.sendo.vn/mob/product/search?p=${page_num}&q=${key_word}`
@@ -58,7 +59,7 @@ function SortFunction(props)
     {
      try {
        let key_word = props.metadata.key_word;
-       let page_num = props.metadata.current_page;
+       let page_num = context.currentPage
        const result = await Axios({
          method: "GET",
          url: `https://mapi.sendo.vn/mob/product/search?p=${page_num}&q=${key_word}`
@@ -79,7 +80,7 @@ function SortFunction(props)
     {
      try {
        let key_word = props.metadata.key_word;
-       let page_num = props.metadata.current_page;
+       let page_num = context.currentPage
        const result = await Axios({
          method: "GET",
          url: `https://mapi.sendo.vn/mob/product/search?p=${page_num}&q=${key_word}`
@@ -100,7 +101,7 @@ function SortFunction(props)
     {
      try {
        let key_word = props.metadata.key_word;
-       let page_num = props.metadata.current_page;
+       let page_num = context.currentPage
        const result = await Axios({
          method: "GET",
          url: `https://mapi.sendo.vn/mob/product/search?p=${page_num}&q=${key_word}`

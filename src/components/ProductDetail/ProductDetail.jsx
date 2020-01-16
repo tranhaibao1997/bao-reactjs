@@ -7,6 +7,7 @@ import formatPrice from '../../format'
 import update from 'immutability-helper';
 import { useToasts, ToastProvider } from 'react-toast-notifications'
 import Slider from "react-slick";
+import StarRatings from 'react-star-ratings';
 
 
 
@@ -17,6 +18,10 @@ export default function ProductDetail(props) {
     window.scrollTo(0, 0);
     props.getProductDetailById(id)
   }, []);
+
+  
+
+
   var settings = {
     dots: true,
     infinite: true,
@@ -48,6 +53,7 @@ export default function ProductDetail(props) {
   const [attribute1, setAttribute1] = useState("");
   const [attribute2, setAttribute2] = useState("");
   const [tabActive, setTabActive] = useState("description")
+  
 
   //set btn active
   const [ActiveAttribute1Btn, setActiveAttribute1Btn] = useState(-1);
@@ -169,6 +175,12 @@ export default function ProductDetail(props) {
 
   // Không có item trong cart
 
+  
+  // const [rating,setRating]=React.useState(product.rating_info.percent_star)
+  // function changeRating( newRating,name ) {
+  //   setRating(newRating)
+  // }
+
   //add to Favorite
   function addToFavorite() {
 
@@ -239,6 +251,12 @@ export default function ProductDetail(props) {
                   <a href="#">furniture</a>
                 </div>
                 <h2 className="pro-details-title mb-15">{product.name}</h2>
+                <StarRatings
+          rating={product.rating_info.rate_percent}
+          starRatedColor="red"
+          numberOfStars={5}
+          name='rating'
+        />
                 <div className="details-price mb-20">
                   <span>{formatPrice(product.final_price)}đ</span>
                   <span className="old-price">{formatPrice(product.price)}đ</span>

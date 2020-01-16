@@ -92,7 +92,7 @@ function Cart(props) {
                 <li>
                     <div className="checkout-link">
                         <Link id="checkout" to="/check-out">Shopping Cart</Link>
-                        <a className="red-color" href="#" >Checkout</a>
+                       
                     </div>
 
 

@@ -7,6 +7,7 @@ function SuggestionFunction(props) {
 
 function sendSuggestion(value)
 {
+  props.getSearchTextAction(value)
 props.getProductListBySearch(value,1);
 context.setCurrentPage(1);
 }

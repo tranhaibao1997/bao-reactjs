@@ -3,14 +3,17 @@ import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css'
 import formatPrice from '../../format'
 import Axios from 'axios';
+import { ThemeContext } from '../../ThemeContext';
 
 class RecentProductFunction extends React.Component {
+  static contextType=ThemeContext
   constructor(props) {
     super(props);
 
     this.state = {
       value: { min: 200, max: 500 },
     };
+    
 
   }
 
@@ -19,8 +22,10 @@ class RecentProductFunction extends React.Component {
      return async()=>
      {
       try {
+        
         let key_word = this.props.metadata.key_word;
-        let page_num = this.props.metadata.current_page;
+        let page_num = this.context.currentPage;
+        console.log(page_num)
         const result = await Axios({
           method: "GET",
           url: `https://mapi.sendo.vn/mob/product/search?p=${page_num}&q=${key_word}`
