@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import formatPrice from '../../format'
 import { coupons } from "../../coupons.js"
+import { useToasts, ToastProvider } from 'react-toast-notifications'
 
 
 
@@ -25,8 +26,19 @@ export default function CheckOut(props) {
   const [disableClasses, setDisableClasses] = React.useState(false)
  
   var total=(props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0)*(100-props.coupon.value))/100
-  
-  //caculate Total Price
+  const { addToast } = useToasts()
+  function showAlertSuccess() {
+    addToast("Đã áp dụng mã giảm giá", {
+      appearance: 'success',
+      autoDismiss: true, autoDismissTimeout: 2000
+    })
+  }
+  function showAlertFail() {
+    addToast("Chưa có mã giảm giá được chọn", {
+      appearance: 'error',
+      autoDismiss: true, autoDismissTimeout: 2000
+    })
+  }
  
   async function deleteItem(value) {
     var newArray = [...props.data]
@@ -76,13 +88,14 @@ export default function CheckOut(props) {
     console.log(coupon)
     if(coupon==="--Choose a promo coupon--" || coupon===undefined)
     {
-       alert("Bạn chưa chọn coupon")
+       showAlertFail();
     }
     else
     {
     let i = coupons.findIndex(elm => elm.name === coupon);
     props.getCartAfterCouponSuccess(coupons[i]);
     props.getCartTotalSuccess((props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) * (100 - coupons[i].value)) / 100);
+    showAlertSuccess()
     }
     // setTotal((props.data.reduce((acc, curr) => acc + (curr.final_price * curr.cartQuantity), 0) * 50) / 100);
 
@@ -177,9 +190,7 @@ export default function CheckOut(props) {
                           <button className="btn theme-btn-2" name="apply_coupon" onClick={applyCoupon} type="button" disabled={disableClasses}>Apply coupon</button>
                         </div>
                       </div>
-                      <div className="coupon2">
-                        <input className="btn theme-btn" name="update_cart" defaultValue="Update cart" type="submit" />
-                      </div>
+                      
                     </div>
                   </div>
                 </div>

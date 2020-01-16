@@ -5,7 +5,8 @@ import { getProductListBySort, getProductList, } from '../ProductList/ProductLis
 const mapStateToProps = (store) => ({
 
 
-    data: store.ProductListReducer.data,
+
+    metadata: store.ProductListReducer.metadata,
 
 })
 

@@ -5,6 +5,7 @@ import { getProductListBySort, getProductList } from '../ProductList/ProductList
 
 const mapStateToProps = (store) => ({
     data: store.ProductListReducer.data,
+    metadata: store.ProductListReducer.metadata,
 })
 
 const mapDispatchToProps = {

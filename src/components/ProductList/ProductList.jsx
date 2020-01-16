@@ -14,10 +14,10 @@ import "react-pagination-library/build/css/index.css";
 
 
 function ProductList(props) {
-  useEffect(() => {
-    props.getProductList();
+  // useEffect(() => {
+  //   props.getProductList();
 
-  }, [])
+  // }, [])
 
   const totalPage=props.metadata.total_page
   const context=useContext(ThemeContext)
