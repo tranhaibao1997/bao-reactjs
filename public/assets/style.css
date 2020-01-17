@@ -5795,3 +5795,8 @@ ul.cat li a:hover {
     font-size: 15px;
     font-weight: bold;
 }
+
+.react-multi-carousel-item {
+    /* width: 100px !important; */
+    text-align: center !important;
+}
