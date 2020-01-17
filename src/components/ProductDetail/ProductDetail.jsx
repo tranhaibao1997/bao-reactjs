@@ -8,6 +8,7 @@ import update from 'immutability-helper';
 import { useToasts, ToastProvider } from 'react-toast-notifications'
 import Slider from "react-slick";
 import StarRatings from 'react-star-ratings';
+import Loading from '../Loading/Loading';
 
 
 
@@ -203,7 +204,7 @@ export default function ProductDetail(props) {
 
 
   if (!product) {
-    return <p>Loading</p>
+    return <Loading></Loading>
   }
 
   //add size,color
@@ -247,8 +248,8 @@ export default function ProductDetail(props) {
             <div className="col-xl-6 col-lg-8">
               <div className="product-details mb-30 pl-30">
                 <div className="details-cat mb-20">
-                  <a href="#">decor,</a>
-                  <a href="#">furniture</a>
+                  
+              <a href="#">{product.shop_info.shop_name}</a>
                 </div>
                 <h2 className="pro-details-title mb-15">{product.name}</h2>
                 <StarRatings
@@ -256,8 +257,8 @@ export default function ProductDetail(props) {
           starRatedColor="red"
           numberOfStars={5}
           name='rating'
-        />
-                <div className="details-price mb-20">
+        />({product.rating_info.total_rated} voted)
+                <div className="details-price mb-20">  
                   <span>{formatPrice(product.final_price)}đ</span>
                   <span className="old-price">{formatPrice(product.price)}đ</span>
                 </div>
