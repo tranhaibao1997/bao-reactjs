@@ -30,9 +30,9 @@ console.log(name)
           <div className="pro-cat mb-10">
             <a href="#">{shop_name}</a>
           </div>
-          <h4>
-            <a href="#">{name}</a>
-          </h4>
+          
+            <a href="#"><h4>{name}</h4></a>
+         
           <div className="product-meta">
             <div className="pro-price">
               <span>{formatPrice(final_price)}đ</span>

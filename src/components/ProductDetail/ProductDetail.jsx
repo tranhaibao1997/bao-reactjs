@@ -25,7 +25,7 @@ export default function ProductDetail(props) {
 
   }, []);
 
-  
+
   console.log(props.data)
 
 
@@ -240,10 +240,9 @@ export default function ProductDetail(props) {
   //   }
   // console.log(product.attribute[0].value)
 
-function Reload()
-{
-  // window.location.reload()
-}
+  function Reload() {
+    // window.location.reload()
+  }
 
 
   return (
@@ -327,7 +326,12 @@ function Reload()
                         </div>
                         <button className="details-action-icon" type="button" onClick={addToFavorite}><i className="fas fa-heart" /></button>
                         <div className="details-cart mt-40">
-                          <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
+                          {
+                            attribute1 === '' || attribute2==='' 
+                            ? <button type="button" className="btn theme-btn" disabled onClick={addToCart}>purchase now</button>
+                            : <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
+                          }
+                          
 
                         </div>
                       </form>
@@ -341,7 +345,7 @@ function Reload()
             <h2>Releted Products</h2>
             <p>Browse the huge variety of our products</p>
           </div>
-         
+
           <div className="related" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
             {
 
