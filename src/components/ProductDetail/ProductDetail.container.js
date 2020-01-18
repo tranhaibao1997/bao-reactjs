@@ -9,7 +9,8 @@ const mapStateToProps = (store) => ({
     data: store.ProductDetailReducer.data,
     error: store.ProductDetailReducer.error,
     cartdata: store.CartReducer.data,
-    favoritedata: store.FavoriteReducer.data
+    favoritedata: store.FavoriteReducer.data,
+    related: store.ProductDetailReducer.related
 })
 
 const mapDispatchToProps = {

@@ -9,18 +9,24 @@ import { useToasts, ToastProvider } from 'react-toast-notifications'
 import Slider from "react-slick";
 import StarRatings from 'react-star-ratings';
 import Loading from '../Loading/Loading';
+import axios from 'axios'
 
 
 
 export default function ProductDetail(props) {
 
+  console.log(props, "propddd")
+
   //useEffect
   useEffect(() => {
+
     window.scrollTo(0, 0);
-    props.getProductDetailById(id)
+    props.getProductDetailById(id);
+
   }, []);
 
   
+  console.log(props.data)
 
 
   var settings = {
@@ -46,15 +52,19 @@ export default function ProductDetail(props) {
 
 
 
-
   const product = props.data;
+  const relatedArray = props.related
+
   const cart = [...props.cartdata]
   const favorite = [...props.favoritedata]
   const [inputValue, setInputValue] = useState(1);
   const [attribute1, setAttribute1] = useState("");
   const [attribute2, setAttribute2] = useState("");
   const [tabActive, setTabActive] = useState("description")
-  
+
+
+
+
 
   //set btn active
   const [ActiveAttribute1Btn, setActiveAttribute1Btn] = useState(-1);
@@ -107,6 +117,7 @@ export default function ProductDetail(props) {
 
   //add to Cart
   function addToCart() {
+
     const value = inputValue; //quantity trong input
     let i = cart.findIndex(a => a.name === product.name) //tim index trong cart
     if (i !== -1) //neu index khac -1 => product da co trong item
@@ -115,19 +126,19 @@ export default function ProductDetail(props) {
       if (cart[i].attribute1 !== attribute1 || cart[i].attribute2 !== attribute2) {
         console.log("bi khac chi pu r kia")
 
- 
+
         // const deepClone = update(product, { cartQuantity: { $set: value }, attribute1: { $set: attribute1 }, attribute2: { $set: attribute2 } });
         // console.log(deepClone, "object");
         // const newProductsArray1 = [...cart];// ra mang
         // newProductsArray1.push(deepClone) // sai khuc này 
         // console.log(newProductsArray1, "bug here")
         const _product = [
-          ...cart, 
-         {
-           ...product,
-           attribute1,
-           attribute2,
-           cartQuantity:value
+          ...cart,
+          {
+            ...product,
+            attribute1,
+            attribute2,
+            cartQuantity: value
           }
         ]
         props.getCartSuccess(_product) //add product vao mang 
@@ -176,7 +187,7 @@ export default function ProductDetail(props) {
 
   // Không có item trong cart
 
-  
+
   // const [rating,setRating]=React.useState(product.rating_info.percent_star)
   // function changeRating( newRating,name ) {
   //   setRating(newRating)
@@ -199,8 +210,12 @@ export default function ProductDetail(props) {
 
 
   }
-
   //add slideshow
+
+
+
+
+
 
 
   if (!product) {
@@ -225,7 +240,10 @@ export default function ProductDetail(props) {
   //   }
   // console.log(product.attribute[0].value)
 
-
+function Reload()
+{
+  // window.location.reload()
+}
 
 
   return (
@@ -234,6 +252,7 @@ export default function ProductDetail(props) {
         <div className="container">
           <div className="row">
             <div className="col-xl-6 col-lg-4">
+
               <Slider {...settings}>
                 {
                   product.images.map(elm =>
@@ -248,17 +267,17 @@ export default function ProductDetail(props) {
             <div className="col-xl-6 col-lg-8">
               <div className="product-details mb-30 pl-30">
                 <div className="details-cat mb-20">
-                  
-              <a href="#">{product.shop_info.shop_name}</a>
+
+                  <a href="#">{product.shop_info.shop_name}</a>
                 </div>
                 <h2 className="pro-details-title mb-15">{product.name}</h2>
                 <StarRatings
-          rating={product.rating_info.rate_percent}
-          starRatedColor="red"
-          numberOfStars={5}
-          name='rating'
-        />({product.rating_info.total_rated} voted)
-                <div className="details-price mb-20">  
+                  rating={product.rating_info.rate_percent}
+                  starRatedColor="red"
+                  numberOfStars={5}
+                  name='rating'
+                />({product.rating_info.total_rated} voted)
+                <div className="details-price mb-20">
                   <span>{formatPrice(product.final_price)}đ</span>
                   <span className="old-price">{formatPrice(product.price)}đ</span>
                 </div>
@@ -309,6 +328,7 @@ export default function ProductDetail(props) {
                         <button className="details-action-icon" type="button" onClick={addToFavorite}><i className="fas fa-heart" /></button>
                         <div className="details-cart mt-40">
                           <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
+
                         </div>
                       </form>
                     </div>
@@ -316,6 +336,51 @@ export default function ProductDetail(props) {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="area-title text-center mb-50">
+            <h2>Releted Products</h2>
+            <p>Browse the huge variety of our products</p>
+          </div>
+         
+          <div className="related" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+            {
+
+              props.data.product_relateds.map(elm => {
+                return (
+                  <div className="col-xl-3 col-lg-4 col-md-4" >
+                    <div className="product-wrapper mb-50">
+                      <div className="product-img mb-25">
+                        <Link to={`/product-detail/${elm.id}`} onClick={Reload}>
+                          <img src={`https://media3.scdn.vn/${elm.images[0]}`} alt="" />
+
+                        </Link>
+
+                      </div>
+                      <div className="product-content pr-0">
+                        <StarRatings
+                          rating={elm.rating_info.rate_percent}
+                          starRatedColor="red"
+                          numberOfStars={5}
+                          name='rating'
+                          starDimension='20px'
+                        /> ({elm.rating_info.total_rated} votes)
+              <div className="pro-cat mb-10">
+                          <a href="#">{elm.shop_name}</a>
+                        </div>
+                        <h4>
+                          <a href="#">{elm.name}</a>
+                        </h4>
+                        <div className="product-meta">
+                          <div className="pro-price">
+                            <span>{formatPrice(elm.final_price)}đ</span>
+                            <span className="old-price">{formatPrice(elm.price)}đ</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
           </div>
           <div className="row mt-50">
             <div className="col-xl-8 col-lg-8">
@@ -356,8 +421,8 @@ export default function ProductDetail(props) {
                     aria-labelledby="home-tab6"
                   >
                     <div className="desc-text">
-                      <p dangerouslySetInnerHTML={{__html: product.description}}/ >
-                        
+                      <p dangerouslySetInnerHTML={{ __html: product.description }} />
+
 
                     </div>
                   </div>
@@ -486,10 +551,7 @@ export default function ProductDetail(props) {
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
-              <div className="area-title text-center mb-50">
-                <h2>Releted Products</h2>
-                <p>Browse the huge variety of our products</p>
-              </div>
+
             </div>
           </div>
           <div className="product-slider-2 owl-carousel">

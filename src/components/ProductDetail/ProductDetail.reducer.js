@@ -3,7 +3,8 @@ import { PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS } f
 const initialState = {
     data: null,
     load: false,
-    error: null
+    error: null,
+
 }
 
 export default function ProductDetailReducer(state = initialState, action) {
@@ -18,6 +19,8 @@ export default function ProductDetailReducer(state = initialState, action) {
             return {...state,
                 load: false,
                 data: action.payload
+
+
             }
         case PRODUCT_DETAIL_FAIL:
             return {...state,

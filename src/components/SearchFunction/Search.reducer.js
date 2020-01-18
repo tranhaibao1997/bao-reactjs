@@ -1,7 +1,7 @@
 import { GET_SEARCHTEXT_SUCCESS } from "./Search.action"
 
 const initialState = {
-    searchText: "ao-so-mi-nam"
+    searchText: "áo khoác cá tính"
 }
 
 export default function SearchReducer(state = initialState, action) {

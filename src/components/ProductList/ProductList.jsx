@@ -21,7 +21,10 @@ function ProductList(props) {
 
   // }, [])
 
+  
   const totalPage=props.metadata.total_page
+  
+  console.log(totalPage)
   const context=useContext(ThemeContext)
  
   
