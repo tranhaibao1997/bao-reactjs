@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ProductDetail from './ProductDetail'
-import { getProductDetailById } from './ProductDetail.action'
+import { getProductDetailById, getProductDetailEmpty } from './ProductDetail.action'
 import { getCartSuccess } from '../Cart/Cart.action'
 import { getFavoriteSuccess } from '../Favorite/Favorite.action'
 
@@ -16,7 +16,9 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = {
     getProductDetailById,
     getCartSuccess,
-    getFavoriteSuccess
+    getFavoriteSuccess,
+    getProductDetailEmpty
+
 }
 
 

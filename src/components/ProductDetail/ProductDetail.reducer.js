@@ -1,4 +1,4 @@
-import { PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS } from "./ProductDetail.action"
+import { PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_EMPTY } from "./ProductDetail.action"
 
 const initialState = {
     data: null,
@@ -10,24 +10,32 @@ const initialState = {
 export default function ProductDetailReducer(state = initialState, action) {
     switch (action.type) {
         case PRODUCT_DETAIL_REQUEST:
-            return {...state,
+            return {
+                ...state,
                 load: false,
                 error: action.error
 
             }
         case PRODUCT_DETAIL_SUCCESS:
-            return {...state,
+            return {
+                ...state,
                 load: false,
                 data: action.payload
 
 
             }
         case PRODUCT_DETAIL_FAIL:
-            return {...state,
+            return {
+                ...state,
                 load: true,
                 error: action.error
             }
+        case PRODUCT_EMPTY:
+            return {
+                ...state,
+                data: action.payload
 
+            }
         default:
             return state
     }

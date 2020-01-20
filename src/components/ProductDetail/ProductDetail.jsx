@@ -22,8 +22,13 @@ export default function ProductDetail(props) {
 
     window.scrollTo(0, 0);
     props.getProductDetailById(id);
-
   }, []);
+  useEffect(() => {
+    // returned function will be called on component unmount 
+    return () => {
+      props.getProductDetailEmpty();
+    }
+  }, [])
 
 
   console.log(props.data)
@@ -331,6 +336,11 @@ export default function ProductDetail(props) {
                       }
                       <li><span>Stock:</span> <span className="in-stock">{product.quantity}</span></li>
                     </ul>
+                    <div dangerouslySetInnerHTML={{ __html: product.refund_info.tooltip }} />
+                    <div dangerouslySetInnerHTML={{ __html: product.return_exchange_free.tooltip }} />
+                    <span><img src={product.campaign_list.icon} alt=""></img></span>
+
+                    <div dangerouslySetInnerHTML={{ __html: product.campaign_list.description }} />
                   </div>
                   <div className="product-action-details variant-item">
                     <div className="product-details-action">

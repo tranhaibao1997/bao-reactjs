@@ -6,8 +6,7 @@ import axios from "axios"
 export const PRODUCT_DETAIL_REQUEST = 'PRODUCT_DETAIL_REQUEST'
 export const PRODUCT_DETAIL_SUCCESS = 'PRODUCT_DETAIL_SUCCESS'
 export const PRODUCT_DETAIL_FAIL = 'PRODUCT_DETAIL_FAIL'
-
-
+export const PRODUCT_EMPTY = 'PRODUCT_EMPTY'
 
 function productDetailRequestAction() {
     return {
@@ -30,6 +29,13 @@ function productDetailFailAction(error) {
         type: PRODUCT_DETAIL_FAIL,
         error: error,
         load: true
+    }
+}
+
+function productDetailEmptyAction(payload) {
+    return {
+        type: PRODUCT_EMPTY,
+        payload: payload
     }
 }
 
@@ -66,5 +72,10 @@ export function getProductDetailById(id) {
         } catch (error) {
             dispatch(productDetailFailAction(error))
         }
+    }
+}
+export function getProductDetailEmpty() {
+    return (dispatch) => {
+        dispatch(productDetailSuccessAction(null))
     }
 }
