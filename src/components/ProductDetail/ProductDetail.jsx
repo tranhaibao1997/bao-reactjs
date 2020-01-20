@@ -240,8 +240,9 @@ export default function ProductDetail(props) {
   //   }
   // console.log(product.attribute[0].value)
 
-  function Reload() {
-    // window.location.reload()
+  function Reload(value) {
+    props.getProductDetailById(value);
+    window.scrollTo(0, 0);
   }
 
 
@@ -260,6 +261,22 @@ export default function ProductDetail(props) {
                   )
                 }
               </Slider>
+              <div className="row mt-5">
+                <div className="col-xl-4">
+                  <img style={{ borderRadius: '50%' }} src={product.shop_info.shop_logo} height="170px" alt=""></img>
+
+                </div>
+
+                <div className="col-xl-6 align-self-center align-items-xl-center">
+                  <p className="shop-info-text">Thông tin shop</p>
+                  <p>{product.shop_info.shop_name}</p>
+                  <p> <b>Phản hồi tốt</b> : {product.shop_info.good_review_percent}%</p>
+                  <p>  <b>Tổng điểm </b> : {product.shop_info.score}</p>
+                  <p>  <b>Số điện thoại</b> : {product.shop_info.phone_number}</p>
+
+
+                </div>
+              </div>
 
 
             </div>
@@ -327,11 +344,15 @@ export default function ProductDetail(props) {
                         <button className="details-action-icon" type="button" onClick={addToFavorite}><i className="fas fa-heart" /></button>
                         <div className="details-cart mt-40">
                           {
-                            attribute1 === '' || attribute2==='' 
-                            ? <button type="button" className="btn theme-btn" disabled onClick={addToCart}>purchase now</button>
-                            : <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
+                            product.attribute.length === 2
+                              ? attribute1 === '' || attribute2 === ''
+                                ? <button type="button" className="btn theme-btn" disabled onClick={addToCart}>purchase now</button>
+                                : <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
+                              : attribute1 === ''
+                                ? <button type="button" className="btn theme-btn" disabled onClick={addToCart}>purchase now</button>
+                                : <button type="button" className="btn theme-btn" onClick={addToCart}>purchase now</button>
                           }
-                          
+
 
                         </div>
                       </form>
@@ -342,7 +363,7 @@ export default function ProductDetail(props) {
             </div>
           </div>
           <div className="area-title text-center mb-50">
-            <h2>Releted Products</h2>
+            <h2>Related Products</h2>
             <p>Browse the huge variety of our products</p>
           </div>
 
@@ -354,7 +375,7 @@ export default function ProductDetail(props) {
                   <div className="col-xl-3 col-lg-4 col-md-4" >
                     <div className="product-wrapper mb-50">
                       <div className="product-img mb-25">
-                        <Link to={`/product-detail/${elm.id}`} onClick={Reload}>
+                        <Link to={`/product-detail/${elm.id}`} onClick={(a) => Reload(elm.id)}>
                           <img src={`https://media3.scdn.vn/${elm.images[0]}`} alt="" />
 
                         </Link>

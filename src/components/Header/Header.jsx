@@ -87,9 +87,9 @@ function Header(props) {
                                 }
                                 <ul>
                                  
-                                    <li className="search-btn">
+                                    {/* <li className="search-btn">
                                         <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search"></i></a>
-                                    </li>
+                                    </li> */}
                                     {
                                         userEmail
                                             ? <li style={{ color: 'red' }} className="login-btn"><a onClick={onLogout}><i className="fas fa-sign-out-alt"></i></a></li>

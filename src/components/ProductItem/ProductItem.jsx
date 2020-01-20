@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import formatPrice from '../../format'
 import StarRatings from 'react-star-ratings';
 
-function ProductItem({ name, price, final_price, img_url, shop_name, product_id,percent_star,total_rated,data,getCartSuccess }) {
+function ProductItem({ name, price, final_price, img_url, shop_name, product_id,percent_star,total_rated,data,getCartSuccess}) {
 
 
 console.log(name)

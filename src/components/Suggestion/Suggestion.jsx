@@ -76,7 +76,7 @@ function SuggestionFunction(props) {
           <div className="product-hint-item-text" >Sách </div>
 
         </span>
-        <span className="product-hint-item-cook product-hint-item" onClick={(text) => sendSuggestion('phương tiện')}>
+        <span className="product-hint-item-cook product-hint-item" onClick={(text) => sendSuggestion('xe máy')}>
           <div>  <img className="product-hint-img" src="https://cf.shopee.vn/file/3fb459e3449905545701b418e8220334_tn" alt=""></img></div>
           <div className="product-hint-item-text" >Phương Tiện </div>
 
