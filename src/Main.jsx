@@ -26,7 +26,8 @@ const NotFoundPage = React.lazy(() => import('./components/NotFound/NotFound'))
 
 
 function Main() {
-
+ 
+    const [loading,setLoading]=useState(false);
     return (
         <BrowserRouter>
         
@@ -83,6 +84,7 @@ function Main() {
     )
 
 }
+
 
 
 export default Main

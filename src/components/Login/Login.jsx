@@ -51,9 +51,9 @@ function Login(props) {
             <h3 className="text-center mb-60">Login From Here</h3>
             <form onSubmit={Login}>
               <label htmlFor="name">Email Address <span>**</span></label>
-              <input onChange={handleChange1} id="name" type="text" placeholder="Enter Username or Email address..." />
+              <input onChange={handleChange1} id="name" type="text" placeholder="Enter Username or Email address..." value="testaccount@gmail.com" />
               <label htmlFor="pass">Password <span>**</span></label>
-              <input onChange={handleChange2} id="pass" type="password" placeholder="Enter password..." />
+              <input onChange={handleChange2} id="pass" type="password" placeholder="Enter password..." value="123456" />
               <div className="login-action mb-20 fix">
                 <span className="log-rem f-left">
                   <input id="remember" type="checkbox" />
