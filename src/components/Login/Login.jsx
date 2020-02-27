@@ -49,11 +49,13 @@ function Login(props) {
         <div className="col-lg-8 offset-lg-2">
           <div className="basic-login">
             <h3 className="text-center mb-60">Login From Here</h3>
+            <span>TK test: testaccount@gmail.com</span>
+            <span>Password: 123456</span>
             <form onSubmit={Login}>
               <label htmlFor="name">Email Address <span>**</span></label>
-              <input onChange={handleChange1} id="name" type="text" placeholder="Enter Username or Email address..." value="testaccount@gmail.com" />
+              <input onChange={handleChange1} id="name" type="text" placeholder="Enter Username or Email address..."  />
               <label htmlFor="pass">Password <span>**</span></label>
-              <input onChange={handleChange2} id="pass" type="password" placeholder="Enter password..." value="123456" />
+              <input onChange={handleChange2} id="pass" type="password" placeholder="Enter password..."  />
               <div className="login-action mb-20 fix">
                 <span className="log-rem f-left">
                   <input id="remember" type="checkbox" />
