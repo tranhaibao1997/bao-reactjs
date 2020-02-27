@@ -49,8 +49,9 @@ function Login(props) {
         <div className="col-lg-8 offset-lg-2">
           <div className="basic-login">
             <h3 className="text-center mb-60">Login From Here</h3>
-            <span>TK test: testaccount@gmail.com</span>
-            <span>Password: 123456</span>
+            <p>TK test: testaccount@gmail.com</p>
+            <br></br>
+            <p>Password: 123456</p>
             <form onSubmit={Login}>
               <label htmlFor="name">Email Address <span>**</span></label>
               <input onChange={handleChange1} id="name" type="text" placeholder="Enter Username or Email address..."  />
